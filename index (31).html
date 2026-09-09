@@ -1,0 +1,559 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 2 — Noah</title><style>
+:root{--red:#b42318;--green:#18794e;--ink:#27231f;--paper:#f7f4ee;--card:#fff;--line:#ded5c7;--gold:#80633f}
+*{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.68}
+header{padding:30px 16px 22px;text-align:center;background:#eee5d8;border-bottom:1px solid var(--line)} header h1{font-family:Georgia,serif;margin:8px auto;max-width:850px}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:6px;overflow-x:auto;padding:8px;background:white;border-bottom:1px solid var(--line)} nav button{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:18px;padding:8px 11px}
+main{max-width:960px;margin:auto;padding:14px} .panel{display:none} .panel.active{display:block} .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:19px;margin:14px 0}
+.ol{margin:10px 0} .ol.major{color:#a32620;font-weight:800;font-size:1.08rem} .ol.sub{margin-left:20px} .refs{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:5px}
+.ref{border:0;background:#eef4ff;color:#174b8a;text-decoration:underline;cursor:pointer;padding:2px 5px;border-radius:5px} .ko{font-family:"Noto Sans KR","Malgun Gothic",sans-serif}
+.mn,.prop,.focus3{background:#f8f3ea;border-radius:10px;padding:12px;margin:12px 0} .dayno{font-weight:800;color:#8c5b28;letter-spacing:.08em}
+.note{width:100%;min-height:90px;padding:10px;border:1px solid var(--line);border-radius:8px}
+#modal{display:none;position:fixed;inset:0;background:#0008;z-index:30;padding:15px;overflow:auto} #modal.show{display:block} .modalbox{max-width:780px;margin:3vh auto;background:white;border-radius:16px;padding:20px} .close{float:right}
+.rv{background:#f7f7f7;padding:13px;border-radius:9px} .greek{white-space:pre-wrap;font-family:"Palatino Linotype",serif;font-size:1.28rem;line-height:2} .pron{color:#777} .greekAudioBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}.greekAudioBar button{border:1px solid var(--line);background:white;border-radius:8px;padding:7px 10px;cursor:pointer;font-weight:700} .gword{border:0;background:transparent;font:inherit;padding:1px;cursor:pointer} .gword.verb{color:var(--red);font-weight:800} .gword.noun{color:var(--green);font-weight:800}
+.hymn{background:#fffaf0;border:1px solid #e2d1ac} .status-ok{color:#176b3a;font-weight:700} .status-bad{color:#a32620;font-weight:700}
+@media(max-width:600px){main{padding:9px} .ol.sub{margin-left:10px} header h1{font-size:1.55rem}}
+
+.ttsbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}.ttsbar button,.ttsbar select{border:1px solid var(--line);background:white;border-radius:8px;padding:7px 10px}
+
+.loadingGreek{padding:14px;border:1px dashed var(--line);border-radius:9px;color:#666;background:#fafafa}
+.sourceLine{font-size:.82rem;color:#777;margin-top:8px}
+.parseLine{font-size:.9rem;color:#555;margin-top:4px}
+</style></head><body>
+<header><div>MY BIBLE STUDY · WEEK 2</div><h1>The Line of Life with Noah—<br>the Life and Work That Change the Age</h1>
+<div class="ko">노아가 따른 생명의 노선 — 시대를 바꾸는 생활과 일</div>
+<p>Scripture Reading: <button class='ref' data-ref='Gen. 6:5-14'>Gen. 6:5-14</button> <button class='ref' data-ref='Heb. 11:7'>Heb. 11:7</button></p></header>
+<nav><button data-tab="outline">OUTLINE</button><button data-tab="weekly">WEEKLY FOCUS</button><button data-tab="daily">DAILY FOCUS</button><button data-tab="review">THEOLOGICAL REVIEW</button><button data-tab="hymn">🎵 HYMN</button><button data-tab="notes">📝 MY NOTES</button><button data-tab="check">✓ SCRIPTURE CHECK</button></nav>
+<main>
+<section id="outline" class="panel active"><div class="card" id="englishOutline"><h2>ENGLISH OUTLINE</h2>
+<div class="ttsbar" style="margin:12px 0 18px">
+  <button id="outlineListen">🔊 Listen to English Outline</button>
+  <button id="outlineStop">⏹ Stop</button>
+  <label>Speed
+    <select id="outlineRate">
+      <option value="0.75">0.75</option>
+      <option value="0.9">0.9</option>
+      <option value="1.0" selected>1.0</option>
+      <option value="1.1">1.1</option>
+      <option value="1.25">1.25</option>
+    </select>
+  </label>
+</div>
+<div class="pron">English outline only · browser voice · speed adjustable</div><div class='ol major'><b>I.</b> Noah believed in God, walked with God, pleased God, and enjoyed all that God is: <span class='refs'></span></div><div class='ol sub'><b>A.</b> Satan had corrupted man to the uttermost, and God had determined to destroy the man whom He had created for His purpose. <span class='refs'></span></div><div class='ol sub'><b>B.</b> Thus, it appeared that God was defeated; but Noah points to the sovereign factor that provided God a way to continue to carry out His original purpose with man. <span class='refs'></span></div><div class='ol sub'><b>C.</b> Through Noah’s life and work, God gained the victory over His enemy and changed the age. <span class='refs'></span></div><div class='ol major'><b>II.</b> Noah’s life was a life that changed the age—cf. Phil. 1:19-21a: <span class='refs'><button class='ref' data-ref='Phil. 1:19-21'>Phil. 1:19-21</button></span></div><div class='ol sub'><b>A.</b> The life that changes the age is a life that inherits the godly ways of the forefathers: <span class='refs'></span></div><div class='ol sub'><b>1.</b> Noah inherited Adam’s way of salvation, receiving the promise of Christ as the seed of the woman and the covering of Christ as the God-satisfying righteousness. <span class='refs'><button class='ref' data-ref='Gen. 3:15'>Gen. 3:15</button> <button class='ref' data-ref='Gen. 3:20-21'>Gen. 3:20-21</button> <button class='ref' data-ref='Isa. 12:2'>Isa. 12:2</button></span></div><div class='ol sub'><b>2.</b> Noah inherited Abel’s way of offering, which is that of offering Christ to God, not only as the sacrifice for our sins but also as a gift for pleasing God. <span class='refs'><button class='ref' data-ref='Gen. 4:4'>Gen. 4:4</button></span></div><div class='ol sub'><b>3.</b> Noah inherited Enosh’s way of calling on the name of Jehovah to enjoy all that He is. <span class='refs'><button class='ref' data-ref='Gen. 4:26'>Gen. 4:26</button> <button class='ref' data-ref='Jer. 33:3'>Jer. 33:3</button> <button class='ref' data-ref='Rom. 10:12'>Rom. 10:12</button> <button class='ref' data-ref='2 Tim. 2:22'>2 Tim. 2:22</button></span></div><div class='ol sub'><b>4.</b> Noah inherited Enoch’s way of walking with God, which is to take God as our center and everything, living and doing all things according to God and with God. <span class='refs'><button class='ref' data-ref='Gen. 5:22-24'>Gen. 5:22-24</button> <button class='ref' data-ref='Heb. 11:5-6'>Heb. 11:5-6</button> <button class='ref' data-ref='2 Cor. 5:4'>2 Cor. 5:4</button> <button class='ref' data-ref='2 Cor. 5:9'>2 Cor. 5:9</button> <button class='ref' data-ref='2 Cor. 5:14-16'>2 Cor. 5:14-16</button> <button class='ref' data-ref='2 Cor. 6:1'>2 Cor. 6:1</button></span></div><div class='ol sub'><b>B.</b> God showed Noah the true situation of the corrupt age in which he lived. <span class='refs'><button class='ref' data-ref='Gen. 6:3'>Gen. 6:3</button> <button class='ref' data-ref='Gen. 6:5'>Gen. 6:5</button> <button class='ref' data-ref='Gen. 6:11'>Gen. 6:11</button> <button class='ref' data-ref='Gen. 6:13'>Gen. 6:13</button> <button class='ref' data-ref='Matt. 24:37-39'>Matt. 24:37-39</button> <button class='ref' data-ref='2 Tim. 3:1-5'>2 Tim. 3:1-5</button></span></div><div class='ol sub'><b>C.</b> “But Noah found favor [grace] in the sight of Jehovah.” <span class='refs'><button class='ref' data-ref='Gen. 6:8'>Gen. 6:8</button></span></div><div class='ol sub'><b>1.</b> When Satan has done his best to damage the situation, there have always been some who found grace in the eyes of God to become ones who turned the age. <span class='refs'><button class='ref' data-ref='Dan. 1:8'>Dan. 1:8</button> <button class='ref' data-ref='Dan. 9:23'>Dan. 9:23</button> <button class='ref' data-ref='Dan. 10:11'>Dan. 10:11</button> <button class='ref' data-ref='Dan. 10:19'>Dan. 10:19</button></span></div><div class='ol sub'><b>2.</b> The main purpose of the record of Genesis is not to show the fall but to show how much God’s grace can do for fallen people: <span class='refs'></span></div><div class='ol sub'><b>a.</b> Grace is God Himself, the presence of God, enjoyed by us to be everything to us and to do everything in us, through us, and for us. <span class='refs'><button class='ref' data-ref='John 1:14'>John 1:14</button> <button class='ref' data-ref='John 1:16-17'>John 1:16-17</button> <button class='ref' data-ref='Rev. 22:21'>Rev. 22:21</button></span></div><div class='ol sub'><b>b.</b> The enjoyment of the Lord as grace is with those who love Him. <span class='refs'><button class='ref' data-ref='Eph. 6:24'>Eph. 6:24</button> <button class='ref' data-ref='John 21:15-17'>John 21:15-17</button></span></div><div class='ol sub'><b>c.</b> The grace of the Lord Jesus Christ as the bountiful supply of the Triune God is enjoyed by us through the exercise of our human spirit. <span class='refs'><button class='ref' data-ref='Heb. 10:29'>Heb. 10:29</button> <button class='ref' data-ref='Gal. 6:18'>Gal. 6:18</button> <button class='ref' data-ref='Phil. 4:23'>Phil. 4:23</button> <button class='ref' data-ref='Philem. 25'>Philem. 25</button> <button class='ref' data-ref='2 Tim. 4:22'>2 Tim. 4:22</button></span></div><div class='ol sub'><b>d.</b> God’s word is the word of grace. <span class='refs'><button class='ref' data-ref='Acts 20:32'>Acts 20:32</button> <button class='ref' data-ref='Col. 3:16'>Col. 3:16</button> <button class='ref' data-ref='Jer. 15:16'>Jer. 15:16</button></span></div><div class='ol sub'><b>e.</b> We experience the processed Triune God as the grace of life in meeting with the saints on the ground of oneness. <span class='refs'><button class='ref' data-ref='Psa. 133:3'>Psa. 133:3</button> <button class='ref' data-ref='1 Pet. 3:7'>1 Pet. 3:7</button> <button class='ref' data-ref='Acts 4:33'>Acts 4:33</button> <button class='ref' data-ref='Acts 11:23'>Acts 11:23</button></span></div><div class='ol sub'><b>f.</b> We can experience the Lord as our increasing and all-sufficient grace in the midst of sufferings and trials. <span class='refs'><button class='ref' data-ref='2 Cor. 12:9'>2 Cor. 12:9</button></span></div><div class='ol sub'><b>g.</b> We need to labor for the Lord in the power of His grace. <span class='refs'><button class='ref' data-ref='1 Cor. 15:10'>1 Cor. 15:10</button> <button class='ref' data-ref='1 Cor. 15:58'>1 Cor. 15:58</button> <button class='ref' data-ref='1 Cor. 3:12'>1 Cor. 3:12</button></span></div><div class='ol sub'><b>h.</b> We need to be good stewards of the varied grace of God. <span class='refs'><button class='ref' data-ref='1 Pet. 4:10'>1 Pet. 4:10</button> <button class='ref' data-ref='Eph. 3:2'>Eph. 3:2</button> <button class='ref' data-ref='2 Cor. 1:15'>2 Cor. 1:15</button> <button class='ref' data-ref='Eph. 4:29'>Eph. 4:29</button></span></div><div class='ol sub'><b>i.</b> By the power of grace, the strength of grace, and the life of grace, we can be right with God and with one another; grace produces righteousness. <span class='refs'><button class='ref' data-ref='Heb. 11:7'>Heb. 11:7</button> <button class='ref' data-ref='Rom. 5:17'>Rom. 5:17</button> <button class='ref' data-ref='Rom. 5:21'>Rom. 5:21</button></span></div><div class='ol major'><b>III.</b> Noah’s work was a work that changed the age. <span class='refs'><button class='ref' data-ref='1 Cor. 3:9'>1 Cor. 3:9</button> <button class='ref' data-ref='2 Cor. 6:1'>2 Cor. 6:1</button> <button class='ref' data-ref='Matt. 16:18'>Matt. 16:18</button> <button class='ref' data-ref='1 Cor. 3:12'>1 Cor. 3:12</button></span></div><div class='ol sub'><b>A.</b> God gave Noah an all-inclusive revelation, a further revelation, the revelation to build the ark, which was the way that God would terminate the corrupted generation and bring in a new age. <span class='refs'></span></div><div class='ol sub'><b>1.</b> The ark is a type of Christ—not only the individual Christ but also the corporate Christ, the church, which is the Body of Christ and the new man to consummate in the New Jerusalem. <span class='refs'><button class='ref' data-ref='1 Pet. 3:20-21'>1 Pet. 3:20-21</button> <button class='ref' data-ref='Matt. 16:18'>Matt. 16:18</button> <button class='ref' data-ref='1 Cor. 12:12'>1 Cor. 12:12</button> <button class='ref' data-ref='Eph. 2:15-16'>Eph. 2:15-16</button> <button class='ref' data-ref='Col. 3:10-11'>Col. 3:10-11</button> <button class='ref' data-ref='Rev. 21:2'>Rev. 21:2</button></span></div><div class='ol sub'><b>2.</b> The building of the ark typifies the building of the corporate Christ, with the element of Christ’s riches as the building material, by those who work together with God. <span class='refs'><button class='ref' data-ref='1 Cor. 3:9-12'>1 Cor. 3:9-12</button> <button class='ref' data-ref='Eph. 4:12'>Eph. 4:12</button> <button class='ref' data-ref='Eph. 2:22'>Eph. 2:22</button></span></div><div class='ol sub'><b>3.</b> This building is the working of Christ into people to build them together by Christ that they may become God’s manifestation in the flesh. <span class='refs'><button class='ref' data-ref='1 Tim. 3:15-16'>1 Tim. 3:15-16</button></span></div><div class='ol sub'><b>a.</b> The crucial matter in our work is to minister the building and builded God into others so that the Triune God may build Himself into their being. <span class='refs'><button class='ref' data-ref='Matt. 16:18'>Matt. 16:18</button> <button class='ref' data-ref='Eph. 2:21-22'>Eph. 2:21-22</button> <button class='ref' data-ref='Eph. 3:17'>Eph. 3:17</button> <button class='ref' data-ref='1 Cor. 14:4'>1 Cor. 14:4</button></span></div><div class='ol sub'><b>b.</b> We need to practice one thing—to minister the processed and consummated Triune God into others so that He may build Himself into their inner man; we need to pray that the Lord will teach us to work in this way. <span class='refs'><button class='ref' data-ref='2 Cor. 13:14'>2 Cor. 13:14</button> <button class='ref' data-ref='1 Cor. 3:9'>1 Cor. 3:9</button> <button class='ref' data-ref='1 Cor. 3:10'>1 Cor. 3:10</button> <button class='ref' data-ref='1 Cor. 3:12'>1 Cor. 3:12</button> <button class='ref' data-ref='Rom. 11:36'>Rom. 11:36</button></span></div><div class='ol sub'><b>B.</b> By building the church and entering into the church life, we will be saved from God’s judgment on today’s evil generation through the great tribulation and will be separated from that generation to be ushered into a new age, the age of the millennium. <span class='refs'><button class='ref' data-ref='Heb. 11:7'>Heb. 11:7</button> <button class='ref' data-ref='Matt. 24:37-39'>Matt. 24:37-39</button> <button class='ref' data-ref='Luke 17:26-27'>Luke 17:26-27</button></span></div></div><div class="card"><h2>한글 개요 — 공식 한국어 자료</h2><div class='ol major'><b>Ⅰ.</b> 노아는 하나님을 믿었고, 하나님과 동행했으며, 하나님을 기쁘시게 했고, 하나님의 온 존재를 누렸다. <span class='refs'></span></div><div class='ol sub'><b>A.</b> 사탄이 사람을 극도로 부패시켰기 때문에, 하나님은 그분 자신의 목적을 위하여 창조하신 사람을 멸망시키기로 결정하셨다. <span class='refs'></span></div><div class='ol sub'><b>B.</b> 그러므로 하나님은 패배하신 것처럼 보였다. 하지만 ‘그러나 노아는’이라는 말은 하나님께서 사람에 대해 가지셨던 원래의 목적을 계속하여 수행해 나가실 수 있도록 그분께 길을 마련해 드리는 주권적인 요인이 있었음을 우리에게 보여 준다. <span class='refs'></span></div><div class='ol sub'><b>C.</b> 노아의 생활과 일을 통하여 하나님은 그분의 원수를 이기셨고 시대를 바꾸셨다. <span class='refs'></span></div><div class='ol major'><b>Ⅱ.</b> 노아의 생활은 시대를 바꾸는 생활이었다. <span class='refs'><button class='ref' data-ref='Phil. 1:19-21'>Phil. 1:19-21</button></span></div><div class='ol sub'><b>A.</b> 시대를 바꾸는 생활은 조상들의 경건한 길들을 물려받는 생활이다. <span class='refs'></span></div><div class='ol sub'><b>1.</b> 노아는 아담이 취한 구원의 길을 물려받아, 여자의 씨이신 그리스도에 관한 약속을 받았고 하나님을 만족하시게 하는 의이신 그리스도로 자신을 덮었다. <span class='refs'><button class='ref' data-ref='Gen. 3:15'>Gen. 3:15</button> <button class='ref' data-ref='Gen. 3:20-21'>Gen. 3:20-21</button> <button class='ref' data-ref='Isa. 12:2'>Isa. 12:2</button></span></div><div class='ol sub'><b>2.</b> 노아는 아벨이 취한 제물을 드리는 길을 물려받았다. 그 길은 우리의 죄들에 대한 희생 제물만이 아니라 하나님을 기쁘시게 하는 예물이신 그리스도를 하나님께 드리는 길이다. <span class='refs'><button class='ref' data-ref='Gen. 4:4'>Gen. 4:4</button></span></div><div class='ol sub'><b>3.</b> 노아는 에노스가 취한 여호와의 이름을 불러 그분의 온 존재를 누리는 길을 물려받았다. <span class='refs'><button class='ref' data-ref='Gen. 4:26'>Gen. 4:26</button> <button class='ref' data-ref='Jer. 33:3'>Jer. 33:3</button> <button class='ref' data-ref='Rom. 10:12'>Rom. 10:12</button> <button class='ref' data-ref='2 Tim. 2:22'>2 Tim. 2:22</button></span></div><div class='ol sub'><b>4.</b> 노아는 에녹이 취한 하나님과 동행하는 길을 물려받았다. 하나님과 동행하는 것은 하나님을 우리의 중심과 모든 것으로 취하여, 하나님을 따라 하나님과 함께 살고 모든 일을 하는 것이다. <span class='refs'><button class='ref' data-ref='Gen. 5:22-24'>Gen. 5:22-24</button> <button class='ref' data-ref='Heb. 11:5-6'>Heb. 11:5-6</button> <button class='ref' data-ref='2 Cor. 5:4'>2 Cor. 5:4</button> <button class='ref' data-ref='2 Cor. 5:9'>2 Cor. 5:9</button> <button class='ref' data-ref='2 Cor. 5:14-16'>2 Cor. 5:14-16</button> <button class='ref' data-ref='2 Cor. 6:1'>2 Cor. 6:1</button></span></div><div class='ol sub'><b>B.</b> 하나님은 노아가 살던 부패한 시대의 실지 상황을 노아에게 보여 주셨다. <span class='refs'><button class='ref' data-ref='Gen. 6:3'>Gen. 6:3</button> <button class='ref' data-ref='Gen. 6:5'>Gen. 6:5</button> <button class='ref' data-ref='Gen. 6:11'>Gen. 6:11</button> <button class='ref' data-ref='Gen. 6:13'>Gen. 6:13</button> <button class='ref' data-ref='Matt. 24:37-39'>Matt. 24:37-39</button> <button class='ref' data-ref='2 Tim. 3:1-5'>2 Tim. 3:1-5</button></span></div><div class='ol sub'><b>C.</b> “‘그러나 노아는’ 여호와 앞에 은총(은혜)을 입었다.” <span class='refs'><button class='ref' data-ref='Gen. 6:8'>Gen. 6:8</button></span></div><div class='ol sub'><b>1.</b> 사탄이 힘을 다해 상황을 망쳐 놓았을 때, 하나님 앞에서 은혜를 입어 시대를 바꾼 몇몇 사람들이 항상 있었다. <span class='refs'><button class='ref' data-ref='Dan. 1:8'>Dan. 1:8</button> <button class='ref' data-ref='Dan. 9:23'>Dan. 9:23</button> <button class='ref' data-ref='Dan. 10:11'>Dan. 10:11</button> <button class='ref' data-ref='Dan. 10:19'>Dan. 10:19</button></span></div><div class='ol sub'><b>2.</b> 창세기를 기록한 주된 목적은 타락을 보여 주는 것이 아니라, 하나님의 은혜가 타락한 사람들을 위해 얼마나 많은 것을 할 수 있는지를 보여 주는 것이다. <span class='refs'></span></div><div class='ol sub'><b>a.</b> 은혜란 우리의 누림을 통해 우리에게 모든 것이 되시고 우리 안에서, 우리를 통해서, 우리를 위해서 모든 것을 하시는 하나님 자신 곧 하나님의 임재이다. <span class='refs'><button class='ref' data-ref='John 1:14'>John 1:14</button> <button class='ref' data-ref='John 1:16-17'>John 1:16-17</button> <button class='ref' data-ref='Rev. 22:21'>Rev. 22:21</button></span></div><div class='ol sub'><b>b.</b> 은혜이신 주님에 대한 누림은 그분을 사랑하는 사람들과 함께한다. <span class='refs'><button class='ref' data-ref='Eph. 6:24'>Eph. 6:24</button> <button class='ref' data-ref='John 21:15-17'>John 21:15-17</button></span></div><div class='ol sub'><b>c.</b> 우리는 우리 사람의 영을 사용함으로써 삼일 하나님의 풍성한 공급인 주 예수 그리스도의 은혜를 누린다. <span class='refs'><button class='ref' data-ref='Heb. 10:29'>Heb. 10:29</button> <button class='ref' data-ref='Gal. 6:18'>Gal. 6:18</button> <button class='ref' data-ref='Phil. 4:23'>Phil. 4:23</button> <button class='ref' data-ref='Philem. 25'>Philem. 25</button> <button class='ref' data-ref='2 Tim. 4:22'>2 Tim. 4:22</button></span></div><div class='ol sub'><b>d.</b> 하나님의 말씀은 은혜의 말씀이다. <span class='refs'><button class='ref' data-ref='Acts 20:32'>Acts 20:32</button> <button class='ref' data-ref='Col. 3:16'>Col. 3:16</button> <button class='ref' data-ref='Jer. 15:16'>Jer. 15:16</button></span></div><div class='ol sub'><b>e.</b> 우리는 하나라는 터 위에서 성도들과 함께 모일 때 생명의 은혜이신 과정을 거치신 삼일 하나님을 체험한다. <span class='refs'><button class='ref' data-ref='Psa. 133:3'>Psa. 133:3</button> <button class='ref' data-ref='1 Pet. 3:7'>1 Pet. 3:7</button> <button class='ref' data-ref='Acts 4:33'>Acts 4:33</button> <button class='ref' data-ref='Acts 11:23'>Acts 11:23</button></span></div><div class='ol sub'><b>f.</b> 우리는 고난과 시련 속에서도 증가하며 모든 것을 충족하는 우리의 은혜이신 주님을 체험할 수 있다. <span class='refs'><button class='ref' data-ref='2 Cor. 12:9'>2 Cor. 12:9</button></span></div><div class='ol sub'><b>g.</b> 우리는 주님의 은혜의 능력으로 주님을 위해 수고해야 한다. <span class='refs'><button class='ref' data-ref='1 Cor. 15:10'>1 Cor. 15:10</button> <button class='ref' data-ref='1 Cor. 15:58'>1 Cor. 15:58</button> <button class='ref' data-ref='1 Cor. 3:12'>1 Cor. 3:12</button></span></div><div class='ol sub'><b>h.</b> 우리는 하나님의 다양한 은혜를 맡은 선한 청지기들이 되어야 한다. <span class='refs'><button class='ref' data-ref='1 Pet. 4:10'>1 Pet. 4:10</button> <button class='ref' data-ref='Eph. 3:2'>Eph. 3:2</button> <button class='ref' data-ref='2 Cor. 1:15'>2 Cor. 1:15</button> <button class='ref' data-ref='Eph. 4:29'>Eph. 4:29</button></span></div><div class='ol sub'><b>i.</b> 은혜의 능력과 은혜의 힘과 은혜의 생명에 의해 우리는 하나님께 올바를 수 있고 서로에게 올바를 수 있다. 은혜는 의를 산출한다. <span class='refs'><button class='ref' data-ref='Heb. 11:7'>Heb. 11:7</button> <button class='ref' data-ref='Rom. 5:17'>Rom. 5:17</button> <button class='ref' data-ref='Rom. 5:21'>Rom. 5:21</button></span></div><div class='ol major'><b>Ⅲ.</b> 노아의 일은 시대를 바꾸는 일이었다. <span class='refs'><button class='ref' data-ref='1 Cor. 3:9'>1 Cor. 3:9</button> <button class='ref' data-ref='2 Cor. 6:1'>2 Cor. 6:1</button> <button class='ref' data-ref='Matt. 16:18'>Matt. 16:18</button> <button class='ref' data-ref='1 Cor. 3:12'>1 Cor. 3:12</button></span></div><div class='ol sub'><b>A.</b> 하나님은 노아에게 모든 것을 포함한 계시, 더 전진된 계시, 곧 방주를 건조하라는 계시를 주셨다. 이 방주는 하나님께서 부패한 세대를 종결하시고 새로운 시대를 이끌어 오실 수 있게 하는 길이었다. <span class='refs'></span></div><div class='ol sub'><b>1.</b> 방주는 그리스도의 예표인데, 방주로 예표되시는 그리스도는 개인적인 그리스도일 뿐 아니라 단체적인 그리스도인 교회이다. 교회는 그리스도의 몸이자 새사람이며, 새 예루살렘으로 완결된다. <span class='refs'><button class='ref' data-ref='1 Pet. 3:20-21'>1 Pet. 3:20-21</button> <button class='ref' data-ref='Matt. 16:18'>Matt. 16:18</button> <button class='ref' data-ref='1 Cor. 12:12'>1 Cor. 12:12</button> <button class='ref' data-ref='Eph. 2:15-16'>Eph. 2:15-16</button> <button class='ref' data-ref='Col. 3:10-11'>Col. 3:10-11</button> <button class='ref' data-ref='Rev. 21:2'>Rev. 21:2</button></span></div><div class='ol sub'><b>2.</b> 방주를 건조하는 것은 단체적인 그리스도를 건축하는 것을 보여 주는 예표이며, 이 단체적인 그리스도는 하나님과 함께 일하는 사람들에 의해 그리스도의 풍성의 요소를 건축 재료로 하여 건축된다. <span class='refs'><button class='ref' data-ref='1 Cor. 3:9-12'>1 Cor. 3:9-12</button> <button class='ref' data-ref='Eph. 4:12'>Eph. 4:12</button> <button class='ref' data-ref='Eph. 2:22'>Eph. 2:22</button></span></div><div class='ol sub'><b>3.</b> 이러한 건축은 그리스도를 사람들 안으로 일해 넣음으로 그리스도에 의해 그들을 함께 건축하여, 그들을 육체 안에서의 하나님의 나타나심이 되게 한다. <span class='refs'><button class='ref' data-ref='1 Tim. 3:15-16'>1 Tim. 3:15-16</button></span></div><div class='ol sub'><b>a.</b> 우리의 일에서 가장 중요한 방면은 건축하시고 건축되신 하나님을 다른 이들 안으로 공급함으로, 삼일 하나님께서 그분 자신을 그들의 존재 안으로 건축하실 수 있게 하는 것이다. <span class='refs'><button class='ref' data-ref='Matt. 16:18'>Matt. 16:18</button> <button class='ref' data-ref='Eph. 2:21-22'>Eph. 2:21-22</button> <button class='ref' data-ref='Eph. 3:17'>Eph. 3:17</button> <button class='ref' data-ref='1 Cor. 14:4'>1 Cor. 14:4</button></span></div><div class='ol sub'><b>b.</b> 우리는 한 가지 것을 실행해야 하는데, 그것은 바로 과정을 거치시고 완결되신 삼일 하나님을 다른 이들 안으로 공급함으로 하나님께서 그분 자신을 그들의 속사람 안으로 건축하실 수 있도록 하는 것이다. <span class='refs'><button class='ref' data-ref='2 Cor. 13:14'>2 Cor. 13:14</button> <button class='ref' data-ref='1 Cor. 3:9'>1 Cor. 3:9</button> <button class='ref' data-ref='1 Cor. 3:10'>1 Cor. 3:10</button> <button class='ref' data-ref='1 Cor. 3:12'>1 Cor. 3:12</button> <button class='ref' data-ref='Rom. 11:36'>Rom. 11:36</button></span></div><div class='ol sub'><b>B.</b> 교회를 건축하고 교회생활 안으로 들어옴으로써 우리는 하나님께서 대환난을 통하여 오늘날의 악한 세대에 집행하실 심판에서 구원받고 그 세대에서 분별되어, 새로운 시대 곧 천년왕국의 시대 안으로 이끌릴 것이다. <span class='refs'><button class='ref' data-ref='Heb. 11:7'>Heb. 11:7</button> <button class='ref' data-ref='Matt. 24:37-39'>Matt. 24:37-39</button> <button class='ref' data-ref='Luke 17:26-27'>Luke 17:26-27</button></span></div></div></section>
+<section id="weekly" class="panel"><div class="card"><h2>WEEKLY FOCUS</h2><ol><li><b>Life:</b> inherit the godly ways—salvation, offering, calling on the Lord, and walking with God.</li><li><b>Grace:</b> in a corrupt age, find grace; let grace become practical supply and issue in righteousness.</li><li><b>Work:</b> receive God’s revelation and build according to His word, with Christ and the building up of the church as the New Testament center.</li></ol>
+<p class="ko"><b>주간 중점:</b> 노아의 시대 전환은 하나님과 동행하는 생활에서 시작되고, 은혜를 실제적으로 누림으로 의로운 생활을 산출하며, 하나님의 계시에 따라 건축하는 일로 이어진다.</p></div></section>
+<section id="daily" class="panel"><section class="day card"><div class="dayno">DAY 1</div><h2>Noah believed God and gave Him a way</h2><h3 class="ko">노아는 하나님을 믿고 하나님께 길을 열어 드렸다</h3>
+    <div class="mn"><b>MORNING NOURISHMENT</b><div><button class='ref' data-ref='Gen. 6:8-9'>Gen. 6:8-9</button></div></div>
+    <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3</h3><ol><li>The age was deeply corrupted, yet God’s eternal purpose did not change.</li><li>The decisive expression is “But Noah”: one person found grace and walked with God.</li><li>A life that changes the age begins with faith, fellowship with God, and practical obedience.</li></ol></div>
+    <p class="ko">시대가 극도로 부패했어도 하나님의 영원한 목적은 바뀌지 않았다. 핵심은 ‘그러나 노아는’이다. 한 사람이 은혜를 입고 하나님과 동행함으로 하나님께 길을 열어 드렸다.</p>
+    <div class="prop"><b>~1:30 PROPHESYING</b><p>Today I am impressed that the age was deeply corrupted, yet God’s eternal purpose did not change. The decisive expression is “But Noah”: one person found grace and walked with God. A life that changes the age begins with faith, fellowship with God, and practical obedience. Lord, make this not merely a teaching to me. Bring me into a daily life of faith, grace, fellowship with You, and obedience to Your word, so that my living and service may give You a practical way and may genuinely build up others in Christ.</p></div>
+    <textarea class="note" data-key="day1" placeholder="My private note…"></textarea></section><section class="day card"><div class="dayno">DAY 2</div><h2>Inheriting the godly ways of the forefathers</h2><h3 class="ko">조상들의 경건한 길을 물려받음</h3>
+    <div class="mn"><b>MORNING NOURISHMENT</b><div><button class='ref' data-ref='Gen. 4:26'>Gen. 4:26</button> <button class='ref' data-ref='Gen. 5:24'>Gen. 5:24</button></div></div>
+    <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3</h3><ol><li>Adam: receive God’s salvation and covering.</li><li>Abel and Enosh: offer what pleases God and call on Jehovah.</li><li>Enoch: walk with God, taking Him as the center and everything.</li></ol></div>
+    <p class="ko">시대를 바꾸는 생활은 새 기법을 만드는 것이 아니라 하나님께서 앞선 사람들에게 보여 주신 건강한 길—구원, 하나님을 기쁘시게 함, 주님의 이름을 부름, 하나님과 동행함—을 실제 생활로 이어 가는 것이다.</p>
+    <div class="prop"><b>~1:30 PROPHESYING</b><p>Today I am impressed that adam: receive God’s salvation and covering. Abel and Enosh: offer what pleases God and call on Jehovah. Enoch: walk with God, taking Him as the center and everything. Lord, make this not merely a teaching to me. Bring me into a daily life of faith, grace, fellowship with You, and obedience to Your word, so that my living and service may give You a practical way and may genuinely build up others in Christ.</p></div>
+    <textarea class="note" data-key="day2" placeholder="My private note…"></textarea></section><section class="day card"><div class="dayno">DAY 3</div><h2>Finding grace in a corrupt age</h2><h3 class="ko">부패한 시대에서 은혜를 발견함</h3>
+    <div class="mn"><b>MORNING NOURISHMENT</b><div><button class='ref' data-ref='1 Cor. 15:10'>1 Cor. 15:10</button> <button class='ref' data-ref='Gal. 6:18'>Gal. 6:18</button></div></div>
+    <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3</h3><ol><li>God showed Noah the true condition of his age.</li><li>Noah found grace in the sight of Jehovah.</li><li>Grace becomes practical supply that operates in us and with our spirit.</li></ol></div>
+    <p class="ko">노아는 부패한 시대의 실상을 보았지만 그 상황에 압도되지 않았다. 그는 여호와 앞에서 은혜를 발견했다. 은혜는 단순한 교리가 아니라 우리와 함께하고 우리 안에서 역사하는 실제적인 공급이다.</p>
+    <div class="prop"><b>~1:30 PROPHESYING</b><p>Today I am impressed that god showed Noah the true condition of his age. Noah found grace in the sight of Jehovah. Grace becomes practical supply that operates in us and with our spirit. Lord, make this not merely a teaching to me. Bring me into a daily life of faith, grace, fellowship with You, and obedience to Your word, so that my living and service may give You a practical way and may genuinely build up others in Christ.</p></div>
+    <textarea class="note" data-key="day3" placeholder="My private note…"></textarea></section><section class="day card"><div class="dayno">DAY 4</div><h2>Grace producing righteousness</h2><h3 class="ko">의를 산출하는 은혜</h3>
+    <div class="mn"><b>MORNING NOURISHMENT</b><div><button class='ref' data-ref='Rom. 5:17'>Rom. 5:17</button> <button class='ref' data-ref='Rom. 5:21'>Rom. 5:21</button></div></div>
+    <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3</h3><ol><li>Grace is sufficient in weakness and trials.</li><li>Grace empowers labor and equips us to minister to others.</li><li>Grace reigns through righteousness; its issue should be a right living before God and toward others.</li></ol></div>
+    <p class="ko">은혜는 위로에 그치지 않고 실제 생활에서 의를 산출한다. 하나님의 은혜를 풍성히 받을수록 하나님과 사람 앞에서 올바른 생활이 나타나야 한다.</p>
+    <div class="prop"><b>~1:30 PROPHESYING</b><p>Today I am impressed that grace is sufficient in weakness and trials. Grace empowers labor and equips us to minister to others. Grace reigns through righteousness; its issue should be a right living before God and toward others. Lord, make this not merely a teaching to me. Bring me into a daily life of faith, grace, fellowship with You, and obedience to Your word, so that my living and service may give You a practical way and may genuinely build up others in Christ.</p></div>
+    <textarea class="note" data-key="day4" placeholder="My private note…"></textarea></section><section class="day card"><div class="dayno">DAY 5</div><h2>Building the ark according to revelation</h2><h3 class="ko">계시에 따라 방주를 건축함</h3>
+    <div class="mn"><b>MORNING NOURISHMENT</b><div><button class='ref' data-ref='Heb. 11:7'>Heb. 11:7</button> <button class='ref' data-ref='Matt. 16:18'>Matt. 16:18</button> <button class='ref' data-ref='Eph. 4:12'>Eph. 4:12</button></div></div>
+    <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3</h3><ol><li>Noah received a further revelation—to build the ark—and acted by faith.</li><li>The outline applies the ark typologically to Christ and the church.</li><li>The New Testament directly says Christ builds His church and the saints are perfected for the building up of His Body.</li></ol></div>
+    <p class="ko">노아는 방주를 건조하라는 구체적인 계시를 받고 믿음으로 실행했다. 개요는 이것을 그리스도와 교회의 건축에 예표적으로 적용한다. 신약의 직접적인 강조는 그리스도께서 교회를 건축하시고 성도들이 그 몸을 건축한다는 것이다.</p>
+    <div class="prop"><b>~1:30 PROPHESYING</b><p>Today I am impressed that noah received a further revelation—to build the ark—and acted by faith. The outline applies the ark typologically to Christ and the church. The New Testament directly says Christ builds His church and the saints are perfected for the building up of His Body. Lord, make this not merely a teaching to me. Bring me into a daily life of faith, grace, fellowship with You, and obedience to Your word, so that my living and service may give You a practical way and may genuinely build up others in Christ.</p></div>
+    <textarea class="note" data-key="day5" placeholder="My private note…"></textarea></section><section class="day card"><div class="dayno">DAY 6</div><h2>Christ wrought into people for God’s building</h2><h3 class="ko">하나님의 건축을 위해 사람 안에 그리스도께서 일해 넣어지심</h3>
+    <div class="mn"><b>MORNING NOURISHMENT</b><div><button class='ref' data-ref='Eph. 3:17'>Eph. 3:17</button> <button class='ref' data-ref='1 Cor. 3:12'>1 Cor. 3:12</button></div></div>
+    <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3</h3><ol><li>Christ making His home in our hearts is a strong biblical center for the building work.</li><li>Christian service should build people with Christ rather than merely transmit concepts.</li><li>Noah’s obedience to revelation challenges us to build according to God’s word rather than the tide of the age.</li></ol></div>
+    <p class="ko">건축의 중심은 그리스도께서 믿는 이들의 마음에 거처를 정하시는 것이다. 봉사는 단지 관념을 전달하는 것이 아니라 그리스도로 사람을 건축해야 한다. 노아처럼 시대의 조류가 아니라 하나님의 말씀과 계시를 따라 건축해야 한다.</p>
+    <div class="prop"><b>~1:30 PROPHESYING</b><p>Today I am impressed that christ making His home in our hearts is a strong biblical center for the building work. Christian service should build people with Christ rather than merely transmit concepts. Noah’s obedience to revelation challenges us to build according to God’s word rather than the tide of the age. Lord, make this not merely a teaching to me. Bring me into a daily life of faith, grace, fellowship with You, and obedience to Your word, so that my living and service may give You a practical way and may genuinely build up others in Christ.</p></div>
+    <textarea class="note" data-key="day6" placeholder="My private note…"></textarea></section></section>
+<section id="review" class="panel"><div class="card"><h2>THEOLOGICAL REVIEW</h2>
+<p><b>Explicit biblical teaching:</b> Noah found favor, walked with God, obeyed God, and built the ark by faith. Christ directly says, “I will build My church,” and Ephesians speaks of Christ making His home in believers’ hearts and of believers being built together.</p>
+<p><b>Typological interpretation:</b> 1 Peter 3:20–21 provides a New Testament connection between the ark/flood and salvation/baptism. The more detailed identification of the ark with the “corporate Christ” and present church life is a further ministry interpretation and should be distinguished from the direct wording of Genesis and 1 Peter.</p>
+<p><b>Ministry terminology:</b> expressions such as “processed and consummated Triune God” and “building and builded God” are technical theological vocabulary. For text-centered study, the biblical expressions “Christ making His home in your hearts,” “built together into a dwelling place of God,” and “building up the church” are clearer.</p>
+<p><b>Eschatology:</b> the claim that entering church life saves believers from the great-tribulation judgment and ushers them into the millennium is a debated eschatological application; the cited verses do not explicitly state that condition in that form.</p></div></section>
+<section id="hymn" class="panel"><div class="card hymn"><h2>🎵 WEEK 2 HYMN</h2>
+<p class="ko"><b>한국어 자료의 찬송:</b> 「하나님의 은혜 구한 노아는」 — <i>Choose to Be an Overcomer</i>, 내 마음의 노래 412.</p>
+<p><b>English Hymn #1268:</b> “When Noah worked upon the ark as God to him decreed.”</p>
+<audio controls preload="none" style="width:100%"><source src="https://www.hymnal.net/Hymns/Hymnal/mp3/e1152_i.mp3" type="audio/mpeg">Your browser does not support audio playback.</audio>
+<p class="ko">위 재생은 음원을 앱에 복사한 것이 아니라 Hymnal.net의 원 제공 파일을 직접 재생합니다. 브라우저가 외부 음원 재생을 막으면 아래 원문 페이지를 여십시오.</p>
+<p><a href="https://www.hymnal.net/en/hymn/h/1268" target="_blank" rel="noopener">Open Hymn #1268 at Hymnal.net</a></p>
+</div></section>
+<section id="notes" class="panel"><div class="card"><h2>📝 MY NOTES</h2><textarea class="note" data-key="week2" placeholder="Week 2 private note…"></textarea><p>Notes stay in this browser/device.</p></div></section>
+<section id="check" class="panel"><div class="card"><h2>✓ SCRIPTURE CHECK</h2><p><b>Checked against the user-supplied Week 2 English PDF extraction.</b></p>
+<p>Clickable references used in this app: <b>75</b></p>
+<p>Resolved to supplied Recovery Version text: <b>75</b></p>
+<p class="status-ok">PASS — every clickable reference has supplied RV text.</p>
+<p class="ko">성구를 눌렀는데 빈 화면이나 임시 문구만 나오는 문제를 찾기 위한 자체 점검 페이지입니다.</p><div class="mn"><b>ALL NT GREEK EXPANSION</b><br>
+All Week 2 New Testament references now load SBLGNT/MorphGNT Greek when opened.
+Try: <button class="ref" data-ref="2 Tim. 3:1-5">2 Tim. 3:1-5</button>
+<button class="ref" data-ref="Matt. 24:37-39">Matt. 24:37-39</button>
+<button class="ref" data-ref="2 Cor. 12:9">2 Cor. 12:9</button>
+<button class="ref" data-ref="Rev. 22:21">Rev. 22:21</button></div><div class="mn"><b>Greek Word Test</b><br><button class="ref" data-ref="Heb. 11:7">Heb. 11:7</button> 을 누른 뒤 <b>Πίστει</b> 또는 <b>κατεσκεύασεν</b>을 눌러 보십시오.</div></div></section>
+</main>
+<div id="modal"><div class="modalbox"><button class="close">✕</button><h2 id="mref"></h2><h3>RECOVERY VERSION</h3><div class="ttsbar"><button id="listen">🔊 Scripture Audio</button><select id="rate"><option>.75</option><option>.9</option><option selected>1.0</option><option>1.1</option><option>1.25</option></select></div><div id="mrv" class="rv"></div><div id="gwrap"><h3>GREEK WORD STUDY</h3><div class="ttsbar" id="greekAudioBar" style="display:none"><button id="greekListen" type="button">🔊 Greek Pronunciation</button><button id="greekStop" type="button">⏹ Stop</button><select id="greekRate" aria-label="Greek audio speed"><option>.75</option><option>.9</option><option selected>1.0</option><option>1.1</option><option>1.25</option></select></div><div id="mgreek" class="greek"></div><div id="mpr" class="pron" style="display:none"></div><div id="lex" class="mn" style="display:none"></div></div></div></div>
+<script>
+const RV={"Gen. 6:5-14": "And Jehovah saw that the wickedness of man was great in the earth, and that every imagination of the thoughts of his heart was only evil continually. 6And Jehovah repented that He had made man on the earth, and it grieved Him in His heart. 7And Jehovah said, I will blot out the man whom I have created from the surface of the ground, from man to beast to creeping things to the birds of heaven; for I repent that I have made them. 8But Noah found favor in the sight of Jehovah. 9These are the generations of Noah. Noah was a righteous man, blameless in his generations; and Noah walked with God. 10And Noah begot three sons: Shem, Ham, and Japheth. 11And the earth was corrupt before God, and the earth was ﬁlled with violence. 12And God looked on the earth, and behold, it was corrupt; for all ﬂesh had corrupted its way upon the earth. 13And God said to Noah, The end of all ﬂesh has come before Me, for the earth is ﬁlled with violence because of them; and now I am about to destroy them with the earth. 14Make yourself an ark of gopher wood; you shall make rooms in the ark and shall cover it within and without with pitch.", "Heb. 11:7": "By faith Noah, having been divinely instructed concerning things not yet seen and being moved by pious fear, prepared an ark for the salvation of his house, through which he condemned the world, and became heir of the righteousness which is according to faith.", "Phil. 1:19-21": "For I know that for me this will turn out to salvation through your petition and the bountiful supply of the Spirit of Jesus Christ, 20According to my earnest expectation and hope that in nothing I will be put to shame, but with all boldness, as always, even now Christ will be magniﬁed in my body, whether through life or through death. 21For to me, to live is Christ and to die is gain.", "Gen. 3:15": "And I will put enmity Between you and the woman And between your seed and her seed; He will bruise you on the head, But you will bruise him on the heel.", "Gen. 3:20-21": "And the man called his wife’s name Eve, because she was the mother of all living. 21And Jehovah God made coats of skin for Adam and for his wife and clothed them.", "Isa. 12:2": "God is now my salvation; I will trust and not dread; For Jah Jehovah is my strength and song, And He has become my salvation.", "Gen. 4:4": "And Abel also brought an offering, from the ﬁrstlings of his ﬂock, that is, from their fat portions. And Jehovah had regard for Abel and for his offering.", "Gen. 4:26": "And to Seth also a son was born, and he called his name Enosh. At that time men began to call upon the name of Jehovah.", "Jer. 33:3": "Call unto Me, and I will answer you and tell you great and hidden things, which you do not know.", "Rom. 10:12": "For there is no distinction between Jew and Greek, for the same Lord is Lord of all and rich to all who call upon Him;", "2 Tim. 2:22": "But ﬂee youthful lusts, and pursue righteousness, faith, love, peace with those who call on the Lord out of a pure heart.", "Gen. 5:22-24": "And Enoch walked with God after he had begotten Methuselah three hundred years, and he begot more sons and daughters. 23And all the days of Enoch were three hundred sixty-ﬁve years. 24And Enoch walked with God, and he was not, for God took him.", "Heb. 11:5-6": "By faith Enoch was translated so that he should not see death; and he was not found, because God had translated him. For before his translation he obtained the testimony that he had been well pleasing to God. 6But without faith it is impossible to be well pleasing to Him, for he who comes forward to God must believe that He is and that He is a rewarder of those who diligently seek Him.", "2 Cor. 5:4": "For also, we who are in this tabernacle groan, being burdened, in that we do not desire to be unclothed, but clothed upon, that what is mortal may be swallowed up by life.", "2 Cor. 5:9": "Therefore also we are determined, whether at home or abroad, to gain the honor of being well pleasing to Him.", "2 Cor. 5:14-16": "For the love of Christ constrains us because we have judged this, that One died for all, therefore all died; 15And He died for all that those who live may no longer live to themselves but to Him who died for them and has been raised. 16So 2 then we, from now on, know no one according to the ﬂesh; even though we have known Christ according to the ﬂesh, yet now we know Him so no longer.", "2 Cor. 6:1": "And working together with Him, we also entreat you not to receive the grace of God in vain;", "Gen. 6:3": "And Jehovah said, My Spirit will not strive with man forever, for he indeed is ﬂesh; so his days will be one hundred twenty years.", "Gen. 6:5": "And Jehovah saw that the wickedness of man was great in the earth, and that every imagination of the thoughts of his heart was only evil continually.", "Gen. 6:11": "And the earth was corrupt before God, and the earth was ﬁlled with violence.", "Gen. 6:13": "And God said to Noah, The end of all ﬂesh has come before Me, for the earth is ﬁlled with violence because of them; and now I am about to destroy them with the earth.", "Matt. 24:37-39": "For just as the days of Noah were, so will the coming of the Son of Man be. 38For as they were in those days before the ﬂood, eating and drinking, marrying and giving in marriage, until the day in which Noah entered into the ark, 39And they did not know that judgment was coming until the ﬂood came and took all away, so also will the coming of the Son of Man be.", "2 Tim. 3:1-5": "But know this, that in the last days difﬁcult times will come. 2For men will be lovers of self, lovers of money, boasters, arrogant, revilers, disobedient to parents, unthankful, unholy, 3Without natural affection, implacable, slanderers, without self- control, savage, not lovers of good, 4Traitors, reckless, blinded with pride, lovers of pleasure rather than lovers of God, 5Having an outward form of godliness, though denying its power; from these also turn away.", "Dan. 1:8": "But Daniel set his heart not to deﬁle himself with the king’s choice provision and with the wine that the king drank, so he requested of the leader of the eunuchs that he might not deﬁle himself.", "Dan. 9:23": "At the beginning of your supplications the command went forth, and I have come to tell you, for you are preciousness itself. Therefore understand the matter, and consider the vision.", "Dan. 10:11": "And he said to me, Daniel, man of preciousness, understand the words that I am about to tell you and stand in your place, for I have now been sent to you. And when he had spoken this word to me, I stood up trembling.", "Dan. 10:19": "And he said, Do not be afraid, man of preciousness. Peace to you. Be strong, yes, be strong. And when he spoke to me, I received strength and said, Speak, sir, for you have strengthened me.", "John 1:14": "And the Word became ﬂesh and tabernacled among us (and we beheld His glory, glory as of the only Begotten from the Father), full of grace and reality.", "John 1:16-17": "For of His fullness we have all received, and grace upon grace. 17 For the law was given through Moses; grace and reality came through Jesus Christ.", "Rev. 22:21": "The grace of the Lord Jesus be with all the saints. Amen.", "Eph. 6:24": "Grace be with all those who love our Lord Jesus Christ in incorruptibility.", "John 21:15-17": "Then when they had eaten breakfast, Jesus said to Simon Peter, Simon, son of John, do you love Me more than these? He said to Him, Yes, Lord, You know that I love You. He said to him, Feed My lambs. 16He said to him again a second time, Simon, son of John, do you love Me? He said to Him, Yes, Lord, You know that I love You. He said to him, Shepherd My sheep. 17He said to him the third time, Simon, son of John, do you love Me? Peter was grieved that He said to him the third time, Do you love Me? And he said to Him, Lord, You know all things; You know that I love You. Jesus said to him, Feed My sheep.", "Heb. 10:29": "By how much do you think he will be thought worthy of worse punishment who has trampled underfoot the Son of God and has considered the blood of the covenant by which he was sanctiﬁed a common thing and has insulted the Spirit of grace?", "Gal. 6:18": "The grace of our Lord Jesus Christ be with your spirit, brothers. Amen.", "Phil. 4:23": "The grace of the Lord Jesus Christ be with your spirit. Philem. 25—The grace of the Lord Jesus Christ be with your spirit.", "2 Tim. 4:22": "The Lord be with your spirit. Grace be with you.", "Acts 20:32": "And now I commit you to God and to the word of His grace, which is able to build you up and to give you the inheritance among all those who have been sanctiﬁed.", "Col. 3:16": "Let the word of Christ dwell in you richly in all wisdom, teaching and admonishing one another with psalms and hymns and spiritual songs, singing with grace in your hearts to God.", "Jer. 15:16": "Your words were found and I ate them, And Your word became to me The gladness and joy of my heart, For I am called by Your name, O Jehovah, God of hosts.", "Psa. 133:3": "Like the dew of Hermon That came down upon the mountains of Zion. For there Jehovah commanded the blessing: Life forever.", "1 Pet. 3:7": "Husbands, in like manner dwell together with them according to knowledge, as with the weaker, female vessel, assigning honor to them as also to fellow heirs of the grace of life, that your prayers may not be hindered.", "Acts 4:33": "And with great power the apostles gave testimony of the resurrection of the Lord Jesus, and great grace was upon them all.", "Acts 11:23": "Who, when he arrived and saw the grace of God, rejoiced and encouraged them all to remain with the Lord with purpose of heart;", "2 Cor. 12:9": "And He has said to me, My grace is sufﬁcient for you, for My power is perfected in weakness. Most gladly therefore I will rather boast in my weaknesses that the power of Christ might tabernacle over me.", "1 Cor. 15:10": "But by the grace of God I am what I am; and His grace unto me did not turn out to be in vain, but, on the contrary, I labored more abundantly than all of them, yet not I but the grace of God which is with me.", "1 Cor. 15:58": "Therefore, my beloved brothers, be steadfast, immovable, always abounding in the work of the Lord, knowing that your labor is not in vain in the Lord.", "1 Cor. 3:12": "But if anyone builds upon the foundation gold, silver, precious stones, wood, grass, stubble,", "1 Pet. 4:10": "Each one, as he has received a gift, ministering it among yourselves as good stewards of the varied grace of God.", "Eph. 3:2": "If indeed you have heard of the stewardship of the grace of God which was given to me for you,", "2 Cor. 1:15": "And in this conﬁdence I intended to come to you previously that you might have double grace,", "Eph. 4:29": "Let no corrupt word proceed out of your mouth, but only that which is good for building up, according to the need, that it may give grace to those who hear.", "Rom. 5:17": "For if, by the offense of the one, death reigned through the one, much more those who receive the abundance of grace and of the gift of righteousness will reign in life through the One, Jesus Christ.", "Rom. 5:21": "In order that just as sin reigned in death, so also grace might reign through righteousness unto eternal life through Jesus Christ our Lord.", "1 Cor. 3:9": "For we are God’s fellow workers; you are God’s cultivated land, God’s building.", "Matt. 16:18": "And I also say to you that you are Peter, and upon this rock I will build My church, and the gates of Hades shall not prevail against it.", "1 Pet. 3:20-21": "Who had formerly disobeyed when the long-suffering of God waited in the days of Noah, while the ark was being prepared; entering into which, a few, that is, eight souls, were brought safely through by water. 21Which water, as the antitype, also now saves you, that is, baptism, not a putting away of the ﬁlth of the ﬂesh but the appeal of a good conscience unto God, through the resurrection of Jesus Christ,", "1 Cor. 12:12": "For even as the body is one and has many members, yet all the members of the body, being many, are one body, so also is the Christ.", "Eph. 2:15-16": "Abolishing in His ﬂesh the law of the commandments in ordinances, that He might create the two in Himself into one new man, so making peace, 16And might reconcile both in one Body to God through the cross, having slain the enmity by it.", "Col. 3:10-11": "And have put on the new man, which is being renewed unto full knowledge according to the image of Him who created him, 11Where there cannot be Greek and Jew, circumcision and uncircumcision, barbarian, Scythian, slave, free man, but Christ is all and in all.", "Rev. 21:2": "And I saw the holy city, New Jerusalem, coming down out of heaven from God, prepared as a bride adorned for her husband.", "1 Cor. 3:9-12": "For we are God’s fellow workers; you are God’s cultivated land, God’s building. 10According to the grace of God given to me, as a wise master builder I have laid a foundation, and another builds upon it. But let each man take heed how he builds upon it. 11For another foundation no one is able to lay besides that which is laid, which is Jesus Christ. 12But if anyone builds upon the foundation gold, silver, precious stones, wood, grass, stubble,", "Eph. 4:12": "For the perfecting of the saints unto the work of the ministry, unto the building up of the Body of Christ,", "Eph. 2:22": "In whom you also are being built together into a dwelling place of God in spirit.", "1 Tim. 3:15-16": "But if I delay, I write that you may know how one ought to conduct himself in the house of God, which is the church of the living God, the pillar and base of the truth. 16And confessedly, great is the mystery of godliness: He who was manifested in the ﬂesh, Justiﬁed in the Spirit, Seen by angels, Preached among the nations, Believed on in the world, Taken up in glory.", "Eph. 2:21-22": "In whom all the building, being ﬁtted together, is growing into a holy temple in the Lord; 22In whom you also are being built together into a dwelling place of God in spirit.", "Eph. 3:17": "That Christ may make His home in your hearts through faith, that you, being rooted and grounded in love,", "1 Cor. 14:4": "He who speaks in a tongue builds up himself, but he who prophesies builds up the church.", "2 Cor. 13:14": "The grace of the Lord Jesus Christ and the love of God and the fellowship of the Holy Spirit be with you all.", "1 Cor. 3:10": "According to the grace of God given to me, as a wise master builder I have laid a foundation, and another builds upon it. But let each man take heed how he builds upon it.", "Rom. 11:36": "Because out from Him and through Him and to Him are all things. To Him be the glory forever. Amen.", "Luke 17:26-27": "And even as it happened in the days of Noah, so will it be also in the days of the Son of Man: 27They were eating, they were drinking, they were marrying, they were being given in marriage, until the day in which Noah entered into the ark and the ﬂood came and destroyed them all. 8", "He. 11:7": "By faith Noah, having been divinely instructed concerning things not yet seen and being moved by pious fear, prepared an ark for the salvation of his house, through which he condemned the world, and became heir of the righteousness which is according to faith.", "Is. 12:2": "God is now my salvation; I will trust and not dread; For Jah Jehovah is my strength and song, And He has become my salvation.", "He. 11:5-6": "By faith Enoch was translated so that he should not see death; and he was not found, because God had translated him. For before his translation he obtained the testimony that he had been well pleasing to God. 6But without faith it is impossible to be well pleasing to Him, for he who comes forward to God must believe that He is and that He is a rewarder of those who diligently seek Him.", "Mtt. 24:37-39": "For just as the days of Noah were, so will the coming of the Son of Man be. 38For as they were in those days before the ﬂood, eating and drinking, marrying and giving in marriage, until the day in which Noah entered into the ark, 39And they did not know that judgment was coming until the ﬂood came and took all away, so also will the coming of the Son of Man be.", "Dn. 1:8": "But Daniel set his heart not to deﬁle himself with the king’s choice provision and with the wine that the king drank, so he requested of the leader of the eunuchs that he might not deﬁle himself.", "Dn. 9:23": "At the beginning of your supplications the command went forth, and I have come to tell you, for you are preciousness itself. Therefore understand the matter, and consider the vision.", "Dn. 10:11": "And he said to me, Daniel, man of preciousness, understand the words that I am about to tell you and stand in your place, for I have now been sent to you. And when he had spoken this word to me, I stood up trembling.", "Dn. 10:19": "And he said, Do not be afraid, man of preciousness. Peace to you. Be strong, yes, be strong. And when he spoke to me, I received strength and said, Speak, sir, for you have strengthened me.", "He. 10:29": "By how much do you think he will be thought worthy of worse punishment who has trampled underfoot the Son of God and has considered the blood of the covenant by which he was sanctiﬁed a common thing and has insulted the Spirit of grace?", "Gl. 6:18": "The grace of our Lord Jesus Christ be with your spirit, brothers. Amen.", "Ps. 133:3": "Like the dew of Hermon That came down upon the mountains of Zion. For there Jehovah commanded the blessing: Life forever.", "Mtt. 16:18": "And I also say to you that you are Peter, and upon this rock I will build My church, and the gates of Hades shall not prevail against it.", "Gen. 5:24": "And Enoch walked with God, and he was not, for God took him.", "Gen. 6:8": "But Noah found favor in the sight of Jehovah.", "Gen. 6:8-9": "But Noah found favor in the sight of Jehovah. 9These are the generations of Noah. Noah was a righteous man, blameless in his generations; and Noah walked with God.", "Philem. 25": "The grace of the Lord Jesus Christ be with your spirit."};
+const GREEK={"Heb. 11:7": ["Πίστει χρηματισθεὶς Νῶε περὶ τῶν μηδέπω βλεπομένων, εὐλαβηθεὶς κατεσκεύασεν κιβωτὸν εἰς σωτηρίαν τοῦ οἴκου αὐτοῦ.", "(PEE-stay khree-ma-tis-THEIS NO-eh peh-REE tone may-DEH-po bleh-po-MEH-none...)"], "1 Cor. 15:10": ["χάριτι δὲ θεοῦ εἰμι ὅ εἰμι· καὶ ἡ χάρις αὐτοῦ ἡ εἰς ἐμὲ οὐ κενὴ ἐγενήθη.", "(KHA-ree-tee deh theh-OO AY-mee ho AY-mee...)"], "Gal. 6:18": ["Ἡ χάρις τοῦ κυρίου ἡμῶν Ἰησοῦ Χριστοῦ μετὰ τοῦ πνεύματος ὑμῶν, ἀδελφοί· ἀμήν.", "(Hay KHA-ris too koo-REE-oo hay-MONE ee-ay-SOO khrees-TOO...)"], "Rom. 5:21": ["ἵνα ὥσπερ ἐβασίλευσεν ἡ ἁμαρτία ἐν τῷ θανάτῳ, οὕτως καὶ ἡ χάρις βασιλεύσῃ διὰ δικαιοσύνης εἰς ζωὴν αἰώνιον.", "(HEE-na HOH-spehr eh-va-SEE-lef-sen hay ha-mar-TEE-a...)"], "Matt. 16:18": ["κἀγὼ δέ σοι λέγω ὅτι σὺ εἶ Πέτρος, καὶ ἐπὶ ταύτῃ τῇ πέτρᾳ οἰκοδομήσω μου τὴν ἐκκλησίαν.", "(ka-GO deh soy LEH-go HO-tee soo ee PEH-tros...)"], "Eph. 4:12": ["πρὸς τὸν καταρτισμὸν τῶν ἁγίων εἰς ἔργον διακονίας, εἰς οἰκοδομὴν τοῦ σώματος τοῦ Χριστοῦ.", "(pros ton ka-tar-tis-MON tone ha-GEE-one...)"], "Eph. 3:17": ["κατοικῆσαι τὸν Χριστὸν διὰ τῆς πίστεως ἐν ταῖς καρδίαις ὑμῶν.", "(ka-toy-KAY-sai ton khrees-TON dee-A tees PEES-teh-os...)"], "1 Cor. 3:12": ["εἰ δέ τις ἐποικοδομεῖ ἐπὶ τὸν θεμέλιον χρυσόν, ἄργυρον, λίθους τιμίους, ξύλα, χόρτον, καλάμην.", "(ee DEH tees eh-poy-ko-do-MEE eh-PEE ton theh-MEH-lee-on...)"], "2 Tim. 3:1-5": ["Τοῦτο δὲ γίνωσκε ὅτι ἐν ἐσχάταις ἡμέραις ἐνστήσονται καιροὶ χαλεποί·\nἔσονται γὰρ οἱ ἄνθρωποι φίλαυτοι, φιλάργυροι, ἀλαζόνες, ὑπερήφανοι, βλάσφημοι, γονεῦσιν ἀπειθεῖς, ἀχάριστοι, ἀνόσιοι,\nἄστοργοι, ἄσπονδοι, διάβολοι, ἀκρατεῖς, ἀνήμεροι, ἀφιλάγαθοι,\nπροδόται, προπετεῖς, τετυφωμένοι, φιλήδονοι μᾶλλον ἢ φιλόθεοι,\nἔχοντες μόρφωσιν εὐσεβείας τὴν δὲ δύναμιν αὐτῆς ἠρνημένοι· καὶ τούτους ἀποτρέπου.", "(TOO-to deh GHEE-no-skeh HO-tee en es-KHA-tays hay-MEH-rays en-STAY-son-tai kai-ROY kha-leh-POY...)"]};
+
+const FULL_PRON={
+"Heb. 11:7":"PEE-stay khree-ma-tis-THEIS NO-eh peh-REE tone may-DEH-po bleh-po-MEH-none, yoo-la-vee-THEIS ka-teh-SKEH-va-sen kee-vo-TON ees so-tay-REE-an too EE-koo af-TOO.",
+"1 Cor. 15:10":"KHA-ree-tee deh theh-OO AY-mee ho AY-mee, kai hay KHA-ris af-TOO hay ees eh-MEH oo keh-NAY eh-gheh-NAY-thay.",
+"Gal. 6:18":"Hay KHA-ris too koo-REE-oo hay-MONE ee-ay-SOO khrees-TOO meh-TA too PNEV-ma-tos ee-MONE, a-dhel-FOY, a-MEEN.",
+"Rom. 5:21":"HEE-na HOH-spehr eh-va-SEE-lef-sen hay ha-mar-TEE-a en toh tha-NA-toh, HOO-tohs kai hay KHA-ris va-see-LEF-see dhee-A dhee-kai-o-SEE-nays ees zo-AYN ai-OH-nee-on.",
+"Matt. 16:18":"ka-GO deh soy LEH-go HO-tee soo ee PEH-tros, kai eh-PEE TAF-tay tay PEH-tra oy-ko-do-MAY-so moo teen ek-klay-SEE-an.",
+"Eph. 4:12":"pros ton ka-tar-tis-MON tone ha-GEE-one ees EHR-gon dhee-a-ko-NEE-as, ees oy-ko-do-MAYN too SOH-ma-tos too khrees-TOO.",
+"Eph. 3:17":"ka-toy-KAY-sai ton khrees-TON dhee-A tees PEES-teh-os en tais kar-DHEE-ais ee-MONE.",
+"1 Cor. 3:12":"ee DEH tees eh-poy-ko-do-MEE eh-PEE ton theh-MEH-lee-on khree-SON, AR-ghee-ron, LEE-thoos tee-MEE-oos, KSEE-la, KHOR-ton, ka-LA-mayn.",
+"2 Tim. 3:1-5":"TOO-to deh GHEE-no-skeh HO-tee en es-KHA-tays hay-MEH-rays en-STAY-son-tai kai-ROY kha-leh-POY. EH-son-tai gar oy AN-thro-pee FEE-laf-toy, fee-LAR-ghee-roy, a-la-ZO-nes, ee-peh-RAY-fa-noy, VLAS-fay-moy, go-NEF-seen a-pee-THEES, a-KHA-ree-stoy, a-NO-see-oy, A-stor-goy, A-spon-doy, dhee-A-vo-loy, a-kra-TEES, a-NAY-meh-roy, a-fee-LA-ga-thoy, pro-DHO-tai, pro-peh-TEES, teh-tee-fo-MEH-noy, fee-LAY-dho-noy MAL-lon ay fee-LO-theh-oy, EH-khon-tes MOR-fo-seen yoo-seh-VEE-as teen deh DEE-na-meen af-TAYS ayr-nay-MEH-noy, kai TOO-toos a-po-TREH-poo."
+};
+
+const LEX={"Πίστει": ["πίστις", "noun", "by faith", ["faith", "trust", "faithfulness"]], "χρηματισθεὶς": ["χρηματίζω", "verb", "having been divinely instructed / warned", ["divinely instructed", "warned by God", "given a divine response"]], "Νῶε": ["Νῶε", "proper noun", "Noah", ["Noah"]], "περὶ": ["περί", "preposition", "concerning / about", ["concerning", "about", "regarding"]], "τῶν": ["ὁ", "article", "of the", ["the"]], "μηδέπω": ["μηδέπω", "adverb", "not yet", ["not yet", "not as yet"]], "βλεπομένων": ["βλέπω", "verb", "being seen", ["seen", "perceived", "observed"]], "εὐλαβηθεὶς": ["εὐλαβέομαι", "verb", "having been moved with reverent fear", ["reverently feared", "took heed", "was moved with godly fear"]], "κατεσκεύασεν": ["κατασκευάζω", "verb", "prepared / constructed", ["prepared", "built", "constructed"]], "κιβωτὸν": ["κιβωτός", "noun", "an ark", ["ark", "large vessel", "chest"]], "εἰς": ["εἰς", "preposition", "into / for", ["into", "for", "unto"]], "σωτηρίαν": ["σωτηρία", "noun", "salvation / deliverance", ["salvation", "deliverance", "rescue"]], "τοῦ": ["ὁ", "article", "of the", ["the"]], "οἴκου": ["οἶκος", "noun", "house / household", ["house", "household", "family"]], "αὐτοῦ": ["αὐτός", "pronoun", "his", ["his", "of him"]], "χάριτι": ["χάρις", "noun", "by grace", ["grace", "favor", "gracious gift"]], "δὲ": ["δέ", "conjunction", "but / and", ["but", "and", "now"]], "θεοῦ": ["θεός", "noun", "of God", ["God", "of God"]], "εἰμι": ["εἰμί", "verb", "I am", ["am", "exist", "be"]], "ὅ": ["ὅς", "pronoun", "what / that which", ["what", "that which"]], "καὶ": ["καί", "conjunction", "and / also", ["and", "also", "even"]], "ἡ": ["ὁ", "article", "the", ["the"]], "χάρις": ["χάρις", "noun", "grace", ["grace", "favor", "kindness"]], "ἐμὲ": ["ἐγώ", "pronoun", "me", ["me"]], "οὐ": ["οὐ", "particle", "not", ["not"]], "κενὴ": ["κενός", "adjective", "empty / vain", ["empty", "vain", "without effect"]], "ἐγενήθη": ["γίνομαι", "verb", "became / proved to be", ["became", "came to be", "proved to be"]], "κυρίου": ["κύριος", "noun", "of the Lord", ["Lord", "master", "one in authority"]], "ἡμῶν": ["ἐγώ", "pronoun", "our", ["our"]], "Ἰησοῦ": ["Ἰησοῦς", "proper noun", "Jesus", ["Jesus"]], "Χριστοῦ": ["Χριστός", "proper noun", "Christ", ["Christ", "Messiah", "Anointed One"]], "μετὰ": ["μετά", "preposition", "with", ["with", "among"]], "πνεύματος": ["πνεῦμα", "noun", "spirit", ["spirit", "Spirit", "breath"]], "ὑμῶν": ["σύ", "pronoun", "your", ["your", "of you"]], "ἀδελφοί": ["ἀδελφός", "noun", "brothers", ["brothers", "brethren", "fellow believers"]], "ἀμήν": ["ἀμήν", "particle", "amen / truly", ["amen", "truly"]], "ἵνα": ["ἵνα", "conjunction", "so that / in order that", ["so that", "in order that"]], "ὥσπερ": ["ὥσπερ", "conjunction", "just as", ["just as", "even as"]], "ἐβασίλευσεν": ["βασιλεύω", "verb", "reigned", ["reigned", "ruled", "held sway"]], "ἁμαρτία": ["ἁμαρτία", "noun", "sin", ["sin", "sinfulness"]], "ἐν": ["ἐν", "preposition", "in", ["in", "within"]], "τῷ": ["ὁ", "article", "the", ["the"]], "θανάτῳ": ["θάνατος", "noun", "death", ["death"]], "οὕτως": ["οὕτως", "adverb", "so / in this way", ["so", "thus", "in this way"]], "βασιλεύσῃ": ["βασιλεύω", "verb", "may reign", ["reign", "rule", "exercise kingship"]], "διὰ": ["διά", "preposition", "through", ["through", "by means of"]], "δικαιοσύνης": ["δικαιοσύνη", "noun", "righteousness", ["righteousness", "justice", "right standing"]], "ζωὴν": ["ζωή", "noun", "life", ["life", "living", "divine life"]], "αἰώνιον": ["αἰώνιος", "adjective", "eternal", ["eternal", "everlasting", "age-abiding"]], "κἀγὼ": ["κἀγώ", "pronoun", "and I / I also", ["and I", "I also"]], "δέ": ["δέ", "conjunction", "and / but", ["and", "but", "now"]], "σοι": ["σύ", "pronoun", "to you", ["to you", "for you"]], "λέγω": ["λέγω", "verb", "I say", ["say", "tell", "declare"]], "ὅτι": ["ὅτι", "conjunction", "that / because", ["that", "because"]], "σὺ": ["σύ", "pronoun", "you", ["you"]], "εἶ": ["εἰμί", "verb", "you are", ["are", "exist"]], "Πέτρος": ["Πέτρος", "proper noun", "Peter", ["Peter"]], "ἐπὶ": ["ἐπί", "preposition", "upon / on", ["upon", "on", "over"]], "ταύτῃ": ["οὗτος", "pronoun", "this", ["this"]], "τῇ": ["ὁ", "article", "the", ["the"]], "πέτρᾳ": ["πέτρα", "noun", "rock", ["rock", "bedrock", "rock-mass"]], "οἰκοδομήσω": ["οἰκοδομέω", "verb", "I will build", ["build", "build up", "edify"]], "μου": ["ἐγώ", "pronoun", "my", ["my", "of me"]], "τὴν": ["ὁ", "article", "the", ["the"]], "ἐκκλησίαν": ["ἐκκλησία", "noun", "church / assembly", ["church", "assembly", "congregation"]], "πρὸς": ["πρός", "preposition", "for / toward", ["for", "toward", "with a view to"]], "τὸν": ["ὁ", "article", "the", ["the"]], "καταρτισμὸν": ["καταρτισμός", "noun", "perfecting / equipping", ["equipping", "perfecting", "preparation"]], "ἁγίων": ["ἅγιος", "adjective", "of the saints / holy ones", ["saints", "holy ones"]], "ἔργον": ["ἔργον", "noun", "work", ["work", "deed", "task"]], "διακονίας": ["διακονία", "noun", "ministry / service", ["ministry", "service", "ministration"]], "οἰκοδομὴν": ["οἰκοδομή", "noun", "building up", ["building up", "edification", "building"]], "σώματος": ["σῶμα", "noun", "body", ["body", "corporate body"]], "κατοικῆσαι": ["κατοικέω", "verb", "to dwell / make home", ["dwell", "settle down", "make home"]], "Χριστὸν": ["Χριστός", "proper noun", "Christ", ["Christ", "Messiah", "Anointed One"]], "τῆς": ["ὁ", "article", "the", ["the"]], "πίστεως": ["πίστις", "noun", "faith", ["faith", "trust", "belief"]], "ταῖς": ["ὁ", "article", "the", ["the"]], "καρδίαις": ["καρδία", "noun", "hearts", ["hearts", "inner persons", "centers of being"]], "εἰ": ["εἰ", "conjunction", "if", ["if"]], "τις": ["τις", "pronoun", "anyone", ["anyone", "someone"]], "ἐποικοδομεῖ": ["ἐποικοδομέω", "verb", "builds upon", ["builds upon", "builds on", "erects upon"]], "θεμέλιον": ["θεμέλιος", "noun", "foundation", ["foundation", "foundation stone", "base"]], "χρυσόν": ["χρυσός", "noun", "gold", ["gold"]], "ἄργυρον": ["ἄργυρος", "noun", "silver", ["silver"]], "λίθους": ["λίθος", "noun", "stones", ["stones", "precious stones", "building stones"]], "τιμίους": ["τίμιος", "adjective", "precious", ["precious", "valuable", "honored"]], "ξύλα": ["ξύλον", "noun", "wood", ["wood", "timber"]], "χόρτον": ["χόρτος", "noun", "grass", ["grass"]], "καλάμην": ["καλάμη", "noun", "straw / stubble", ["straw", "stubble", "stalk"]], "Τοῦτο": ["οὗτος", "pronoun", "this", ["this", "this thing"]], "γίνωσκε": ["γινώσκω", "verb", "know / recognize", ["know", "recognize", "understand"]], "ἐσχάταις": ["ἔσχατος", "adjective", "last", ["last", "final", "latter"]], "ἡμέραις": ["ἡμέρα", "noun", "days", ["days", "time"]], "ἐνστήσονται": ["ἐνίστημι", "verb", "will come / be present", ["will come", "will set in", "will be present"]], "καιροὶ": ["καιρός", "noun", "times / seasons", ["times", "seasons", "periods"]], "χαλεποί": ["χαλεπός", "adjective", "difficult / perilous", ["difficult", "hard", "perilous", "troublesome"]], "ἔσονται": ["εἰμί", "verb", "will be", ["will be", "will exist"]], "ἄνθρωποι": ["ἄνθρωπος", "noun", "people / human beings", ["people", "men", "human beings"]], "φίλαυτοι": ["φίλαυτος", "adjective", "lovers of self", ["self-loving", "lovers of self", "self-centered"]], "φιλάργυροι": ["φιλάργυρος", "adjective", "lovers of money", ["money-loving", "lovers of money", "avaricious"]], "ἀλαζόνες": ["ἀλαζών", "noun", "boasters", ["boasters", "braggarts", "pretenders"]], "ὑπερήφανοι": ["ὑπερήφανος", "adjective", "arrogant / proud", ["arrogant", "proud", "haughty"]], "βλάσφημοι": ["βλάσφημος", "adjective", "slanderous / abusive", ["slanderous", "abusive", "blasphemous"]], "γονεῦσιν": ["γονεύς", "noun", "parents", ["parents"]], "ἀπειθεῖς": ["ἀπειθής", "adjective", "disobedient", ["disobedient", "unpersuaded", "rebellious"]], "ἀχάριστοι": ["ἀχάριστος", "adjective", "ungrateful", ["ungrateful", "unthankful"]], "ἀνόσιοι": ["ἀνόσιος", "adjective", "unholy", ["unholy", "profane", "irreverent"]], "ἄστοργοι": ["ἄστοργος", "adjective", "without natural affection", ["without natural affection", "unloving", "hard-hearted"]], "ἄσπονδοι": ["ἄσπονδος", "adjective", "irreconcilable", ["irreconcilable", "implacable", "unforgiving"]], "διάβολοι": ["διάβολος", "adjective", "slanderers", ["slanderers", "false accusers"]], "ἀκρατεῖς": ["ἀκρατής", "adjective", "without self-control", ["without self-control", "undisciplined"]], "ἀνήμεροι": ["ἀνήμερος", "adjective", "savage / brutal", ["savage", "brutal", "fierce"]], "ἀφιλάγαθοι": ["ἀφιλάγαθος", "adjective", "not loving good", ["not loving good", "hostile to good"]], "προδόται": ["προδότης", "noun", "traitors", ["traitors", "betrayers"]], "προπετεῖς": ["προπετής", "adjective", "reckless / rash", ["reckless", "rash", "headstrong"]], "τετυφωμένοι": ["τυφόομαι", "verb", "having become conceited", ["puffed up", "conceited", "blinded with pride"]], "φιλήδονοι": ["φιλήδονος", "adjective", "lovers of pleasure", ["pleasure-loving", "lovers of pleasure"]], "φιλόθεοι": ["φιλόθεος", "adjective", "lovers of God", ["God-loving", "lovers of God"]], "ἔχοντες": ["ἔχω", "verb", "having", ["having", "holding", "possessing"]], "μόρφωσιν": ["μόρφωσις", "noun", "form / outward form", ["form", "outward form", "appearance"]], "εὐσεβείας": ["εὐσέβεια", "noun", "godliness", ["godliness", "piety", "devotion"]], "δύναμιν": ["δύναμις", "noun", "power", ["power", "ability", "effective power"]], "ἠρνημένοι": ["ἀρνέομαι", "verb", "having denied", ["denied", "disowned", "rejected"]], "τούτους": ["οὗτος", "pronoun", "these people", ["these", "such people"]], "ἀποτρέπου": ["ἀποτρέπομαι", "verb", "turn away from / avoid", ["turn away from", "avoid", "shun"]]};
+const NT_BOOKS={"Matt.": {"file": "61-Mt-morphgnt.txt", "code": "01"}, "Luke": {"file": "63-Lk-morphgnt.txt", "code": "03"}, "John": {"file": "64-Jn-morphgnt.txt", "code": "04"}, "Acts": {"file": "65-Ac-morphgnt.txt", "code": "05"}, "Rom.": {"file": "66-Ro-morphgnt.txt", "code": "06"}, "1 Cor.": {"file": "67-1Co-morphgnt.txt", "code": "07"}, "2 Cor.": {"file": "68-2Co-morphgnt.txt", "code": "08"}, "Gal.": {"file": "69-Ga-morphgnt.txt", "code": "09"}, "Eph.": {"file": "70-Eph-morphgnt.txt", "code": "10"}, "Phil.": {"file": "71-Php-morphgnt.txt", "code": "11"}, "Col.": {"file": "72-Col-morphgnt.txt", "code": "12"}, "1 Tim.": {"file": "75-1Ti-morphgnt.txt", "code": "15"}, "2 Tim.": {"file": "76-2Ti-morphgnt.txt", "code": "16"}, "Philem.": {"file": "78-Phm-morphgnt.txt", "code": "18"}, "Heb.": {"file": "79-Heb-morphgnt.txt", "code": "19"}, "1 Pet.": {"file": "81-1Pe-morphgnt.txt", "code": "21"}, "2 Pet.": {"file": "82-2Pe-morphgnt.txt", "code": "22"}, "Rev.": {"file": "87-Re-morphgnt.txt", "code": "27"}};
+const GLOSS={"θεός": ["God", ["God", "deity"]], "κύριος": ["Lord / master", ["Lord", "master", "owner"]], "Ἰησοῦς": ["Jesus", ["Jesus"]], "Χριστός": ["Christ / Messiah", ["Christ", "Messiah", "Anointed One"]], "πνεῦμα": ["spirit", ["spirit", "Spirit", "breath"]], "χάρις": ["grace / favor", ["grace", "favor", "gracious gift"]], "πίστις": ["faith / trust", ["faith", "trust", "faithfulness"]], "ἀγάπη": ["love", ["love", "affection", "devotion"]], "ζωή": ["life", ["life", "living", "divine life"]], "δικαιοσύνη": ["righteousness / justice", ["righteousness", "justice", "right standing"]], "σωτηρία": ["salvation / deliverance", ["salvation", "deliverance", "rescue"]], "ἐκκλησία": ["church / assembly", ["church", "assembly", "congregation"]], "σῶμα": ["body", ["body", "corporate body"]], "λόγος": ["word / message", ["word", "message", "matter", "account"]], "ἔργον": ["work / deed", ["work", "deed", "task"]], "διακονία": ["ministry / service", ["ministry", "service", "ministration"]], "οἰκοδομή": ["building / building up", ["building", "building up", "edification"]], "οἰκοδομέω": ["build / build up", ["build", "build up", "edify"]], "κατοικέω": ["dwell / settle down", ["dwell", "make home", "settle down"]], "ἅγιος": ["holy / saint", ["holy", "saint", "holy one"]], "ἄνθρωπος": ["human being / person", ["person", "human being", "man"]], "ἀδελφός": ["brother / fellow believer", ["brother", "fellow believer", "brother or sister"]], "καρδία": ["heart / inner person", ["heart", "inner person", "center of being"]], "δύναμις": ["power / ability", ["power", "ability", "effective power"]], "εὐσέβεια": ["godliness / piety", ["godliness", "piety", "devotion"]], "ἁμαρτία": ["sin", ["sin", "sinfulness"]], "θάνατος": ["death", ["death"]], "αἰώνιος": ["eternal / everlasting", ["eternal", "everlasting", "age-abiding"]], "βασιλεύω": ["reign / rule", ["reign", "rule", "exercise kingship"]], "λαμβάνω": ["receive / take", ["receive", "take", "obtain"]], "γινώσκω": ["know / recognize", ["know", "recognize", "understand"]], "ἔχω": ["have / hold", ["have", "hold", "possess"]], "λέγω": ["say / speak", ["say", "speak", "tell", "declare"]], "ποιέω": ["do / make", ["do", "make", "practice"]], "δίδωμι": ["give / grant", ["give", "grant", "bestow"]], "ἀκούω": ["hear / listen", ["hear", "listen", "heed"]], "βλέπω": ["see / perceive", ["see", "perceive", "look"]], "μένω": ["remain / abide", ["remain", "abide", "stay"]], "ἀρνέομαι": ["deny / disown", ["deny", "disown", "reject"]], "ἐργάζομαι": ["work / labor", ["work", "labor", "practice"]], "καταρτίζω": ["equip / perfect", ["equip", "perfect", "prepare", "restore"]], "κοινωνία": ["fellowship / sharing", ["fellowship", "sharing", "participation"]], "δόξα": ["glory", ["glory", "honor", "splendor"]], "ἀλήθεια": ["truth", ["truth", "reality"]], "εἰρήνη": ["peace", ["peace", "well-being"]], "παράκλησις": ["encouragement / comfort", ["encouragement", "comfort", "exhortation"]], "κληρονομία": ["inheritance", ["inheritance", "possession"]], "ἀνάστασις": ["resurrection", ["resurrection", "rising"]], "παρουσία": ["coming / presence", ["coming", "presence", "arrival"]], "κρίμα": ["judgment / verdict", ["judgment", "verdict", "sentence"]]};
+const VERBS=new Set(["βασιλεύσῃ", "βλεπομένων", "εἰμι", "εἶ", "εὐλαβηθεὶς", "κατεσκεύασεν", "κατοικῆσαι", "λέγω", "οἰκοδομήσω", "χρηματισθεὶς", "ἐβασίλευσεν", "ἐγενήθη", "ἐποικοδομεῖ"]);
+const NOUNS=new Set(["Νῶε", "Πέτρος", "Πίστει", "Χριστοῦ", "Χριστὸν", "διακονίας", "δικαιοσύνης", "ζωὴν", "θανάτῳ", "θεμέλιον", "θεοῦ", "καλάμην", "καρδίαις", "καταρτισμὸν", "κιβωτὸν", "κυρίου", "λίθους", "ξύλα", "οἰκοδομὴν", "οἴκου", "πέτρᾳ", "πίστεως", "πνεύματος", "σωτηρίαν", "σώματος", "χάρις", "χάριτι", "χρυσόν", "χόρτον", "ἀδελφοί", "ἁγίων", "ἁμαρτία", "ἄργυρον", "ἐκκλησίαν", "ἔργον", "Ἰησοῦ"]);
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById(b.dataset.tab).classList.add('active')});
+document.addEventListener('click',e=>{const r=e.target.closest('.ref');if(r){e.preventDefault();openVerse(r.dataset.ref);}});
+
+function cleanGreekToken(t){return t.replace(/[⸀⸂⸃·,.;·—“”()?!·]/g,'').trim();}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+
+function greekMarkup(g){
+  return g.split(/(\s+)/).map(t=>{
+    if(/^\s+$/.test(t)) return t;
+    const c=cleanGreekToken(t);
+    const x=LEX[c];
+    if(!x) return `<span>${esc(t)}</span>`;
+    const pos=x[1];
+    const cls=pos==='verb'?'verb':(pos==='noun'||pos==='proper noun')?'noun':'';
+    return `<button type="button" class="gword ${cls}" data-word="${esc(c)}">${esc(t)}</button>`;
+  }).join('');
+}
+
+function parseNTRef(ref){
+  const books=Object.keys(NT_BOOKS).sort((a,b)=>b.length-a.length);
+  const book=books.find(b=>ref.startsWith(b+' '));
+  if(!book) return null;
+  const rest=ref.slice(book.length).trim().replace(/[ab]$/,'');
+  const m=rest.match(/^(\d+):(\d+)(?:-(\d+))?$/);
+  if(!m) return null;
+  return {book,chapter:+m[1],v1:+m[2],v2:+(m[3]||m[2]),...NT_BOOKS[book]};
+}
+
+function posName(code){
+  const x=(code||'').slice(0,2);
+  return {'V-':'verb','N-':'noun','A-':'adjective','D-':'adverb','P-':'preposition','C-':'conjunction',
+    'RA':'article','RD':'demonstrative pronoun','RI':'interrogative/indefinite pronoun',
+    'RP':'personal pronoun','RR':'relative pronoun','I-':'interjection','X-':'particle'}[x]||'word';
+}
+
+function approxPronounce(text){
+  let t=text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const pairs=[['αι','ai'],['ει','ee'],['οι','oy'],['ου','oo'],['ευ','ev'],['αυ','av'],['γγ','ng'],['γκ','ngk']];
+  pairs.forEach(([a,b])=>t=t.split(a).join(b));
+  const map={'α':'a','β':'v','γ':'g','δ':'d','ε':'e','ζ':'z','η':'ee','θ':'th','ι':'ee','κ':'k','λ':'l','μ':'m','ν':'n','ξ':'x','ο':'o','π':'p','ρ':'r','σ':'s','ς':'s','τ':'t','υ':'ee','φ':'f','χ':'kh','ψ':'ps','ω':'o'};
+  return t.split('').map(c=>map[c]??c).join('').replace(/\s+/g,' ');
+}
+
+// English-style pronunciation follows the same traditional Bible-study pronunciation system
+// used in “My Bible — Greek-based Translation” (John), rather than Modern-Greek TTS spelling.
+function stripGreekMarksMyBible(x){
+  return String(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').normalize('NFC').toLowerCase();
+}
+function hasRoughBreathingMyBible(x){
+  return String(x||'').normalize('NFD').includes('\u0314');
+}
+
+
+// English-style learner pronunciation for Greek.
+// This intentionally favors readable, consistent respelling over IPA.
+function greekEnglishStylePronunciation(input){
+  if(!input) return '';
+  let s = input.normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase()
+    .replace(/[··.,;:!?'"“”‘’()[\]{}]/g,'')
+    .trim();
+
+  // Whole-word corrections for common / irregular forms used in Week 2.
+  const WORDS = {
+    'περι':'peh-REE',
+    'νωε':'NOH-eh',
+    'βλεπομενων':'bleh-poh-MEH-nohn',
+    'σωτηριαν':'soh-tay-REE-an',
+    'λεγω':'LEH-goh',
+    'κυριον':'KOO-ree-on',
+    'πιστιν':'PEES-teen',
+    'αγαπην':'ah-GAH-pane',
+    'ειρηνην':'ay-RAY-nane',
+    'καρδιας':'kar-DEE-ahs',
+    'θεου':'theh-OO',
+    'ιησου':'yay-SOO',
+    'χριστου':'khrees-TOO',
+    'πνευματος':'PNYOO-mah-tos',
+    'ζωην':'zoh-ANE',
+    'εκκλησιαν':'ek-klay-SEE-an',
+    'πετρα':'PEH-trah',
+    'πετρος':'PEH-tros',
+    'οικοδομησω':'oy-koh-doh-MAY-soh',
+    'δικαιοσυνην':'dee-kai-oh-SOO-nane',
+    'επιθυμιας':'eh-pee-thoo-MEE-ahs',
+    'φευγε':'FAYV-geh',
+    'διωκε':'dee-OH-keh',
+    'επικαλουμενων':'eh-pee-kah-loo-MEH-nohn'
+  };
+  if (WORDS[s]) return WORDS[s];
+
+  // Common Greek letter / cluster approximations.
+  // Order matters: multi-letter combinations first.
+  const rules = [
+    [/αι/g,'eye'],[/ει/g,'ee'],[/οι/g,'oy'],[/ου/g,'oo'],
+    [/αυ/g,'av'],[/ευ/g,'ev'],[/ηυ/g,'eev'],
+    [/γγ/g,'ng'],[/γκ/g,'ngk'],[/γχ/g,'nkh'],[/γξ/g,'nx'],
+    [/θ/g,'th'],[/χ/g,'kh'],[/φ/g,'f'],[/ψ/g,'ps'],
+    [/β/g,'v'],[/γ/g,'g'],[/δ/g,'th'],[/ζ/g,'z'],
+    [/κ/g,'k'],[/λ/g,'l'],[/μ/g,'m'],[/ν/g,'n'],
+    [/ξ/g,'x'],[/π/g,'p'],[/ρ/g,'r'],[/σ|ς/g,'s'],
+    [/τ/g,'t'],[/ω/g,'oh'],[/η/g,'ay'],[/υ/g,'ee'],
+    [/ε/g,'eh'],[/ο/g,'oh'],[/ι/g,'ee'],[/α/g,'ah']
+  ];
+  let out = s;
+  for (const [a,b] of rules) out = out.replace(a,b);
+
+  // Light cleanup for readability.
+  return out
+    .replace(/hhh/g,'h')
+    .replace(/([aeiouy])\1\1+/g,'$1$1')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+// AUDITED My Bible surface-form pronunciation corrections.
+// Exact inflected forms take priority over the generic transliterator.
+const MYBIBLE_SURFACE_PRON_AUDIT = {
+  'σωτηρια':'소테리아',
+  'σωτηριαν':'소테리안',
+  'σωτηριας':'소테리아스',
+  'σωτηριον':'소테리온',
+  'μαρτυρια':'마르튀리아',
+  'μαρτυριαν':'마르튀리안',
+  'εξουσια':'엑수시아',
+  'εξουσιαν':'엑수시안',
+  'καρδια':'카르디아',
+  'καρδιαν':'카르디안',
+  'καρδιας':'카르디아스',
+  'αμαρτια':'하마르티아',
+  'αμαρτιαν':'하마르티안',
+  'αμαρτιας':'하마르티아스',
+  'δικαιοσυνη':'디카이오쉬네',
+  'δικαιοσυνην':'디카이오쉬넨',
+  'πιστις':'피스티스',
+  'πιστιν':'피스틴',
+  'πιστει':'피스테이',
+  'αγαπη':'아가페',
+  'αγαπην':'아가펜',
+  'ειρηνη':'에이레네',
+  'ειρηνην':'에이레넨',
+  'κυριος':'퀴리오스',
+  'κυριον':'퀴리온',
+  'κυριου':'퀴리우',
+  'λογος':'로고스',
+  'λογον':'로곤',
+  'λογου':'로구',
+  'λογω':'로고',
+  'λεγω':'레고',
+  'λεγει':'레게이',
+  'θεος':'테오스',
+  'θεον':'테온',
+  'θεου':'테우',
+  'ιησους':'이에수스',
+  'ιησουν':'이에순',
+  'ιησου':'이에수',
+  'χριστος':'크리스토스',
+  'χριστον':'크리스톤',
+  'χριστου':'크리스투',
+  'πνευμα':'프뉴마',
+  'πνευματος':'프뉴마토스',
+  'ζωη':'조에',
+  'ζωην':'조엔',
+  'ζωης':'조에스'
+};
+
+const MYBIBLE_PRON_OVERRIDES={
+  'εν':'엔','αρχη':'아르케','ην':'엔','ο':'호','η':'헤','οι':'호이',
+  'λογος':'로고스','λογον':'로곤','λογου':'로구','λογω':'로고','λεγω':'레고','λεγει':'레게이',
+  'και':'카이','προς':'프로스','τον':'톤','θεον':'테온','θεος':'테오스','θεου':'테우',
+  'το':'토','του':'투','τω':'토','της':'테스','την':'텐','τα':'타','τας':'타스','τους':'투스','των':'톤','τοις':'토이스',
+  'αυτου':'아우투','αυτον':'아우톤','αυτω':'아우토','αυτος':'아우토스','αυτη':'아우테',
+  'εγω':'에고','συ':'쉬','υμιν':'휘민','ημιν':'헤민','ημων':'헤몬',
+  'ιησους':'이에수스','ιησουν':'이에순','ιησου':'이에수','ιωαννης':'이오안네스',
+  'κυριος':'퀴리오스','κυριον':'퀴리온','κυριου':'퀴리우',
+  'πιστις':'피스티스','πιστιν':'피스틴','αγαπη':'아가페','αγαπην':'아가펜',
+  'ειρηνη':'에이레네','ειρηνην':'에이레넨','καρδια':'카르디아','καρδιας':'카르디아스',
+  'δικαιοσυνη':'디카이오쉬네','δικαιοσυνην':'디카이오쉬넨'
+};
+const MB_JAMO_I={'g':0,'k':15,'d':3,'t':16,'b':7,'p':17,'s':9,'z':12,'m':6,'n':2,'r':5,'l':5,'h':18,'th':16,'ph':17,'kh':15};
+const MB_JAMO_V={'a':0,'e':5,'i':20,'o':8,'u':13,'y':17};
+const MB_JAMO_F={'n':4,'m':16,'l':8,'g':1,'k':1,'d':7,'t':7,'b':17,'p':17};
+function mbHangul(on,vow,fin=''){
+  const oi=on?MB_JAMO_I[on]:11, vi=MB_JAMO_V[vow], fi=fin?(MB_JAMO_F[fin]||0):0;
+  if(oi===undefined||vi===undefined)return '';
+  return String.fromCharCode(0xAC00+(oi*21+vi)*28+fi);
+}
+function mbRomanTokens(norm){
+  const reps=[['αι','AI'],['ει','EI'],['οι','OI'],['ου','OU'],['αυ','AU'],['ευ','EU'],['υι','YI'],
+              ['θ','TH'],['φ','PH'],['χ','KH'],['ψ','PS'],['ξ','KS']];
+  let x=norm;
+  for(const [a,b] of reps)x=x.split(a).join(b);
+  const map={'α':'a','ε':'e','η':'e','ι':'i','ο':'o','ω':'o','υ':'y',
+             'β':'b','γ':'g','δ':'d','ζ':'z','κ':'k','λ':'l','μ':'m','ν':'n','π':'p','ρ':'r','σ':'s','ς':'s','τ':'t'};
+  x=[...x].map(c=>map[c]||c).join('');
+  return x.replace(/AI/g,'ai').replace(/EI/g,'ei').replace(/OI/g,'oi').replace(/OU/g,'ou').replace(/AU/g,'au').replace(/EU/g,'eu').replace(/YI/g,'yi')
+          .replace(/TH/g,'th').replace(/PH/g,'ph').replace(/KH/g,'kh').replace(/PS/g,'ps').replace(/KS/g,'ks');
+}
+function myBibleGreekWord(word){
+  const __surfaceKey = stripGreekMarksMyBible(arguments[0]).replace(/[^α-ωϲς]/g,'');
+  if (MYBIBLE_SURFACE_PRON_AUDIT[__surfaceKey]) return MYBIBLE_SURFACE_PRON_AUDIT[__surfaceKey];
+
+  const norm=stripGreekMarksMyBible(word).replace(/[^\u0370-\u03ff\u1f00-\u1fff]/g,'');
+  if(!norm)return '';
+  if(MYBIBLE_PRON_OVERRIDES[norm])return MYBIBLE_PRON_OVERRIDES[norm];
+  let r=mbRomanTokens(norm), rough=hasRoughBreathingMyBible(word);
+  const vowels=['ai','ei','oi','ou','au','eu','yi','a','e','i','o','u','y'];
+  const cons=['th','ph','kh','ps','ks','b','g','d','z','k','l','m','n','p','r','s','t','h'];
+  let toks=[];
+  for(let i=0;i<r.length;){
+    let t=[...vowels,...cons].find(q=>r.startsWith(q,i));
+    if(!t){i++;continue}
+    toks.push(t);i+=t.length;
+  }
+  const isV=t=>vowels.includes(t);
+  let vis=[];toks.forEach((t,i)=>{if(isV(t))vis.push(i)});
+  if(!vis.length)return norm;
+  let out='',start=0;
+  for(let q=0;q<vis.length;q++){
+    const vi=vis[q], next=vis[q+1]??toks.length;
+    let onset=toks.slice(start,vi), between=toks.slice(vi+1,next), coda=[];
+    if(q<vis.length-1 && between.length){
+      const allow=new Set(['pr','pl','br','bl','tr','dr','kr','kl','gr','gl','fr','fl']);
+      const cluster=between.join('');
+      if(between.length===1){ start=vi+1; }
+      else if(allow.has(cluster)){ start=vi+1; }
+      else { coda=[between[0]]; start=vi+2; }
+    }else if(q===vis.length-1){ coda=between; }
+    let onsetText='';
+    if(q===0&&rough)onset=['h',...onset];
+    if(onset.length>1){
+      for(let j=0;j<onset.length-1;j++){
+        const c=onset[j];
+        onsetText += c==='r'||c==='l'?'르':(mbHangul(c==='th'?'t':c==='ph'?'p':c==='kh'?'k':c,'y')||'');
+      }
+    }
+    let last=onset.length?onset[onset.length-1]:'';
+    last=last==='th'?'t':last==='ph'?'p':last==='kh'?'k':last;
+    let v=toks[vi], vout='';
+    const diph={'ai':['a','이'],'ei':['e','이'],'oi':['o','이'],'ou':['u',''],'au':['a','우'],'eu':['e','우'],'yi':['y','이']};
+    if(diph[v]){
+      const [vv,tail]=diph[v];
+      vout=mbHangul(last,vv,coda.length===1&&['n','m'].includes(coda[0])?coda[0]:'')+tail;
+    }else{
+      const vv=v==='y'?'y':v;
+      vout=mbHangul(last,vv,coda.length===1&&['n','m'].includes(coda[0])?coda[0]:'');
+    }
+    if(coda.length && !(coda.length===1&&['n','m'].includes(coda[0]))){
+      for(const c0 of coda){
+        const c=c0==='th'?'t':c0==='ph'?'p':c0==='kh'?'k':c0;
+        if(c==='s')vout+='스'; else if(c==='r'||c==='l')vout+='르'; else vout+=(mbHangul(c,'y')||'');
+      }
+    }
+    out+=onsetText+vout;
+  }
+  return out||norm;
+}
+function greekToKorean(text){
+  return String(text||'').split(/\s+/).map(w=>{
+    const lead=(w.match(/^[“‘'"(\[]+/)||[''])[0];
+    const tail=(w.match(/[.,·;;:!?ʼ’”')\]]+$/)||[''])[0];
+    const core=w.slice(lead.length,w.length-tail.length);
+    return lead+myBibleGreekWord(core)+tail;
+  }).join(' ').trim();
+}
+
+async function loadRemoteGreek(ref){
+  const r=parseNTRef(ref);
+  if(!r) return false;
+  const box=document.getElementById('mgreek');
+  const pr=document.getElementById('mpr');
+  box.innerHTML='<div class="loadingGreek">Loading Greek text and morphology…</div>';
+  pr.textContent='';
+  document.getElementById('greekAudioBar').style.display='none';
+  const url='https://raw.githubusercontent.com/morphgnt/sblgnt/master/'+r.file;
+  try{
+    const resp=await fetch(url,{cache:'force-cache'});
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    const text=await resp.text();
+    const rows=[];
+    for(const line of text.split(/\r?\n/)){
+      if(!line.trim()) continue;
+      const cols=line.trim().split(/\s+/);
+      if(cols.length<7) continue;
+      const code=cols[0];
+      const chapter=+code.slice(2,4), verse=+code.slice(4,6);
+      if(code.slice(0,2)!==r.code || chapter!==r.chapter || verse<r.v1 || verse>r.v2) continue;
+      rows.push({code,pos:cols[1],parse:cols[2],text:cols[3],word:cols[4],norm:cols[5],lemma:cols.slice(6).join(' ')});
+    }
+    if(!rows.length) throw new Error('Verse not found in MorphGNT');
+    let lastVerse=null, html='';
+    for(const row of rows){
+      const verse=+row.code.slice(4,6);
+      if(verse!==lastVerse){
+        if(lastVerse!==null) html+=' ';
+        html+=`<sup style="color:#777;font-size:.65em">${verse}</sup> `;
+        lastVerse=verse;
+      }
+      const pname=posName(row.pos);
+      const cls=pname==='verb'?'verb':pname==='noun'?'noun':'';
+      html+=`<button type="button" class="gword ${cls}" data-word="${esc(row.word)}" data-norm="${esc(row.norm)}" data-lemma="${esc(row.lemma)}" data-pos="${esc(pname)}" data-parse="${esc(row.parse)}">${esc(row.text)}</button> `;
+    }
+    box.innerHTML=html+`<div class="sourceLine">SBLGNT Greek text · MorphGNT morphology/lemma</div>`;
+    const plain=rows.map(x=>x.word).join(' ');
+    const remotePron=approxPronounce(plain);
+    pr.textContent='';
+    updateGreekAudioUI();
+    return true;
+  }catch(err){
+    box.innerHTML=`<div class="loadingGreek">Greek could not be loaded. Internet access is required for the expanded NT word layer.<br><small>${esc(err.message)}</small></div>`;
+    updateGreekAudioUI();
+    return false;
+  }
+}
+
+let currentGreekRef='';
+
+async function openVerse(ref){
+  currentGreekRef=ref;
+  document.getElementById('mref').textContent=ref;
+  document.getElementById('mrv').textContent=RV[ref]||'⚠ RV text not resolved — please report this reference.';
+  document.getElementById('lex').style.display='none';
+  document.getElementById('modal').classList.add('show');
+  const x=GREEK[ref];
+  if(x){
+    document.getElementById('mgreek').innerHTML=greekMarkup(x[0]);
+    document.getElementById('mpr').textContent='';
+    updateGreekAudioUI();
+  }else if(parseNTRef(ref)){
+    await loadRemoteGreek(ref);
+  }else{
+    document.getElementById('mgreek').innerHTML='<span class="pron">This is an Old Testament reference. LXX word study is embedded only for selected OT key verses.</span>';
+    document.getElementById('mpr').textContent='';
+    updateGreekAudioUI();
+  }
+}
+document.addEventListener('click',e=>{
+  const w=e.target.closest('.gword');
+  if(!w) return;
+  const surface=w.dataset.word||cleanGreekToken(w.textContent);
+  const local=LEX[surface]||LEX[w.dataset.norm];
+  const lemma=w.dataset.lemma||(local?local[0]:'');
+  const gloss=GLOSS[lemma];
+  const box=document.getElementById('lex');
+  box.style.display='block';
+  if(local){
+    box.innerHTML=`<div style="font-size:1.25rem"><b>${esc(surface)}</b> <span class="pron">(${esc(greekEnglishStylePronunciation(surface))})</span></div>
+      <div><b>Lemma:</b> ${esc(local[0])}</div>
+      <div><b>Part of speech:</b> ${esc(local[1])}</div>
+      <div><b>Meaning in this verse:</b> ${esc(local[2])}</div>
+      <div><b>Possible English renderings:</b> ${local[3].map(esc).join(' · ')}</div>`;
+  }else{
+    const meaning=gloss?gloss[0]:'Use the Recovery Version context above together with the lemma.';
+    const renders=gloss?gloss[1].map(esc).join(' · '):'lemma-based lexical study';
+    box.innerHTML=`<div style="font-size:1.25rem"><b>${esc(surface)}</b> <span class="pron">(${esc(greekEnglishStylePronunciation(surface))})</span></div>
+      <div><b>Lemma:</b> ${esc(lemma||surface)}</div>
+      <div><b>Part of speech:</b> ${esc(w.dataset.pos||'word')}</div>
+      ${w.dataset.parse?`<div><b>Morphology:</b> ${esc(w.dataset.parse)}</div>`:''}
+      <div><b>Meaning:</b> ${esc(meaning)}</div>
+      <div><b>Possible English renderings:</b> ${renders}</div>`;
+  }
+});
+
+function getGreekVerseText(){
+  const box=document.getElementById('mgreek');
+  if(!box) return '';
+  const words=[...box.querySelectorAll('.gword')].map(x=>x.textContent.trim()).filter(Boolean);
+  if(words.length) return words.join(' ');
+  const clone=box.cloneNode(true);
+  clone.querySelectorAll('.sourceLine,.loadingGreek,button').forEach(x=>x.remove());
+  return clone.innerText.replace(/\s+/g,' ').trim();
+}
+function getKoineKoreanVerseText(){
+  const box=document.getElementById('mgreek');
+  if(!box) return '';
+  const words=[...box.querySelectorAll('.gword')]
+    .map(x=>greekToKorean(x.dataset.word||x.textContent.trim()))
+    .filter(Boolean);
+  if(words.length) return words.join(' ');
+  return '';
+}
+function chooseKoreanVoice(){
+  const voices=speechSynthesis.getVoices();
+  return voices.find(v=>/^ko-KR$/i.test(v.lang))
+      || voices.find(v=>/^ko/i.test(v.lang))
+      || null;
+}
+function updateGreekAudioUI(){
+  const bar=document.getElementById('greekAudioBar');
+  if(!bar) return;
+  const text=getKoineKoreanVerseText();
+  bar.style.display=text ? 'flex' : 'none';
+}
+document.getElementById('greekListen').onclick=()=>{
+  speechSynthesis.cancel();
+  const text=getKoineKoreanVerseText();
+  if(!text) return;
+  // Read the SAME Korean Koine pronunciation shown in the keyword/word-study layer.
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='ko-KR';
+  u.rate=parseFloat(document.getElementById('greekRate').value);
+  const v=chooseKoreanVoice();
+  if(v) u.voice=v;
+  speechSynthesis.speak(u);
+};
+document.getElementById('greekStop').onclick=()=>speechSynthesis.cancel();
+
+function getEnglishOutlineText(){
+  const root=document.getElementById('englishOutline');
+  if(!root) return '';
+  const clone=root.cloneNode(true);
+  clone.querySelectorAll('.ttsbar,button,select,label,textarea').forEach(x=>x.remove());
+  return clone.innerText.replace(/\s+/g,' ').trim();
+}
+function chooseEnglishVoice(){
+  const voices=speechSynthesis.getVoices();
+  return voices.find(v=>/Ryan|Brandon/i.test(v.name)&&/^en/i.test(v.lang))
+      || voices.find(v=>/^en-(US|CA|GB)/i.test(v.lang))
+      || voices.find(v=>/^en/i.test(v.lang))
+      || null;
+}
+document.getElementById('outlineListen').onclick=()=>{
+  speechSynthesis.cancel();
+  const text=getEnglishOutlineText();
+  if(!text) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US';
+  u.rate=parseFloat(document.getElementById('outlineRate').value);
+  u.voice=chooseEnglishVoice();
+  speechSynthesis.speak(u);
+};
+document.getElementById('outlineStop').onclick=()=>speechSynthesis.cancel();
+
+document.getElementById('listen').onclick=()=>{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(document.getElementById('mrv').textContent);u.lang='en-US';u.rate=parseFloat(document.getElementById('rate').value);let vs=speechSynthesis.getVoices();u.voice=vs.find(v=>/Ryan|Brandon/i.test(v.name)&&/^en/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;speechSynthesis.speak(u)};
+document.querySelector('.close').onclick=()=>{speechSynthesis.cancel();document.getElementById('modal').classList.remove('show');};document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')e.currentTarget.classList.remove('show')};
+document.querySelectorAll('.note').forEach(n=>{n.value=localStorage.getItem('week2note:'+n.dataset.key)||'';n.oninput=()=>localStorage.setItem('week2note:'+n.dataset.key,n.value)});
+</script></body></html>
