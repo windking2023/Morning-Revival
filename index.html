@@ -1,0 +1,1888 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 3 — Daniel and His Companions · v2</title><style>
+:root{--red:#b42318;--green:#18794e;--ink:#27231f;--paper:#f7f4ee;--card:#fff;--line:#ded5c7;--gold:#80633f}
+*{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.68}
+header{padding:30px 16px 22px;text-align:center;background:#eee5d8;border-bottom:1px solid var(--line)} header h1{font-family:Georgia,serif;margin:8px auto;max-width:850px}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:6px;overflow-x:auto;padding:8px;background:white;border-bottom:1px solid var(--line)} nav button{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:18px;padding:8px 11px}
+main{max-width:960px;margin:auto;padding:14px} .panel{display:none} .panel.active{display:block} .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:19px;margin:14px 0}
+.ol{margin:10px 0} .ol.major{color:#a32620;font-weight:800;font-size:1.08rem} .ol.sub{margin-left:20px} .refs{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:5px}
+.ref{border:0;background:#eef4ff;color:#174b8a;text-decoration:underline;cursor:pointer;padding:2px 5px;border-radius:5px} .ko{font-family:"Noto Sans KR","Malgun Gothic",sans-serif}
+.mn,.prop,.focus3{background:#f8f3ea;border-radius:10px;padding:12px;margin:12px 0} .dayno{font-weight:800;color:#8c5b28;letter-spacing:.08em}
+.note{width:100%;min-height:90px;padding:10px;border:1px solid var(--line);border-radius:8px}
+#modal{display:none;position:fixed;inset:0;background:#0008;z-index:30;padding:15px;overflow:auto} #modal.show{display:block} .modalbox{max-width:780px;margin:3vh auto;background:white;border-radius:16px;padding:20px} .close{float:right}
+.rv{background:#f7f7f7;padding:13px;border-radius:9px;line-height:1.75}
+.greek{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 10px;font-family:"Palatino Linotype","Times New Roman",serif;font-size:1.28rem;line-height:1.35}
+.pron{color:#777}
+.gpair{display:inline-flex;flex-direction:column;align-items:center;white-space:nowrap;word-break:keep-all;overflow-wrap:normal}
+.gword{border:0;background:transparent;font:inherit;padding:1px;cursor:pointer;touch-action:manipulation}
+.gword.verb{color:var(--red);font-weight:800}.gword.noun{color:var(--green);font-weight:800}
+.roman{font-family:Arial,"Noto Sans",sans-serif;font-size:11px;font-weight:600;color:#777;line-height:1.15;margin-top:2px;white-space:nowrap;direction:ltr;unicode-bidi:isolate}
+.transword{cursor:pointer;border-radius:3px;padding:0 1px}
+.transword.verified{border-bottom:2px solid #d5ad00}
+.transword.verified:hover,.transword.verified:active{background:#fff4a8}
+.gpair.gmatch{background:#ffe66d;outline:3px solid #d7a900;border-radius:6px;padding:3px 4px;box-shadow:0 0 0 2px #fff7b2}
+.gpair.gmatch .roman{color:#222;font-weight:800}
+.linkhint{font-size:11px;color:#7b6a22;margin:6px 0 2px}
+#wordDict{position:fixed;inset:0;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.28);z-index:40}
+#wordDict.show{display:flex}
+.wordDictCard{width:min(620px,100%);max-height:68vh;overflow:auto;background:#fff;border:1px solid #bbb;border-radius:18px 18px 0 0;padding:18px;box-shadow:0 -10px 34px rgba(0,0,0,.22)}
+#wordDictClose{float:right;border:1px solid #ccc;background:#f5f5f5;border-radius:8px;padding:6px 9px;cursor:pointer}
+.wordDictGreek{font-family:"Palatino Linotype","Times New Roman",serif;font-size:1.75rem;font-weight:800}
+.wordDictRoman{font-family:Arial,sans-serif;color:#666;font-size:.92rem;margin:2px 0 10px}
+.wordDictRow{margin:7px 0;line-height:1.55}
+.hymn{background:#fffaf0;border:1px solid #e2d1ac} .status-ok{color:#176b3a;font-weight:700} .status-bad{color:#a32620;font-weight:700}
+@media(max-width:600px){main{padding:9px} .ol.sub{margin-left:10px} header h1{font-size:1.55rem}}
+
+.ttsbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}.ttsbar button,.ttsbar select{border:1px solid var(--line);background:white;border-radius:8px;padding:7px 10px}
+
+.loadingGreek{padding:14px;border:1px dashed var(--line);border-radius:9px;color:#666;background:#fafafa}
+.sourceLine{font-size:.82rem;color:#777;margin-top:8px}
+.parseLine{font-size:.9rem;color:#555;margin-top:4px}
+
+.transword{cursor:pointer;border-radius:4px;padding:0 1px}
+.transword.verified{cursor:pointer;border-bottom:2px solid #d5ad00}
+.transword.verified:hover,.transword.verified:active{background:#fff7c7}
+.gpair.gmatch{background:#ffe66d!important;outline:3px solid #d7a900;border-radius:6px;padding:3px 4px;box-shadow:0 0 0 2px #fff7b2}
+.gpair.gmatch .gword{background:#ffe66d!important}
+.gpair.gmatch .roman{background:#ffe66d!important;color:#222;font-weight:800}
+.rv sup{font-size:.72em;color:#777;margin-right:3px}
+
+
+.greek{display:block!important}
+.gphrase{display:block;margin:10px 0 14px;padding:8px 10px;border-left:3px solid #ded5c7;border-radius:8px;background:#fcfbf8}
+.greekline{font-family:"Palatino Linotype","Times New Roman",serif;font-size:1.28rem;line-height:1.7}
+.gphrase .gpair{display:inline!important;white-space:normal!important}
+.gphrase .gword{display:inline!important}
+.romanline{font-family:Arial,sans-serif;font-size:.84rem;color:#69645d;line-height:1.5;margin-top:3px;letter-spacing:.01em}
+.gphrase.gmatch{background:#ffe66d!important;outline:3px solid #d7a900}
+.gphrase.gmatch .romanline{color:#222;font-weight:700}
+.prayer{background:#eef6f1;border-left:4px solid #4f7d61;border-radius:10px;padding:13px;margin:12px 0}
+.sourceverse{margin:.65rem 0 0;color:#4b4742}
+
+
+/* v2: source-style day markers, repeat controls, aligned original-language pronunciation */
+.outlineDayMark{margin:14px 0 8px;display:flex;align-items:center;gap:8px}
+.outlineDayLink{border:1px solid #b88c54;background:#fff7e8;color:#7d4b15;border-radius:999px;padding:6px 12px;font-weight:850;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.outlineDayLink:hover,.outlineDayLink:focus{background:#f7e5c5;outline:2px solid #d5ab73;outline-offset:1px}
+.day.card{scroll-margin-top:70px}.dayFlash{animation:dayFlash 1.5s ease}
+@keyframes dayFlash{0%{box-shadow:0 0 0 5px #ffe08a}100%{box-shadow:none}}
+.repeatCtl{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:8px;padding:6px 9px;background:#fff;font-weight:700}
+.repeatCtl input{transform:scale(1.12)}
+#outlineDailyDay,#topEnglishVoice{max-width:200px}
+.originalStatus{font-size:.82rem;color:#666;margin:7px 0 0}
+.retryOriginal{margin-top:9px;border:1px solid #b8b0a3;background:#fff;border-radius:8px;padding:7px 10px;cursor:pointer}
+/* one original word + one pronunciation directly below it */
+.greekline,.semiticline{display:flex!important;flex-wrap:wrap;align-items:flex-start;gap:9px 7px;line-height:1.25}
+.greekline{direction:ltr}
+.semiticline{direction:rtl;justify-content:flex-start;font-family:"Times New Roman","Noto Serif Hebrew",serif;font-size:1.38rem}
+.gphrase .gpair,.hpair{display:inline-flex!important;flex-direction:column!important;align-items:center!important;vertical-align:top;white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important;padding:2px 1px;border-radius:5px}
+.gphrase .gpair .roman,.hpair .roman{display:block!important;font-family:Arial,"Noto Sans",sans-serif;font-size:11px!important;font-weight:650;color:#716b63;line-height:1.2;margin-top:3px;direction:ltr!important;unicode-bidi:isolate;white-space:nowrap}
+.hword{border:0;background:transparent;font:inherit;padding:1px 2px;cursor:pointer;direction:rtl}.hword.verb{color:var(--red);font-weight:800}.hword.noun{color:var(--green);font-weight:800}
+.hpair.gmatch{background:#ffe66d;outline:3px solid #d7a900}
+.verseTag{font-family:Arial,sans-serif;font-size:.7rem;color:#777;direction:ltr;align-self:center;margin-inline-end:2px}
+@media(max-width:600px){#outlineDailyDay,#topEnglishVoice{max-width:155px}.outlineDayLink{padding:6px 10px}.semiticline{font-size:1.25rem}}
+
+
+/* v4: essential English listening chunks */
+#chunks .chunkIntro{background:#f6f8fb;border-left:4px solid #566f9f;padding:13px 15px;border-radius:10px;margin:10px 0 16px}
+.chunkControls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 18px;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.chunkControls button,.chunkControls select{padding:7px 10px;border:1px solid #b8b0a3;border-radius:8px;background:#fff;font-size:.95rem}
+.chunkControls button{cursor:pointer;font-weight:700}
+.chunkDay{margin:20px 0 26px;scroll-margin-top:70px}
+.chunkDay h3{margin:0 0 10px;color:#563d22}
+.chunkRow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 12px;align-items:start;border:1px solid #ddd7ce;border-radius:10px;padding:11px 12px;margin:8px 0;background:#fff}
+.chunkPlay{border:1px solid #a9a097;background:#fafafa;border-radius:8px;padding:6px 9px;cursor:pointer;white-space:nowrap}
+.chunkText{font-size:1.08rem;font-weight:800;line-height:1.4;color:#1f2e44}
+.chunkKo{margin-top:3px;color:#625b53;font-size:.94rem}
+.chunkTip{margin-top:4px;color:#7a7269;font-size:.82rem}
+.chunkBadge{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.03em;color:#fff;background:#6d7fa4;border-radius:999px;padding:3px 7px;margin-left:6px;vertical-align:middle}
+@media(max-width:600px){
+  .chunkRow{grid-template-columns:1fr}
+  .chunkPlay{justify-self:start}
+  #chunkVoice{max-width:170px}
+}
+
+</style></head><body>
+
+<header><div>MY BIBLE STUDY · WEEK 3</div>
+<h1>The Victory of the Overcomers<br>Seen with Daniel and His Companions</h1>
+<div class="ko">다니엘과 그의 동반자들에게서 볼 수 있는 이기는 이들의 승리</div>
+<p>Scripture Reading: <b>Dan. 1—6</b></p></header>
+<nav><button data-tab="outline">OUTLINE</button><button data-tab="weekly">WEEKLY FOCUS</button><button data-tab="daily">DAILY FOCUS</button><button data-tab="notes">📝 MY NOTES</button><button data-tab="hymn">🎵 HYMN</button><button data-tab="chunks">🎧 ENGLISH CHUNKS</button><button data-tab="review">THEOLOGICAL REVIEW</button><button data-tab="check">✓ SCRIPTURE CHECK</button></nav>
+<main>
+
+<section id="outline" class="panel active">
+<div class="card" id="englishOutline"><h2>ENGLISH OUTLINE</h2>
+<div class="ttsbar" style="margin:12px 0 18px">
+<button id="outlineListen">🔊 Outline English</button>
+<label>Daily <select id="outlineDailyDay"><option value="1">Day 1</option><option value="2">Day 2</option><option value="3">Day 3</option><option value="4">Day 4</option><option value="5">Day 5</option><option value="6">Day 6</option></select></label>
+<button id="outlineDailyListen">🔊 Daily English</button>
+<label class="repeatCtl"><input id="englishRepeat" type="checkbox"> 🔁 Auto Repeat</label>
+<button id="outlinePause">⏸ Pause</button>
+<button id="outlineStop">⏹ Stop</button>
+<label>Voice <select id="topEnglishVoice"><option value="">Auto — male first</option></select></label>
+<label>Speed <select id="outlineRate"><option value="0.75">0.75</option><option value="0.9">0.9</option><option value="1.0" selected>1.0</option><option value="1.1">1.1</option><option value="1.25">1.25</option></select></label>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="1">DAY 1 · 1일</button></div>
+<div class='ol major'><b>I.</b> The principle of the Lord’s recovery is seen with “Daniel and his companions” (Hananiah, Mishael, and Azariah), as overcomers who were absolutely one with God in their victory over Satan’s devices—Dan. 2:13, 17; cf. Rev. 17:14; Matt. 22:14. <span class='refs'><button class='ref' data-ref='Dan. 2:13'>Dan. 2:13</button> <button class='ref' data-ref='Dan. 2:17'>Dan. 2:17</button> <button class='ref' data-ref='Rev. 17:14'>Rev. 17:14</button> <button class='ref' data-ref='Matt. 22:14'>Matt. 22:14</button></span></div>
+<div class='ol sub'><b>A.</b> Nebuchadnezzar changed their names, which indicated that they belonged to God, to names that made them one with idols. <span class='refs'><button class='ref' data-ref='Dan. 1:6-7'>Dan. 1:6-7</button></span></div>
+<div class='ol sub'><b>B.</b> Daniel, “God is my Judge,” was changed to Belteshazzar, “the prince of Bel” or “the favorite of Bel.” <span class='refs'><button class='ref' data-ref='Isa. 46:1'>Isa. 46:1</button></span></div>
+<div class='ol sub'><b>C.</b> Hananiah, “Jah has graciously given,” was changed to Shadrach, “enlightened by the sun god.”</div>
+<div class='ol sub'><b>D.</b> Mishael, “Who is what God is?” was changed to Meshach, “Who can be like the goddess Shach?”</div>
+<div class='ol sub'><b>E.</b> Azariah, “Jah has helped,” was changed to Abed-nego, “the faithful servant of the fire god Nego.”</div>
+
+<div class='ol major'><b>II.</b> Daniel and his companions were victorious over the demonic diet—Dan. 1.</div>
+<div class='ol sub'><b>A.</b> Nebuchadnezzar’s temptation was to defile Daniel and his three companions by unclean food offered to idols.</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="2">DAY 2 · 2일</button></div>
+<div class='ol sub'><b>B.</b> To eat that food would have been to participate in defilement and idolatry. <span class='refs'><button class='ref' data-ref='1 Cor. 10:19-21'>1 Cor. 10:19-21</button></span></div>
+<div class='ol sub'><b>C.</b> They refused the king’s food and chose vegetables; the outline applies this as rejecting the tree of the knowledge of good and evil and taking the tree of life. <span class='refs'><button class='ref' data-ref='Dan. 1:8-16'>Dan. 1:8-16</button> <button class='ref' data-ref='Gen. 3:1-6'>Gen. 3:1-6</button> <button class='ref' data-ref='Gen. 2:9'>Gen. 2:9</button> <button class='ref' data-ref='Gen. 2:16-17'>Gen. 2:16-17</button></span></div>
+<div class='ol sub'><b>D.</b> The outline describes the Lord’s recovery as the recovery of “eating Jesus” for the building up of the church. <span class='refs'><button class='ref' data-ref='Gen. 2:9'>Gen. 2:9</button> <button class='ref' data-ref='Gen. 2:16-17'>Gen. 2:16-17</button> <button class='ref' data-ref='Rev. 2:7'>Rev. 2:7</button> <button class='ref' data-ref='Rev. 2:17'>Rev. 2:17</button> <button class='ref' data-ref='Rev. 3:20'>Rev. 3:20</button></span></div>
+<div class='ol sub'><b>E.</b> We can receive the Lord through His words and through fellowship with those who call on Him out of a pure heart. <span class='refs'><button class='ref' data-ref='Jer. 15:16'>Jer. 15:16</button> <button class='ref' data-ref='2 Tim. 2:22'>2 Tim. 2:22</button> <button class='ref' data-ref='1 Cor. 15:33'>1 Cor. 15:33</button> <button class='ref' data-ref='Prov. 13:20'>Prov. 13:20</button></span></div>
+
+<div class='ol major'><b>III.</b> Daniel and his companions were victorious over the devilish blinding that prevents people from seeing the great human image and the crushing stone as the divine history within human history—Dan. 2.</div>
+<div class='ol sub'><b>A.</b> The outline interprets the stone and mountain corporately with Christ and His overcoming people, and connects this with the defeat of Antichrist. <span class='refs'><button class='ref' data-ref='Dan. 2:34-35'>Dan. 2:34-35</button> <button class='ref' data-ref='Dan. 2:44-45'>Dan. 2:44-45</button> <button class='ref' data-ref='2 Thes. 2:8'>2 Thes. 2:8</button> <button class='ref' data-ref='Rev. 19:11-21'>Rev. 19:11-21</button> <button class='ref' data-ref='Gen. 11:4-9'>Gen. 11:4-9</button> <button class='ref' data-ref='Isa. 33:22'>Isa. 33:22</button></span></div>
+<div class='ol sub'><b>B.</b> Christ is the living and precious stone, foundation stone, cornerstone, and topstone for God’s building. <span class='refs'><button class='ref' data-ref='1 Pet. 2:4-8'>1 Pet. 2:4-8</button> <button class='ref' data-ref='Isa. 28:16'>Isa. 28:16</button> <button class='ref' data-ref='Zech. 3:9'>Zech. 3:9</button> <button class='ref' data-ref='Zech. 4:7'>Zech. 4:7</button> <button class='ref' data-ref='Zech. 4:9-10'>Zech. 4:9-10</button></span></div>
+
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="3">DAY 3 · 3일</button></div>
+<div class='ol major'><b>IV.</b> Daniel and his companions were victorious over the seduction of idol worship—Dan. 3; cf. Matt. 4:9-10. <span class='refs'><button class='ref' data-ref='Matt. 4:9-10'>Matt. 4:9-10</button></span></div>
+<div class='ol sub'><b>A.</b> “Little children, guard yourselves from idols.” <span class='refs'><button class='ref' data-ref='1 John 5:21'>1 John 5:21</button></span></div>
+<div class='ol sub'><b>B.</b> In the Body we deny the self and preach Christ Jesus as Lord. <span class='refs'><button class='ref' data-ref='Matt. 16:24'>Matt. 16:24</button> <button class='ref' data-ref='2 Cor. 4:5'>2 Cor. 4:5</button></span></div>
+<div class='ol sub'><b>C.</b> Daniel’s companions stood against idol worship at the cost of their lives. <span class='refs'><button class='ref' data-ref='Dan. 3:19-23'>Dan. 3:19-23</button></span></div>
+<div class='ol sub'><b>D.</b> Nebuchadnezzar saw four men in the fire; the outline identifies the fourth as Christ. <span class='refs'><button class='ref' data-ref='Dan. 3:24-25'>Dan. 3:24-25</button></span></div>
+<div class='ol sub'><b>E.</b> The outline applies Christ’s presence as companionship and care in suffering. <span class='refs'><button class='ref' data-ref='Dan. 3:17'>Dan. 3:17</button> <button class='ref' data-ref='Heb. 4:15-16'>Heb. 4:15-16</button></span></div>
+
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="4">DAY 4 · 4일</button></div>
+<div class='ol major'><b>V.</b> Daniel and his companions were victorious over the covering that hinders people from seeing the ruling of the heavens by the God of the heavens—Dan. 4.</div>
+<div class='ol sub'><b>A.</b> We are under God’s heavenly rule; the outline connects this with Christ having the first place. <span class='refs'><button class='ref' data-ref='Dan. 4:18'>Dan. 4:18</button> <button class='ref' data-ref='Dan. 4:23-26'>Dan. 4:23-26</button> <button class='ref' data-ref='Dan. 4:30-32'>Dan. 4:30-32</button> <button class='ref' data-ref='Rom. 8:28-29'>Rom. 8:28-29</button> <button class='ref' data-ref='Col. 1:18'>Col. 1:18</button> <button class='ref' data-ref='2 Cor. 10:13'>2 Cor. 10:13</button> <button class='ref' data-ref='2 Cor. 10:18'>2 Cor. 10:18</button> <button class='ref' data-ref='Jer. 9:23-24'>Jer. 9:23-24</button></span></div>
+<div class='ol sub'><b>B.</b> “He is able to abase those who walk in pride.” <span class='refs'><button class='ref' data-ref='Dan. 4:37'>Dan. 4:37</button></span></div>
+
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="5">DAY 5 · 5일</button></div>
+<div class='ol major'><b>VI.</b> Daniel and his companions were victorious over the ignorance concerning the result of the debauchery before God and the insult to His holiness—Dan. 5.</div>
+<div class='ol sub'><b>A.</b> Belshazzar used the vessels of God’s temple in idolatrous worship and failed to learn from Nebuchadnezzar. <span class='refs'><button class='ref' data-ref='Dan. 5:4'>Dan. 5:4</button> <button class='ref' data-ref='Dan. 4:18-37'>Dan. 4:18-37</button> <button class='ref' data-ref='Dan. 5:18'>Dan. 5:18</button> <button class='ref' data-ref='Dan. 5:20'>Dan. 5:20</button> <button class='ref' data-ref='Dan. 5:24-31'>Dan. 5:24-31</button></span></div>
+<div class='ol sub'><b>B.</b> “An excellent spirit and knowledge and insight … were found in this Daniel.” <span class='refs'></span></div>
+<div class='ol sub'><b>C.</b> Belshazzar knew God’s dealings but did not humble his heart or honor the God in whose hand was his breath. <span class='refs'><button class='ref' data-ref='Dan. 5:22-23'>Dan. 5:22-23</button> <button class='ref' data-ref='Dan. 5:20'>Dan. 5:20</button></span></div>
+
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="6">DAY 6 · 6일</button></div>
+<div class='ol major'><b>VII.</b> Daniel and his companions were victorious over the subtlety that prohibited the faithfulness of the overcomers in the worship of God—Dan. 6.</div>
+<div class='ol sub'><b>A.</b> The outline emphasizes prayer as the inner secret of Daniel 6 and as practical dependence on God.</div>
+<div class='ol sub'><b>B.</b> Daniel prayed three times daily with his windows open toward Jerusalem; the outline applies the direction of prayer typologically to Christ, God’s kingdom, and God’s house. <span class='refs'><button class='ref' data-ref='Dan. 6:10'>Dan. 6:10</button> <button class='ref' data-ref='1 Kings 19:12'>1 Kings 19:12</button> <button class='ref' data-ref='1 Kings 19:18'>1 Kings 19:18</button> <button class='ref' data-ref='1 Kings 8:48-49'>1 Kings 8:48-49</button></span></div>
+</div>
+<div class="card"><h2>KOREAN OUTLINE</h2>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="1">1일 · DAY 1</button></div>
+<div class='ol major ko'><b>Ⅰ.</b> 우리는 주님의 회복의 원칙을 ‘다니엘과 그의 동반자들(하나냐와 미사엘과 아사랴)’에게서 볼 수 있다. 그들은 하나님과 절대적으로 하나 되어 사탄의 책략에 맞서 승리한 이기는 이들이었다 — 단 2:13, 17, 비교 계 17:14, 마 22:14.</div>
+<div class='ol sub ko'><b>A.</b> 느부갓네살은 다니엘과 그의 동반자들을 마귀적으로 유혹하면서, 그들이 하나님께 속하였음을 나타내는 그들의 이름을 우상들과 하나 되게 만드는 이름으로 바꾸었다 — 단 1:6-7.</div>
+<div class='ol sub ko'><b>B.</b> ‘하나님은 나의 심판자이시다’를 의미하는 다니엘이라는 이름은 ‘벨의 왕자’ 혹은 ‘벨이 총애하는 사람’을 의미하는 벨드사살로 바뀌었다 — 사 46:1.</div>
+<div class='ol sub ko'><b>C.</b> ‘야께서 은혜롭게 주셨다’ 혹은 ‘야께 은총 입은 사람’을 의미하는 하나냐는 ‘태양신에게서 깨우침을 얻었다’를 의미하는 사드락으로 바뀌었다.</div>
+<div class='ol sub ko'><b>D.</b> ‘누가 하나님과 같은가?’를 의미하는 미사엘은 ‘누가 사크 여신과 같을 수 있는가?’를 의미하는 메삭으로 바뀌었다.</div>
+<div class='ol sub ko'><b>E.</b> ‘야께서 도우셨다’를 의미하는 아사랴는 ‘불의 신 느고의 신실한 종’을 의미하는 아벳느고로 바뀌었다.</div>
+
+<div class='ol major ko'><b>Ⅱ.</b> 다니엘과 그의 동반자들은 귀신적인 음식에 맞서 승리했다 — 단 1장.</div>
+<div class='ol sub ko'><b>A.</b> 느부갓네살의 마귀적인 유혹은 다니엘과 그의 세 동반자를 꾀어서 부정한 음식 곧 우상들 앞에 바쳐진 음식을 먹게 하여 그들을 더럽히는 것이었다.</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="2">2일 · DAY 2</button></div>
+<div class='ol sub ko'><b>B.</b> 그 음식을 먹었다면 더럽혀진 것을 받아들이고 우상들을 받아들여 사탄과 하나가 되었을 것이다 — 비교 고전 10:19-21.</div>
+<div class='ol sub ko'><b>C.</b> 느부갓네살의 부정한 음식을 거절하고 채식을 선택했을 때, 개요는 원칙상 그들이 선과 악의 지식나무를 거절하고 생명나무를 받아들인 것으로 적용한다 — 단 1:8-16, 비교 창 3:1-6, 2:9, 16-17.</div>
+<div class='ol sub ko'><b>D.</b> 주님의 회복은 교회를 건축하기 위해 예수님을 먹는 것을 회복하는 것이다 — 창 2:9, 16-17, 계 2:7, 17, 3:20.</div>
+<div class='ol sub ko'><b>E.</b> 우리는 예수님의 말씀을 먹고, 순수한 마음으로 그분을 부르는 이들과 함께함으로써 예수님을 먹을 수 있다 — 렘 15:16, 딤후 2:22, 고전 15:33, 잠 13:20.</div>
+
+<div class='ol major ko'><b>Ⅲ.</b> 다니엘과 그의 동반자들은 사람들이 거대한 인간 형상과 인간 역사 속에 있는 신성한 역사인 산산이 부수는 돌을 보지 못하게 하는 마귀적인 눈멀게 함에 맞서 승리했다 — 단 2장.</div>
+<div class='ol sub ko'><b>A.</b> 돌과 산인 단체적인 그리스도, 신랑과 신부, 하나님의 호흡을 가진 하나님의 단체적인 사람은 그분의 입에서 나오는 호흡, 곧 칼로 적그리스도와 그의 군대를 산산이 부수고 멸절할 것이다 — 단 2:34-35, 44-45, 살후 2:8, 계 19:11-21, 창 11:4-9, 비교 사 33:22.</div>
+<div class='ol sub ko'><b>B.</b> 살아 있고 보배로운 돌이신 그리스도는 우리를 그분의 건축물을 위한 살아 있고 보배로운 돌들로 변화시키신다 — 벧전 2:4-8, 사 28:16, 슥 3:9, 4:7, 9-10.</div>
+
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="3">3일 · DAY 3</button></div>
+<div class='ol major ko'><b>Ⅳ.</b> 다니엘과 그의 동반자들은 우상숭배에 대한 회유에 맞서 승리했다 — 단 3장, 비교 마 4:9-10.</div>
+<div class='ol sub ko'><b>A.</b> 우리의 거듭난 영 안에 계신 참되신 하나님이 아닌 것은 무엇이든지 하나님을 대치하는 우상이다 — 요일 5:21.</div>
+<div class='ol sub ko'><b>B.</b> 몸 안에서, 몸을 위하여 우리는 자아를 부인하고 우리 자신을 전파하는 것이 아니라 그리스도 예수님께서 주님이심을 전파한다 — 마 16:24, 고후 4:5.</div>
+<div class='ol sub ko'><b>C.</b> 다니엘의 동반자들은 목숨을 희생하면서까지 유일하신 하나님 편에 서고 우상숭배에 맞섰다 — 단 3:19-23.</div>
+<div class='ol sub ko'><b>D.</b> 느부갓네살은 네 사람이 불 한가운데를 걸어 다니는 것을 보았고, 개요는 넷째 사람을 그리스도로 해석한다 — 단 3:24-25.</div>
+<div class='ol sub ko'><b>E.</b> 개요는 고난 가운데 그리스도께서 동반자가 되시고 임재로 돌보시는 것으로 적용한다 — 비교 단 3:17, 히 4:15-16.</div>
+
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="4">4일 · DAY 4</button></div>
+<div class='ol major ko'><b>Ⅴ.</b> 다니엘과 그의 동반자들은 사람들이 하늘들의 하나님에 의한 하늘들의 통치를 못 보게 가로막는 덮개에 맞서 승리했다 — 단 4장.</div>
+<div class='ol sub ko'><b>A.</b> 우리는 그리스도를 으뜸이 되시게 할 목적으로 하나님의 하늘에 속한 다스림 아래 있다 — 단 4:18, 23-26, 30-32, 롬 8:28-29, 골 1:18하, 고후 10:13, 18, 렘 9:23-24.</div>
+<div class='ol sub ko'><b>B.</b> “그분께서 교만하게 행하는 이를 낮추실 수 있으시기 때문이다.” — 단 4:37하.</div>
+
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="5">5일 · DAY 5</button></div>
+<div class='ol major ko'><b>Ⅵ.</b> 다니엘과 그의 동반자들은 하나님 앞에서 방탕하게 행하며 그분의 거룩함을 모독한 결과에 대한 무지함에 맞서 승리했다 — 단 5장.</div>
+<div class='ol sub ko'><b>A.</b> 벨사살이 성전의 그릇들을 우상들에 경배하는 데 사용한 것은 하나님의 거룩함을 모독한 것이었다. 그는 느부갓네살의 체험에서 교훈을 얻었어야 했다.</div>
+<div class='ol sub ko'><b>B.</b> “다니엘에게는 탁월한 영과 지식과 통찰력이 있어 … 난제를 해결하였기 때문입니다.” — 단 5:12상.</div>
+<div class='ol sub ko'><b>C.</b> 벨사살은 이 모든 것을 알고도 마음을 낮추지 않고 하늘들의 주님을 거슬러 자신을 높였으며, 자신의 호흡을 손에 쥐고 계신 하나님을 존경하지 않았다 — 단 5:22-23.</div>
+
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="6">6일 · DAY 6</button></div>
+<div class='ol major ko'><b>Ⅶ.</b> 다니엘과 그의 동반자들은 이기는 이들이 신실하게 하나님께 경배하는 것을 금지하는 간교함에 맞서 승리했다 — 단 6장.</div>
+<div class='ol sub ko'><b>A.</b> 다니엘서 6장의 중심은 하나님의 경륜을 수행하기 위하여 사람이 기도하는 것이다. 다니엘은 사람이 할 수 없는 것을 하기 위해, 그리고 사람이 이해할 수 없는 것을 이해하기 위해 기도를 의지했다.</div>
+<div class='ol sub ko'><b>B.</b> 다니엘은 예루살렘을 향하여 창을 열고 하루에 세 번 기도했다. 개요는 이 기도를 그리스도와 하나님의 왕국과 하나님의 집을 향하는 기도로 예표적으로 적용한다 — 단 6:10, 비교 왕상 19:12, 18, 8:48-49.</div>
+</div>
+</section>
+<section id="weekly" class="panel"><div class="card"><h2>WEEKLY FOCUS</h2>
+<ol>
+<li><b>Identity:</b> Daniel and his companions remained God’s people even when Babylon changed their surroundings and names.</li>
+<li><b>Separation:</b> They refused defilement and idolatrous participation in practical daily choices.</li>
+<li><b>Worship:</b> They would not worship the image even at the cost of their lives.</li>
+<li><b>God’s rule:</b> Daniel 4–5 exposes human pride and shows that the Most High rules and judges arrogant self-exaltation.</li>
+<li><b>Prayer:</b> Daniel’s established prayer life remained faithful under legal and political pressure.</li>
+</ol>
+<p class="ko">이번 주의 중심은 바빌론이라는 압력 아래에서도 하나님께 속한 정체성, 더럽힘을 거절하는 생활, 하나님만 경배하는 신실함, 하늘의 통치에 대한 인식, 그리고 멈추지 않는 기도 생활이다.</p>
+</div></section>
+<section id="daily" class="panel">
+<section class="day card">
+  <div class="dayno">DAY 1</div>
+  <h2>Remaining God’s testimony in Babylon</h2>
+  <h3 class="ko">바빌론에서도 하나님께 속한 증거를 지킴</h3>
+  <div class="mn"><b>MORNING NOURISHMENT</b><div><button class='ref' data-ref='Dan. 1:3-4'>Dan. 1:3-4</button> <button class='ref' data-ref='Dan. 1:7'>Dan. 1:7</button></div>
+  <p class="ko sourceverse">단 1:3-4 — 왕은 이스라엘 자손 가운데서 흠이 없고 외모가 준수하며 지혜와 지식과 생각에 통찰력이 있고 왕궁에 설 역량이 있는 소년들을 데려오게 하였다. 단 1:7 — 내시장은 그들에게 이름을 지어 주었다.</p></div>
+  <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3 · 4 · 5</h3><ol><li>Captivity did not cancel God’s purpose; even in Babylon God preserved a testimony through a small group of young men.</li><li>Daniel and his companions were outwardly placed in a pagan system, yet their inward belonging to God could not be changed by that system.</li><li>The changing of their names shows Babylon’s attempt to redefine identity and allegiance, but a new label did not have to become a new heart.</li><li>Overcoming begins with belonging to God more absolutely than to the surrounding culture, pressure, or expectation.</li><li>God can use a faithful minority to preserve His testimony when the broader situation appears defeated.</li></ol></div>
+  <p class="ko">하나님의 선민이 포로가 되어 바빌론에 있었지만 하나님은 다니엘과 그의 동반자들을 보존하셨다. 느부갓네살은 그들의 이름까지 바꾸었지만, 그들이 하나님께 속했다는 내적인 사실까지 바꿀 수는 없었다. 하나님은 몇몇 젊은 이기는 이들을 통해 그분의 증거를 계속 지키셨다.</p>
+  <div class="prop"><b>~2:30 PROPHESYING</b><p>Today I am impressed by Daniel and his companions in Babylon. Outwardly, almost everything had changed. Jerusalem had been defeated, the temple vessels had been carried away, these young men had been taken into a foreign court, and even their names were changed. Yet God’s purpose had not ended. God still had a small group of people who belonged to Him.
+
+This shows me that the environment does not have the final word over our identity. Babylon could give Daniel another name, but Babylon could not make him stop belonging to God. The same principle applies to us. Our culture, workplace, school, family expectations, or the spirit of the age may try to tell us who we are and what we should value. But our deepest identity is determined by God’s calling and by our relationship with Him.
+
+I am also helped by the fact that God did not need a large number. He used Daniel and his companions as a testimony in a very dark situation. When the general condition seems weak, God can still gain a few who are faithful to Him. Their victory begins not with a dramatic public act but with an inward decision: they are for God.
+
+So I want to learn from Daniel. I do not want merely to criticize the age around me. I want to remain inwardly clear about whom I belong to. Lord, preserve my identity in You. Make me faithful in small decisions and use my living, together with other believers, as a testimony that Your purpose is still being carried out even in difficult circumstances.</p></div>
+  <div class="prayer"><b>PRAYER · 기도</b><p class="ko">주님, 환경이 어떠하든 제가 당신께 속한 사람이라는 사실을 잊지 않게 하소서. 세상의 이름과 평가보다 당신의 부르심을 더 귀히 여기게 하시고, 다니엘과 그의 동반자들처럼 몇 사람이라도 당신께 신실하여 당신의 증거를 지키게 하소서.</p></div>
+  <textarea class="note" data-key="week3-day1" placeholder="My private note…"></textarea>
+</section>
+<section id="notes" class="panel"><div class="card"><h2>📝 MY NOTES</h2>
+<textarea class="note" data-key="week3" placeholder="Week 3 private note…"></textarea>
+<p>Notes stay in this browser/device.</p></div></section>
+<section id="hymn" class="panel"><div class="card hymn"><h2>🎵 WEEK 3 HYMN</h2>
+<p class="ko"><b>한국어 자료:</b> 찬송 1021 — 「우리를 부른 주님」</p>
+<p><b>English Hymn #1273:</b> “Christ has called us once to Him.”</p>
+<p>The hymn repeatedly emphasizes the call to “Overcome!” and uses the ministry expressions “eating Christ,” the tree of life, the man-child, and the bride.</p>
+<p><a href="https://www.hymnal.net/en/hymn/h/1273" target="_blank" rel="noopener">Open Hymn #1273 at Hymnal.net</a></p>
+</div></section>
+<section id="chunks" class="panel">
+  <div class="card">
+    <h2>THIS WEEK’S ESSENTIAL ENGLISH CHUNKS <span class="chunkBadge">INTERMEDIATE</span></h2>
+    <div class="chunkIntro">
+      <b>선정 기준:</b> 이번 주 영어에서 원어민이 실제 말할 때 한 덩어리로 처리하기 좋은 의미 단위,
+      내용 이해에 핵심인 표현, 그리고 중급 학습자가 연결된 말에서 놓치기 쉬운 표현을 우선했습니다.
+      단어 하나씩보다 <b>청크 전체의 소리와 리듬</b>을 익히는 것이 목표입니다.
+    </div>
+    <div class="chunkControls">
+      <label>Day
+        <select id="chunkDaySelect">
+          <option value="1">Day 1</option><option value="2">Day 2</option><option value="3">Day 3</option>
+          <option value="4">Day 4</option><option value="5">Day 5</option><option value="6">Day 6</option>
+        </select>
+      </label>
+      <label>Repeat each
+        <select id="chunkRepeat">
+          <option value="1">1×</option><option value="2" selected>2×</option><option value="3">3×</option>
+        </select>
+      </label>
+      <label>Speed
+        <select id="chunkRate">
+          <option value="0.85">0.85</option><option value="0.9">0.9</option>
+          <option value="1.0" selected>1.0</option><option value="1.1">1.1</option><option value="1.2">1.2</option>
+        </select>
+      </label>
+      <label>Voice
+        <select id="chunkVoice"><option value="">Auto — male first</option></select>
+      </label>
+      <button type="button" id="chunkDayListen">▶ Selected Day</button>
+      <button type="button" id="chunkPause">⏸ Pause</button>
+      <button type="button" id="chunkStop">⏹ Stop</button>
+    </div>
+
+<div class="chunkDay" data-chunk-day="1"><h3>DAY 1 · Identity &amp; testimony</h3>
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="1" data-index="0">🔊 1</button>
+          <div>
+            <div class="chunkText">through a small group of young men</div>
+            <div class="chunkKo">소수의 젊은이들을 통하여</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="1" data-index="1">🔊 2</button>
+          <div>
+            <div class="chunkText">their inward belonging to God</div>
+            <div class="chunkKo">그들이 내적으로 하나님께 속해 있다는 사실</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="1" data-index="2">🔊 3</button>
+          <div>
+            <div class="chunkText">redefine identity and allegiance</div>
+            <div class="chunkKo">정체성과 충성의 대상을 새롭게 규정하다</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="1" data-index="3">🔊 4</button>
+          <div>
+            <div class="chunkText">does not have the final word</div>
+            <div class="chunkKo">최종 결정권을 갖고 있지 않다</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="1" data-index="4">🔊 5</button>
+          <div>
+            <div class="chunkText">remain inwardly clear about whom I belong to</div>
+            <div class="chunkKo">내가 누구에게 속했는지 내적으로 분명히 유지하다</div>
+          </div>
+        </div>
+        
+</div>
+<div class="chunkDay" data-chunk-day="2"><h3>DAY 2 · A heart set on God</h3>
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="2" data-index="0">🔊 1</button>
+          <div>
+            <div class="chunkText">set his heart not to be defiled</div>
+            <div class="chunkKo">자신을 더럽히지 않기로 마음을 정하다</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="2" data-index="1">🔊 2</button>
+          <div>
+            <div class="chunkText">before it became an outward practice</div>
+            <div class="chunkKo">그것이 외적인 실행이 되기 전에</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="2" data-index="2">🔊 3</button>
+          <div>
+            <div class="chunkText">connected with an idolatrous environment</div>
+            <div class="chunkKo">우상 숭배적인 환경과 연결된</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="2" data-index="3">🔊 4</button>
+          <div>
+            <div class="chunkText">refusing participation in what compromises our relationship with God</div>
+            <div class="chunkKo">하나님과의 관계를 손상시키는 일에 참여하기를 거절하는 것</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="2" data-index="4">🔊 5</button>
+          <div>
+            <div class="chunkText">those who call on Him out of a pure heart</div>
+            <div class="chunkKo">순수한 마음으로 그분을 부르는 이들</div>
+          </div>
+        </div>
+        
+</div>
+<div class="chunkDay" data-chunk-day="3"><h3>DAY 3 · Faithfulness without conditions</h3>
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="3" data-index="0">🔊 1</button>
+          <div>
+            <div class="chunkText">God was able to deliver them</div>
+            <div class="chunkKo">하나님은 그들을 능히 건지실 수 있었다</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="3" data-index="1">🔊 2</button>
+          <div>
+            <div class="chunkText">But if He does not</div>
+            <div class="chunkKo">그러나 그분께서 그리하지 않으실지라도</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="3" data-index="2">🔊 3</button>
+          <div>
+            <div class="chunkText">their loyalty to God was settled</div>
+            <div class="chunkKo">하나님께 대한 그들의 충성은 이미 확정되어 있었다</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="3" data-index="3">🔊 4</button>
+          <div>
+            <div class="chunkText">in the midst of suffering</div>
+            <div class="chunkKo">고난 한가운데에서</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="3" data-index="4">🔊 5</button>
+          <div>
+            <div class="chunkText">a faith that does not bargain with God</div>
+            <div class="chunkKo">하나님과 흥정하지 않는 믿음</div>
+          </div>
+        </div>
+        
+</div>
+<div class="chunkDay" data-chunk-day="4"><h3>DAY 4 · God’s rule &amp; humility</h3>
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="4" data-index="0">🔊 1</button>
+          <div>
+            <div class="chunkText">the Most High rules over human kingdoms</div>
+            <div class="chunkKo">지극히 높으신 분께서 인간의 왕국들을 다스리신다</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="4" data-index="1">🔊 2</button>
+          <div>
+            <div class="chunkText">by the might of his power</div>
+            <div class="chunkKo">자기 능력의 힘으로</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="4" data-index="2">🔊 3</button>
+          <div>
+            <div class="chunkText">the illusion of human self-sufficiency</div>
+            <div class="chunkKo">인간이 스스로 충분하다는 착각</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="4" data-index="3">🔊 4</button>
+          <div>
+            <div class="chunkText">give Christ the first place</div>
+            <div class="chunkKo">그리스도께 첫째 위치를 드리다</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="4" data-index="4">🔊 5</button>
+          <div>
+            <div class="chunkText">recognize Your hand in my circumstances</div>
+            <div class="chunkKo">나의 환경 가운데서 당신의 손길을 인정하다</div>
+          </div>
+        </div>
+        
+</div>
+<div class="chunkDay" data-chunk-day="5"><h3>DAY 5 · Humbling the heart</h3>
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="5" data-index="0">🔊 1</button>
+          <div>
+            <div class="chunkText">though you knew all this</div>
+            <div class="chunkKo">이 모든 것을 알고 있었음에도</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="5" data-index="1">🔊 2</button>
+          <div>
+            <div class="chunkText">you have not humbled your heart</div>
+            <div class="chunkKo">당신은 마음을 낮추지 않았다</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="5" data-index="2">🔊 3</button>
+          <div>
+            <div class="chunkText">in whose hand was his breath</div>
+            <div class="chunkKo">그의 호흡이 그분의 손 안에 있는</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="5" data-index="3">🔊 4</button>
+          <div>
+            <div class="chunkText">spiritual knowledge creates responsibility</div>
+            <div class="chunkKo">영적인 지식은 책임을 가져온다</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="5" data-index="4">🔊 5</button>
+          <div>
+            <div class="chunkText">familiar with spiritual things</div>
+            <div class="chunkKo">영적인 것들에 익숙해진</div>
+          </div>
+        </div>
+        
+</div>
+<div class="chunkDay" data-chunk-day="6"><h3>DAY 6 · An established prayer life</h3>
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="6" data-index="0">🔊 1</button>
+          <div>
+            <div class="chunkText">as he had always done previously</div>
+            <div class="chunkKo">그가 이전부터 늘 해 오던 대로</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="6" data-index="1">🔊 2</button>
+          <div>
+            <div class="chunkText">an established prayer life</div>
+            <div class="chunkKo">이미 세워진 기도 생활</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="6" data-index="2">🔊 3</button>
+          <div>
+            <div class="chunkText">political pressure to redefine worship</div>
+            <div class="chunkKo">경배를 새롭게 규정하려는 정치적 압력</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="6" data-index="3">🔊 4</button>
+          <div>
+            <div class="chunkText">practical dependence on God</div>
+            <div class="chunkKo">하나님을 실제적으로 의지하는 것</div>
+          </div>
+        </div>
+        
+
+        <div class="chunkRow">
+          <button type="button" class="chunkPlay" data-day="6" data-index="4">🔊 5</button>
+          <div>
+            <div class="chunkText">a steady part of my daily living</div>
+            <div class="chunkKo">나의 일상생활의 꾸준한 일부</div>
+          </div>
+        </div>
+        
+</div>
+
+  </div>
+</section>
+<section id="review" class="panel"><div class="card"><h2>THEOLOGICAL REVIEW</h2>
+<p><b>Explicit biblical teaching:</b> Daniel and his companions refuse defilement and idolatry; the three companions will not worship the image even if deliverance does not come; the Most High rules over human kingdoms; Belshazzar is judged after knowingly refusing to humble himself; and Daniel remains faithful in prayer under pressure.</p>
+<p><b>Typological and ministry applications:</b> the identification of the king’s food with the tree of the knowledge of good and evil and the vegetables with the tree of life is an interpretive application rather than the literal statement of Daniel 1. Likewise, the “corporate Christ” interpretation of Daniel 2 develops beyond the direct wording of the dream.</p>
+<p><b>Daniel 3:</b> the text says that the fourth figure looked “like a son of the gods.” Identifying the figure specifically as Christ is a longstanding Christian/ministry interpretation; it should be distinguished from what the Aramaic sentence itself explicitly identifies.</p>
+<p><b>Daniel 6:</b> praying toward Jerusalem is historically connected with Solomon’s prayer concerning exiles. The outline’s application of the land, city, and temple to Christ, God’s kingdom, and God’s house is a typological reading.</p>
+<p><b>Ministry terminology:</b> expressions such as “eating Jesus,” “the Lord’s recovery,” and “God’s economy” can be explained in more direct biblical language: receiving Christ and His word, enjoying fellowship with Him, living under God’s rule, and participating in the building up of the church.</p>
+</div></section>
+<section id="check" class="panel"><div class="card"><h2>✓ SCRIPTURE CHECK</h2>
+<p><b>English scripture text:</b> checked against the user-supplied Message Three outline PDF.</p>
+<p><b>Korean material:</b> taken from the previously supplied Korean Morning Revival PDF, not newly translated for this app.</p>
+<p>Clickable references in this Week 3 app: <b>64</b></p>
+<p>Resolved to supplied Recovery Version text: <b>64</b></p>
+<p class="status-ok">PASS — all rendered clickable references in the outline/daily cards have RV text.</p>
+<div class="mn"><b>Original-language display test</b><br>OT uses WLC/OSHB Hebrew/Aramaic; NT uses SBLGNT/MorphGNT.<br>
+Try <button class="ref" data-ref="Dan. 1:8">Dan. 1:8</button>,
+<button class="ref" data-ref="Dan. 3:17-18">Dan. 3:17-18</button>,
+<button class="ref" data-ref="Dan. 5:22-23">Dan. 5:22-23</button>,
+or <button class="ref" data-ref="2 Tim. 2:22">2 Tim. 2:22</button>.
+</div></div></section>
+</main>
+<div id="modal"><div class="modalbox"><button class="close">✕</button><h2 id="mref"></h2><h3>RECOVERY VERSION</h3>
+<div class="ttsbar"><button id="listen">🔊 Listen</button><button id="versePause">⏸ Pause</button><select id="rate"><option>.75</option><option>.9</option><option selected>1.0</option><option>1.1</option><option>1.25</option></select></div>
+<div id="mrv" class="rv"></div>
+<div class="linkhint" id="originalHint">Tap an original-language word to open its lexical information.</div>
+<div id="gwrap"><h3 id="originalHeading">ORIGINAL LANGUAGE · ENGLISH PRONUNCIATION</h3><div id="mgreek" class="greek"></div></div></div></div>
+<div id="wordDict" aria-hidden="true"><div class="wordDictCard"><button id="wordDictClose" type="button">✕</button><div id="wordDictBody"></div></div></div>
+
+<script>
+const RV={"Dan. 2:13": "And the decree went forth that the wise men should be slain; and they sought Daniel and his companions so that they might be slain.", "Dan. 2:17": "Then Daniel went to his house and made the thing known to Hananiah, Mishael, and Azariah, his companions,", "Rev. 17:14": "These will make war with the Lamb, and the Lamb will overcome them, for He is Lord of lords and King of kings; and they who are with Him, the called and chosen and faithful, will also overcome them.", "Matt. 22:14": "For many are called but few are chosen.", "Dan. 1:6-7": "Now among these from the sons of Judah were Daniel, Hananiah, Mishael, and Azariah. 7And the leader of the eunuchs gave them names: he gave Daniel the name Belteshazzar; Hananiah, the name Shadrach; Mishael, the name Meshach; and Azariah, the name Abed-nego.", "Isa. 46:1": "Bel has bowed down; Nebo stoops; Their idols are on beasts and cattle; The things which you carry are a burden, A load for a weary beast.", "1 Cor. 10:19-21": "What then am I saying? That what is sacrificed to an idol is anything? Or that an idol is anything? 20No, but that the things which the Gentiles sacrifice, they sacrifice to demons and not to God; and I do not want you to become those who have fellowship with demons. 21You cannot drink the Lord’s cup and the demons’ cup; you cannot partake of the Lord’s table and of the demons’ table.", "Dan. 1:8-16": "But Daniel set his heart not to defile himself with the king’s choice provision and with the wine that the king drank, so he requested of the leader of the eunuchs that he might not defile himself. 9And God granted Daniel favor and compassion in the sight of the leader of the eunuchs; 10And the leader of the eunuchs said to Daniel, I fear my lord the king, who has appointed your food and drink; for why should he see your faces being more morose than those of the children who are of your own age? Then you would bring guilt upon my head before the king. 11Then Daniel said to the steward whom the leader of the eunuchs had appointed over Daniel, Hananiah, Mishael, and Azariah, 12Please test your servants for ten days, and let vegetables be given to us to eat and water to drink. 13Then let our countenances be watched in your presence, as well as the countenances of the children who eat the king’s choice provision; and do with your servants according to what you see. 14So he listened to them in this matter and tested them for ten days. 15And at the end of ten days their countenances appeared better, and they were more fully fleshed than all the children who ate the king’s choice provision. 16 Therefore the steward withheld their portion of the choice provision and the wine that they were to drink and gave them vegetables.", "Gen. 3:1-6": "Now the serpent was more crafty than any other animal of the field that Jehovah God had made. And he said to the woman, Did God really say, You shall not eat of any tree of the garden? 2And the woman said to the serpent, Of the fruit of the trees of the garden we may eat; 3But of the fruit of the tree which is in the middle of the garden, God has said, You shall not eat of it, nor shall you touch it, lest you die. 4And the serpent said to the woman, You shall not surely die! 5For God knows that in the day you eat of it your eyes will be opened, and you will become like God, knowing good and evil. 6And when the woman saw that the tree was good for food and that it was a delight to the eyes and that the tree was to be desired to make oneself wise, she took of its fruit and ate; and she also gave some to her husband with her, and he ate.", "Gen. 2:9": "And out of the ground Jehovah God caused to grow every tree that is pleasant to the sight and good for food, as well as the tree of life in the middle of the garden and the tree of the knowledge of good and evil.", "Gen. 2:16-17": "And Jehovah God commanded the man, saying, Of every tree of the garden you may eat freely, 17But of the tree of the knowledge of good and evil, of it you shall not eat; for in the day that you eat of it you shall surely die.", "Rev. 2:7": "He who has an ear, let him hear what the Spirit says to the churches. To him who overcomes, to him I will give to eat of the tree of life, which is in the Paradise of God.", "Rev. 2:17": "He who has an ear, let him hear what the Spirit says to the churches. To him who overcomes, to him I will give of the hidden manna, and to him I will give a white stone, and upon the stone a new name written, which no one knows except him who receives it.", "Rev. 3:20": "Behold, I stand at the door and knock; if anyone hears My voice and opens the door, then I will come in to him and dine with him and he with Me.", "Jer. 15:16": "Your words were found and I ate them, And Your word became to me The gladness and joy of my heart, For I am called by Your name, O Jehovah, God of hosts.", "2 Tim. 2:22": "But flee youthful lusts, and pursue righteousness, faith, love, peace with those who call on the Lord out of a pure heart.", "1 Cor. 15:33": "Do not be deceived: Evil companionships corrupt good morals.", "Prov. 13:20": "He who walks with wise men will be wise, But the companion of fools will be troubled.", "Dan. 2:34-35": "You were watching until a stone was cut out without hands, and it struck the image at its feet of iron and clay and crushed them. 35Then the iron, the clay, the bronze, the silver, and the gold were crushed all at once, and they became like chaff from the summer threshing floors; and the wind carried them away so that no trace of them was found. And the stone that struck the image became a great mountain and filled the whole earth.", "Dan. 2:44-45": "And in the days of those kings the God of the heavens will raise up a kingdom which will never be destroyed, and its reign will not be left to another people; it will crush and put an end to all these kingdoms; and it will stand forever. 45Inasmuch as you saw that out of the mountain a stone was cut without hands and that it crushed the iron, the bronze, the clay, the silver, and the gold, the great God has made known to the king what will happen afterward; and the dream is certain, and its interpretation trustworthy.", "2 Thes. 2:8": "And then the lawless one will be revealed (whom the Lord Jesus will slay by the breath of His mouth and bring to nothing by the manifestation of His coming),", "Rev. 19:11-21": "And I saw heaven opened, and behold, a white horse, and He who sits on it called Faithful and True, and in righteousness He judges and makes war. 12And His eyes are a flame of fire, and on His head are many diadems, and He has a name written which no one knows but Himself. 13And He is clothed with a garment dipped in blood; and His name is called the Word of God. 14And the armies which are in heaven followed Him on white horses, dressed in fine linen, white and clean. 15And out of His mouth proceeds a sharp sword, that with it He might smite the nations; and He will shepherd them with an iron rod; and He treads the winepress of the fury of the wrath of God the Almighty. 16And He has on His garment and on His thigh a name written, KING OF KINGS AND LORD OF LORDS. 17And I saw an angel standing in the sun, and he cried out with a loud voice, saying to all the birds that fly in mid-heaven, Come here; gather yourselves to the great dinner of God, 18That you may eat the flesh of kings and the flesh of generals and the flesh of mighty men and the flesh of horses and of those who sit on them and the flesh of all men, both free and slave and small and great. 19And I saw the beast and the kings of the earth and their armies gathered together to make war with Him who sits on the horse and with His army. 20And the beast was seized, and with him the false prophet, who in his presence had done the signs by which he deceived those who received the mark of the beast and those who worshipped his image. These two were cast alive into the lake of fire, which burns with brimstone. 21And the rest were killed with the sword which proceeds out of the mouth of Him who sits on the horse, and all the birds were filled with their flesh.", "Gen. 11:4-9": "And they said, Come, let us build ourselves a city and a tower whose top is in the heavens; and let us make a name for ourselves, lest we be scattered over the surface of the whole earth. 5And Jehovah came down to see the city and the tower which the children of men had built. 6And Jehovah said, Behold, they are one people, and they all have one language; and this is only the beginning of what they will do; and now nothing which they purpose to do will be kept from them. 7Come, let Us go down and there confound their language, that they may not understand one another’s speech. 8So Jehovah scattered them from there over the surface of all the earth, and they ceased building the city. 9Therefore its name was called Babel, because there Jehovah confounded the language of all the earth, and from there Jehovah scattered them over the surface of the earth.", "Isa. 33:22": "For Jehovah is our Judge, / Jehovah is our Lawmaker, / Jehovah is our King; He will save us.", "1 Pet. 2:4-8": "Coming to Him, a living stone, rejected by men but with God chosen and precious, 5You yourselves also, as living stones, are being built up as a spiritual house into a holy priesthood to offer up spiritual sacrifices acceptable to God through Jesus Christ. 6For it is contained in Scripture: “Behold, I lay in Zion a cornerstone, chosen and precious; and he who believes on Him shall by no means be put to shame.” 7To you therefore who believe is the preciousness; but to the unbelieving, “The stone which the 4 builders rejected, this has become the head of the corner,” 8And, “A stone of stumbling and a rock of offense”; who stumble at the word, being disobedient, to which also they were appointed.", "Isa. 28:16": "Therefore thus says The Lord Jehovah: Indeed I lay a stone in Zion as a foundation, A tested stone, A precious cornerstone as a foundation firmly established; He who believes will not hasten away.", "Zech. 3:9": "For here is the stone that I have set before Joshua—upon one stone are seven eyes. I will engrave its engraving, declares Jehovah of hosts, and I will remove the iniquity of that land in one day.", "Zech. 4:7": "Who are you, O great mountain? Before Zerubbabel you will become a plain, and he will bring forth the topstone with shouts of Grace, grace to it!", "Zech. 4:9-10": "The hands of Zerubbabel have laid the foundation of this house, and his hands will finish it; and you will know that Jehovah of hosts has sent Me to you. 10For who has despised the day of small things? For these seven rejoice when they see the plummet in the hand of Zerubbabel; they are the eyes of Jehovah running to and fro on the whole earth.", "Matt. 4:9-10": "And he said to Him, All these will I give You if You will fall down and worship me. 10Then Jesus said to him, Go away, Satan! For it is written, “You shall worship the Lord your God, and Him only shall you serve.”", "1 John 5:21": "Little children, guard yourselves from idols.", "Matt. 16:24": "Then Jesus said to His disciples, If anyone wants to come after Me, let him deny himself and take up his cross and follow Me.", "2 Cor. 4:5": "For we do not preach ourselves but Christ Jesus as Lord, and ourselves as your slaves for Jesus’ sake.", "Dan. 3:19-23": "Then Nebuchadnezzar was filled with fury and the countenance of his face was changed toward Shadrach, Meshach, and Abed-nego. He responded and commanded that the furnace be made seven times hotter than it was usually heated. 20 And he commanded certain mighty men who were in his army to bind Shadrach, Meshach, and Abed-nego, and throw them into the blazing furnace of fire. 21Then these men were bound in their shirts, tunics, and mantles, and other clothing, and thrown into the midst of the blazing furnace of fire. 22For this reason, because the king’s word was so 5 harsh and the furnace had been heated to an extreme, the flame of the fire slew those men who carried up Shadrach, Meshach, and Abed-nego. 23And these three men, Shadrach, Meshach, and Abed-nego, fell into the midst of the blazing furnace of fire bound up.", "Dan. 3:24-25": "Then Nebuchadnezzar the king was astonished and stood up in haste; he responded and said to his counselors, Did we not throw three men into the midst of the fire bound up? They answered and said to the king, Certainly, O king. 25He answered and said, Look, I see four men loose, walking in the midst of the fire; and they are not harmed. And the appearance of the fourth is like a son of the gods.", "Dan. 3:17": "If it be so, our God whom we serve is able to deliver us from the blazing furnace of fire, and He will deliver us out of your hand, O king.", "Heb. 4:15-16": "For we do not have a High Priest who cannot be touched with the feeling of our weaknesses, but One who has been tempted in all respects like us, yet without sin. 16 Let us therefore come forward with boldness to the throne of grace that we may receive mercy and find grace for timely help.", "Dan. 4:18": "This dream I, King Nebuchadnezzar, have seen. Now you, Belteshazzar, tell me the interpretation, inasmuch as all the wise men of my kingdom are not able to make the interpretation known to me; but you are able, for a spirit of the holy gods is in you.", "Dan. 4:23-26": "And in that the king saw a watcher, indeed, a holy one, coming down from heaven and saying, Cut down the tree and destroy it; yet leave its stump of roots in the earth, but with an iron and bronze band around it, in the tender grass of the field; and let him be wet with the dew of heaven, and let his portion be with the beasts of the field until seven periods of time pass over him; 24This is the interpretation, O king, and this is the decree of the Most High, which has come upon my lord the king: 25You shall be driven out from among mankind, and with the beasts of the field shall your dwelling place be; and you shall be made to eat grass as bulls do and shall be wet with the dew of heaven; and seven periods of time will pass over you, until you come to know that the Most High is the Ruler over the kingdom of men and gives it to whomever He wills. 6 26 And in that it was commanded that the stump of roots of the tree be left, your kingdom will be assured to you after you have come to know that the heavens do rule.", "Dan. 4:30-32": "The king responded and said, Is this not Babylon the great, which I have built up as a royal house by the might of my power and for the glory of my majesty? 31 While the word was still in the king’s mouth, a voice came down from heaven: To you it is spoken, King Nebuchadnezzar: The kingdom has passed on from you; 32And from among mankind you shall be driven out, and with the beasts of the field shall your dwelling place be; you shall be made to eat grass as bulls do; and seven periods of time will pass over you, until you come to know that the Most High is the Ruler over the kingdom of men and gives it to whomever He wills.", "Rom. 8:28-29": "And we know that all things work together for good to those who love God, to those who are called according to His purpose. 29Because those whom He foreknew, He also predestinated to be conformed to the image of His Son, that He might be the Firstborn among many brothers;", "Col. 1:18": "And He is the Head of the Body, the church; He is the beginning, the Firstborn from the dead, that He Himself might have the first place in all things;", "2 Cor. 10:13": "But we will not boast beyond our measure but according to the measure of the rule which the God of measure has apportioned to us, to reach even as far as you.", "2 Cor. 10:18": "For it is not the one who commends himself who is approved, but the one whom the Lord commends.", "Jer. 9:23-24": "Thus says Jehovah, Let not the wise man glory in his wisdom, And let not the mighty man glory in his might; Let not the rich man glory in his riches. 24But let him who glories glory in this, That he has insight and knows Me, That I am Jehovah who exercises lovingkindness, Justice, and righteousness on earth; For in these things I delight, declares Jehovah.", "Dan. 5:4": "They drank wine and praised the gods of gold and of silver, of bronze, iron, wood, and stone.", "Dan. 4:18-37": "This dream I, King Nebuchadnezzar, have seen. Now you, Belteshazzar, tell me the interpretation, inasmuch as all the wise men of my kingdom are not able to make the interpretation known to me; but you are able, for a spirit of the holy gods is in you. 19Then Daniel, whose name is Belteshazzar, was appalled for a while as his thoughts alarmed him. The king responded and said, Belteshazzar, do not let the dream or its interpretation alarm you. Belteshazzar answered and said, My lord, may the dream be for those who hate you, and its interpretation for your enemies! 20The tree that you saw, 7 which grew great and became strong, and whose height reached to heaven and the sight of it to all the earth, 21And whose foliage was beautiful and its fruit abundant, and in which was food for all, and under which the beasts of the field dwelt, and in whose branches the birds of the sky lodged— 22It is you, O king, who have grown great and become strong, for your greatness has grown and reaches to heaven, and your dominion to the end of the earth. 23And in that the king saw a watcher, indeed, a holy one, coming down from heaven and saying, Cut down the tree and destroy it; yet leave its stump of roots in the earth, but with an iron and bronze band around it, in the tender grass of the field; and let him be wet with the dew of heaven, and let his portion be with the beasts of the field until seven periods of time pass over him; 24This is the interpretation, O king, and this is the decree of the Most High, which has come upon my lord the king: 25You shall be driven out from among mankind, and with the beasts of the field shall your dwelling place be; and you shall be made to eat grass as bulls do and shall be wet with the dew of heaven; and seven periods of time will pass over you, until you come to know that the Most High is the Ruler over the kingdom of men and gives it to whomever He wills. 26And in that it was commanded that the stump of roots of the tree be left, your kingdom will be assured to you after you have come to know that the heavens do rule. 27 Therefore, O king, let my counsel be acceptable to you: Break off your sins by doing righteousness, and your iniquities by showing mercy to the poor; perhaps there may be a prolonging of your prosperity. 28All this came upon Nebuchadnezzar the king. 29At the end of twelve months he was walking upon the roof of the royal palace of Babylon. 30The king responded and said, Is this not Babylon the great, which I have built up as a royal house by the might of my power and for the glory of my majesty? 31While the word was still in the king’s mouth, a voice came down from heaven: To you it is spoken, King Nebuchadnezzar: The kingdom has passed on from you; 32And from among mankind you shall be driven out, and with the beasts of the field shall your dwelling place be; you shall be made to eat grass as bulls do; and seven periods of time will pass over you, until you come to know that the Most High is the Ruler over the kingdom of men and gives it to whomever He wills. 33In that very hour the word concerning Nebuchadnezzar was fulfilled; and from among mankind he was driven out, and he began to eat grass as bulls do, and his body was wet with the dew of heaven, until his hair had grown like eagles’ feathers and his nails like birds’ claws. 34And at the end of those days I, Nebuchadnezzar, lifted up my eyes to heaven, and my reason returned to me; and I blessed the Most High, and I praised and honored the ever-living One; For His dominion is an eternal dominion, And His kingdom is from generation to generation; 35And all the inhabitants of earth are considered as nothing, But He does according to His will in the army of heaven And among the inhabitants of the earth; And there is no one who can resist His hand Or say to Him, What are You doing? 36At that time my reason returned to me; and for the glory of my kingdom, my majesty and my splendor returned to me; and my counselors and my lords sought me out, and I was established in my kingdom, and surpassing greatness was added to me. 37Now I, Nebuchadnezzar, praise and exalt and honor the King of the heavens, because all His works are truth and His ways justice, and because He is able to abase those who walk in pride.", "Dan. 5:18": "Regarding you, O king, God the Most High gave to Nebuchadnezzar your forefather kingship, greatness, glory, and majesty;", "Dan. 5:20": "But when his heart was lifted up and his spirit became so arrogant that he conducted himself in pride, he was deposed from his royal throne, and his glory was taken away from him.", "Dan. 5:24-31": "Then that part of the hand was sent from before Him, and this writing was inscribed. 25And this is the writing that was inscribed: MENE, MENE, TEKEL, UPHARSIN. 26This is the interpretation of the matter: MENE—God has numbered your kingdom and brought it to an end; 27TEKEL—You have been weighed in the scales and found to be lacking. 28PERES—Your kingdom has been divided and given to the Medes and Persians. 29Then Belshazzar commanded; and they clothed Daniel in purple and put a chain of gold around his neck, and they made the proclamation concerning him that he should rule as the third ruler in the kingdom. 30In that very night Belshazzar the Chaldean king was slain. 31And Darius the Mede received the kingdom at about the age of sixty-two.", "Dan. 6:10": "Now when Daniel came to know that the writing had been signed, he went to his house (in his upper room he had windows open toward Jerusalem) and three times daily he knelt on his knees and prayed and gave thanks before his God, because he had always done so previously.", "1 Kings 19:12": "And after the earthquake, a fire—Jehovah was not in the fire. And after the fire, a gentle, quiet voice.", "1 Kings 19:18": "Yet I have left Myself seven thousand in Israel, all the knees that have not bowed unto Baal and every mouth that has not kissed him.", "1 Kings 8:48-49": "And if they return to You with all their heart and with all their soul in the land of their enemies, who have carried them captive, and they pray to You toward their land that You have given to their fathers, the city that You have chosen, and the house that I have built for Your name; 49Then hear their prayer and their supplication in the heavens Your dwelling place and maintain their cause, 10 © 2026 Living Stream Ministry", "Dan. 1:3-4": "Then the king told the chief of his eunuchs to bring some of the sons of Israel, including some from the royal seed and from the nobility, 4Children in whom was no defect, who were good in appearance, who showed insight in all wisdom, understanding in knowledge, and apprehension in thought, and in whom was the ability to stand in the king’s palace; and to teach them the learning and language of the Chaldeans.", "Dan. 1:7": "And the leader of the eunuchs gave them names: he gave Daniel the name Belteshazzar; Hananiah, the name Shadrach; Mishael, the name Meshach; and Azariah, the name Abed-nego.", "Dan. 1:8": "But Daniel set his heart not to defile himself with the king’s choice provision and with the wine that the king drank, so he requested of the leader of the eunuchs that he might not defile himself.", "Dan. 1:16": "Therefore the steward withheld their portion of the choice provision and the wine that they were to drink and gave them vegetables.", "Dan. 3:17-18": "If it be so, our God whom we serve is able to deliver us from the blazing furnace of fire, and He will deliver us out of your hand, O king. 18But if He does not, let it be known to you, O king, that we will not serve your gods nor worship the golden image that you have set up.", "Dan. 3:23": "And these three men, Shadrach, Meshach, and Abed-nego, fell into the midst of the blazing furnace of fire bound up.", "Dan. 4:34-35": "And at the end of those days I, Nebuchadnezzar, lifted up my eyes to heaven, and my reason returned to me; and I blessed the Most High, and I praised and honored the ever-living One; For His dominion is an eternal dominion, And His kingdom is from generation to generation; 35And all the inhabitants of earth are considered as nothing, But He does according to His will in the army of heaven And among the inhabitants of the earth; And there is no one who can resist His hand Or say to Him, What are You doing?", "Dan. 4:37": "Now I, Nebuchadnezzar, praise and exalt and honor the King of the heavens, because all His works are truth and His ways justice, and because He is able to abase those who walk in pride.", "Dan. 5:22-23": "And you his descendant, Belshazzar, have not humbled your heart, though you knew all this; 23But you have exalted yourself against the Lord of the heavens; and they have brought the vessels of His house before you, and you and your lords, your wives, and your concubines have drunk wine from them; and you have praised the gods of silver and of gold, of bronze, iron, wood, and stone, which do not see nor hear nor know. But the God in whose hand is your breath and to whom all your ways belong, you have not honored.", "Dan. 6:10-11": "Now when Daniel came to know that the writing had been signed, he went to his house (in his upper room he had windows open toward Jerusalem) and three times daily he knelt on his knees and prayed and gave thanks before his God, because he had always done so previously. 11Then these men assembled and found Daniel making petition and supplication before his God."};
+const GREEK={"Heb. 11:7": ["Πίστει χρηματισθεὶς Νῶε περὶ τῶν μηδέπω βλεπομένων, εὐλαβηθεὶς κατεσκεύασεν κιβωτὸν εἰς σωτηρίαν τοῦ οἴκου αὐτοῦ, δι᾽ ἧς κατέκρινεν τὸν κόσμον, καὶ τῆς κατὰ πίστιν δικαιοσύνης ἐγένετο κληρονόμος.", ""], "1 Cor. 15:10": ["χάριτι δὲ θεοῦ εἰμι ὅ εἰμι· καὶ ἡ χάρις αὐτοῦ ἡ εἰς ἐμὲ οὐ κενὴ ἐγενήθη.", "(KHA-ree-tee deh theh-OO AY-mee ho AY-mee...)"], "Gal. 6:18": ["Ἡ χάρις τοῦ κυρίου ἡμῶν Ἰησοῦ Χριστοῦ μετὰ τοῦ πνεύματος ὑμῶν, ἀδελφοί· ἀμήν.", "(Hay KHA-ris too koo-REE-oo hay-MONE ee-ay-SOO khrees-TOO...)"], "Rom. 5:21": ["ἵνα ὥσπερ ἐβασίλευσεν ἡ ἁμαρτία ἐν τῷ θανάτῳ, οὕτως καὶ ἡ χάρις βασιλεύσῃ διὰ δικαιοσύνης εἰς ζωὴν αἰώνιον.", "(HEE-na HOH-spehr eh-va-SEE-lef-sen hay ha-mar-TEE-a...)"], "Matt. 16:18": ["κἀγὼ δέ σοι λέγω ὅτι σὺ εἶ Πέτρος, καὶ ἐπὶ ταύτῃ τῇ πέτρᾳ οἰκοδομήσω μου τὴν ἐκκλησίαν.", "(ka-GO deh soy LEH-go HO-tee soo ee PEH-tros...)"], "Eph. 4:12": ["πρὸς τὸν καταρτισμὸν τῶν ἁγίων εἰς ἔργον διακονίας, εἰς οἰκοδομὴν τοῦ σώματος τοῦ Χριστοῦ.", "(pros ton ka-tar-tis-MON tone ha-GEE-one...)"], "Eph. 3:17": ["κατοικῆσαι τὸν Χριστὸν διὰ τῆς πίστεως ἐν ταῖς καρδίαις ὑμῶν.", "(ka-toy-KAY-sai ton khrees-TON dee-A tees PEES-teh-os...)"], "1 Cor. 3:12": ["εἰ δέ τις ἐποικοδομεῖ ἐπὶ τὸν θεμέλιον χρυσόν, ἄργυρον, λίθους τιμίους, ξύλα, χόρτον, καλάμην.", "(ee DEH tees eh-poy-ko-do-MEE eh-PEE ton theh-MEH-lee-on...)"], "2 Tim. 3:1-5": ["Τοῦτο δὲ γίνωσκε ὅτι ἐν ἐσχάταις ἡμέραις ἐνστήσονται καιροὶ χαλεποί·\nἔσονται γὰρ οἱ ἄνθρωποι φίλαυτοι, φιλάργυροι, ἀλαζόνες, ὑπερήφανοι, βλάσφημοι, γονεῦσιν ἀπειθεῖς, ἀχάριστοι, ἀνόσιοι,\nἄστοργοι, ἄσπονδοι, διάβολοι, ἀκρατεῖς, ἀνήμεροι, ἀφιλάγαθοι,\nπροδόται, προπετεῖς, τετυφωμένοι, φιλήδονοι μᾶλλον ἢ φιλόθεοι,\nἔχοντες μόρφωσιν εὐσεβείας τὴν δὲ δύναμιν αὐτῆς ἠρνημένοι· καὶ τούτους ἀποτρέπου.", "(TOO-to deh GHEE-no-skeh HO-tee en es-KHA-tays hay-MEH-rays en-STAY-son-tai kai-ROY kha-leh-POY...)"]};
+
+const LEX={"Πίστει": ["πίστις", "noun", "by faith", ["faith", "trust", "faithfulness"]], "χρηματισθεὶς": ["χρηματίζω", "verb", "having been divinely instructed / warned", ["divinely instructed", "warned by God", "given a divine response"]], "Νῶε": ["Νῶε", "proper noun", "Noah", ["Noah"]], "περὶ": ["περί", "preposition", "concerning / about", ["concerning", "about", "regarding"]], "τῶν": ["ὁ", "article", "of the", ["the"]], "μηδέπω": ["μηδέπω", "adverb", "not yet", ["not yet", "not as yet"]], "βλεπομένων": ["βλέπω", "verb", "being seen", ["seen", "perceived", "observed"]], "εὐλαβηθεὶς": ["εὐλαβέομαι", "verb", "having been moved with reverent fear", ["reverently feared", "took heed", "was moved with godly fear"]], "κατεσκεύασεν": ["κατασκευάζω", "verb", "prepared / constructed", ["prepared", "built", "constructed"]], "κιβωτὸν": ["κιβωτός", "noun", "an ark", ["ark", "large vessel", "chest"]], "εἰς": ["εἰς", "preposition", "into / for", ["into", "for", "unto"]], "σωτηρίαν": ["σωτηρία", "noun", "salvation / deliverance", ["salvation", "deliverance", "rescue"]], "τοῦ": ["ὁ", "article", "of the", ["the"]], "οἴκου": ["οἶκος", "noun", "house / household", ["house", "household", "family"]], "αὐτοῦ": ["αὐτός", "pronoun", "his", ["his", "of him"]], "χάριτι": ["χάρις", "noun", "by grace", ["grace", "favor", "gracious gift"]], "δὲ": ["δέ", "conjunction", "but / and", ["but", "and", "now"]], "θεοῦ": ["θεός", "noun", "of God", ["God", "of God"]], "εἰμι": ["εἰμί", "verb", "I am", ["am", "exist", "be"]], "ὅ": ["ὅς", "pronoun", "what / that which", ["what", "that which"]], "καὶ": ["καί", "conjunction", "and / also", ["and", "also", "even"]], "ἡ": ["ὁ", "article", "the", ["the"]], "χάρις": ["χάρις", "noun", "grace", ["grace", "favor", "kindness"]], "ἐμὲ": ["ἐγώ", "pronoun", "me", ["me"]], "οὐ": ["οὐ", "particle", "not", ["not"]], "κενὴ": ["κενός", "adjective", "empty / vain", ["empty", "vain", "without effect"]], "ἐγενήθη": ["γίνομαι", "verb", "became / proved to be", ["became", "came to be", "proved to be"]], "κυρίου": ["κύριος", "noun", "of the Lord", ["Lord", "master", "one in authority"]], "ἡμῶν": ["ἐγώ", "pronoun", "our", ["our"]], "Ἰησοῦ": ["Ἰησοῦς", "proper noun", "Jesus", ["Jesus"]], "Χριστοῦ": ["Χριστός", "proper noun", "Christ", ["Christ", "Messiah", "Anointed One"]], "μετὰ": ["μετά", "preposition", "with", ["with", "among"]], "πνεύματος": ["πνεῦμα", "noun", "spirit", ["spirit", "Spirit", "breath"]], "ὑμῶν": ["σύ", "pronoun", "your", ["your", "of you"]], "ἀδελφοί": ["ἀδελφός", "noun", "brothers", ["brothers", "brethren", "fellow believers"]], "ἀμήν": ["ἀμήν", "particle", "amen / truly", ["amen", "truly"]], "ἵνα": ["ἵνα", "conjunction", "so that / in order that", ["so that", "in order that"]], "ὥσπερ": ["ὥσπερ", "conjunction", "just as", ["just as", "even as"]], "ἐβασίλευσεν": ["βασιλεύω", "verb", "reigned", ["reigned", "ruled", "held sway"]], "ἁμαρτία": ["ἁμαρτία", "noun", "sin", ["sin", "sinfulness"]], "ἐν": ["ἐν", "preposition", "in", ["in", "within"]], "τῷ": ["ὁ", "article", "the", ["the"]], "θανάτῳ": ["θάνατος", "noun", "death", ["death"]], "οὕτως": ["οὕτως", "adverb", "so / in this way", ["so", "thus", "in this way"]], "βασιλεύσῃ": ["βασιλεύω", "verb", "may reign", ["reign", "rule", "exercise kingship"]], "διὰ": ["διά", "preposition", "through", ["through", "by means of"]], "δικαιοσύνης": ["δικαιοσύνη", "noun", "righteousness", ["righteousness", "justice", "right standing"]], "ζωὴν": ["ζωή", "noun", "life", ["life", "living", "divine life"]], "αἰώνιον": ["αἰώνιος", "adjective", "eternal", ["eternal", "everlasting", "age-abiding"]], "κἀγὼ": ["κἀγώ", "pronoun", "and I / I also", ["and I", "I also"]], "δέ": ["δέ", "conjunction", "and / but", ["and", "but", "now"]], "σοι": ["σύ", "pronoun", "to you", ["to you", "for you"]], "λέγω": ["λέγω", "verb", "I say", ["say", "tell", "declare"]], "ὅτι": ["ὅτι", "conjunction", "that / because", ["that", "because"]], "σὺ": ["σύ", "pronoun", "you", ["you"]], "εἶ": ["εἰμί", "verb", "you are", ["are", "exist"]], "Πέτρος": ["Πέτρος", "proper noun", "Peter", ["Peter"]], "ἐπὶ": ["ἐπί", "preposition", "upon / on", ["upon", "on", "over"]], "ταύτῃ": ["οὗτος", "pronoun", "this", ["this"]], "τῇ": ["ὁ", "article", "the", ["the"]], "πέτρᾳ": ["πέτρα", "noun", "rock", ["rock", "bedrock", "rock-mass"]], "οἰκοδομήσω": ["οἰκοδομέω", "verb", "I will build", ["build", "build up", "edify"]], "μου": ["ἐγώ", "pronoun", "my", ["my", "of me"]], "τὴν": ["ὁ", "article", "the", ["the"]], "ἐκκλησίαν": ["ἐκκλησία", "noun", "church / assembly", ["church", "assembly", "congregation"]], "πρὸς": ["πρός", "preposition", "for / toward", ["for", "toward", "with a view to"]], "τὸν": ["ὁ", "article", "the", ["the"]], "καταρτισμὸν": ["καταρτισμός", "noun", "perfecting / equipping", ["equipping", "perfecting", "preparation"]], "ἁγίων": ["ἅγιος", "adjective", "of the saints / holy ones", ["saints", "holy ones"]], "ἔργον": ["ἔργον", "noun", "work", ["work", "deed", "task"]], "διακονίας": ["διακονία", "noun", "ministry / service", ["ministry", "service", "ministration"]], "οἰκοδομὴν": ["οἰκοδομή", "noun", "building up", ["building up", "edification", "building"]], "σώματος": ["σῶμα", "noun", "body", ["body", "corporate body"]], "κατοικῆσαι": ["κατοικέω", "verb", "to dwell / make home", ["dwell", "settle down", "make home"]], "Χριστὸν": ["Χριστός", "proper noun", "Christ", ["Christ", "Messiah", "Anointed One"]], "τῆς": ["ὁ", "article", "the", ["the"]], "πίστεως": ["πίστις", "noun", "faith", ["faith", "trust", "belief"]], "ταῖς": ["ὁ", "article", "the", ["the"]], "καρδίαις": ["καρδία", "noun", "hearts", ["hearts", "inner persons", "centers of being"]], "εἰ": ["εἰ", "conjunction", "if", ["if"]], "τις": ["τις", "pronoun", "anyone", ["anyone", "someone"]], "ἐποικοδομεῖ": ["ἐποικοδομέω", "verb", "builds upon", ["builds upon", "builds on", "erects upon"]], "θεμέλιον": ["θεμέλιος", "noun", "foundation", ["foundation", "foundation stone", "base"]], "χρυσόν": ["χρυσός", "noun", "gold", ["gold"]], "ἄργυρον": ["ἄργυρος", "noun", "silver", ["silver"]], "λίθους": ["λίθος", "noun", "stones", ["stones", "precious stones", "building stones"]], "τιμίους": ["τίμιος", "adjective", "precious", ["precious", "valuable", "honored"]], "ξύλα": ["ξύλον", "noun", "wood", ["wood", "timber"]], "χόρτον": ["χόρτος", "noun", "grass", ["grass"]], "καλάμην": ["καλάμη", "noun", "straw / stubble", ["straw", "stubble", "stalk"]], "Τοῦτο": ["οὗτος", "pronoun", "this", ["this", "this thing"]], "γίνωσκε": ["γινώσκω", "verb", "know / recognize", ["know", "recognize", "understand"]], "ἐσχάταις": ["ἔσχατος", "adjective", "last", ["last", "final", "latter"]], "ἡμέραις": ["ἡμέρα", "noun", "days", ["days", "time"]], "ἐνστήσονται": ["ἐνίστημι", "verb", "will come / be present", ["will come", "will set in", "will be present"]], "καιροὶ": ["καιρός", "noun", "times / seasons", ["times", "seasons", "periods"]], "χαλεποί": ["χαλεπός", "adjective", "difficult / perilous", ["difficult", "hard", "perilous", "troublesome"]], "ἔσονται": ["εἰμί", "verb", "will be", ["will be", "will exist"]], "ἄνθρωποι": ["ἄνθρωπος", "noun", "people / human beings", ["people", "men", "human beings"]], "φίλαυτοι": ["φίλαυτος", "adjective", "lovers of self", ["self-loving", "lovers of self", "self-centered"]], "φιλάργυροι": ["φιλάργυρος", "adjective", "lovers of money", ["money-loving", "lovers of money", "avaricious"]], "ἀλαζόνες": ["ἀλαζών", "noun", "boasters", ["boasters", "braggarts", "pretenders"]], "ὑπερήφανοι": ["ὑπερήφανος", "adjective", "arrogant / proud", ["arrogant", "proud", "haughty"]], "βλάσφημοι": ["βλάσφημος", "adjective", "slanderous / abusive", ["slanderous", "abusive", "blasphemous"]], "γονεῦσιν": ["γονεύς", "noun", "parents", ["parents"]], "ἀπειθεῖς": ["ἀπειθής", "adjective", "disobedient", ["disobedient", "unpersuaded", "rebellious"]], "ἀχάριστοι": ["ἀχάριστος", "adjective", "ungrateful", ["ungrateful", "unthankful"]], "ἀνόσιοι": ["ἀνόσιος", "adjective", "unholy", ["unholy", "profane", "irreverent"]], "ἄστοργοι": ["ἄστοργος", "adjective", "without natural affection", ["without natural affection", "unloving", "hard-hearted"]], "ἄσπονδοι": ["ἄσπονδος", "adjective", "irreconcilable", ["irreconcilable", "implacable", "unforgiving"]], "διάβολοι": ["διάβολος", "adjective", "slanderers", ["slanderers", "false accusers"]], "ἀκρατεῖς": ["ἀκρατής", "adjective", "without self-control", ["without self-control", "undisciplined"]], "ἀνήμεροι": ["ἀνήμερος", "adjective", "savage / brutal", ["savage", "brutal", "fierce"]], "ἀφιλάγαθοι": ["ἀφιλάγαθος", "adjective", "not loving good", ["not loving good", "hostile to good"]], "προδόται": ["προδότης", "noun", "traitors", ["traitors", "betrayers"]], "προπετεῖς": ["προπετής", "adjective", "reckless / rash", ["reckless", "rash", "headstrong"]], "τετυφωμένοι": ["τυφόομαι", "verb", "having become conceited", ["puffed up", "conceited", "blinded with pride"]], "φιλήδονοι": ["φιλήδονος", "adjective", "lovers of pleasure", ["pleasure-loving", "lovers of pleasure"]], "φιλόθεοι": ["φιλόθεος", "adjective", "lovers of God", ["God-loving", "lovers of God"]], "ἔχοντες": ["ἔχω", "verb", "having", ["having", "holding", "possessing"]], "μόρφωσιν": ["μόρφωσις", "noun", "form / outward form", ["form", "outward form", "appearance"]], "εὐσεβείας": ["εὐσέβεια", "noun", "godliness", ["godliness", "piety", "devotion"]], "δύναμιν": ["δύναμις", "noun", "power", ["power", "ability", "effective power"]], "ἠρνημένοι": ["ἀρνέομαι", "verb", "having denied", ["denied", "disowned", "rejected"]], "τούτους": ["οὗτος", "pronoun", "these people", ["these", "such people"]], "ἀποτρέπου": ["ἀποτρέπομαι", "verb", "turn away from / avoid", ["turn away from", "avoid", "shun"]]};
+const NT_BOOKS={"Matt.": {"file": "61-Mt-morphgnt.txt", "code": "01"}, "Luke": {"file": "63-Lk-morphgnt.txt", "code": "03"}, "John": {"file": "64-Jn-morphgnt.txt", "code": "04"}, "Acts": {"file": "65-Ac-morphgnt.txt", "code": "05"}, "Rom.": {"file": "66-Ro-morphgnt.txt", "code": "06"}, "1 Cor.": {"file": "67-1Co-morphgnt.txt", "code": "07"}, "2 Cor.": {"file": "68-2Co-morphgnt.txt", "code": "08"}, "Gal.": {"file": "69-Ga-morphgnt.txt", "code": "09"}, "Eph.": {"file": "70-Eph-morphgnt.txt", "code": "10"}, "Phil.": {"file": "71-Php-morphgnt.txt", "code": "11"}, "Col.": {"file": "72-Col-morphgnt.txt", "code": "12"}, "1 Thes.": {"file": "73-1Th-morphgnt.txt", "code": "13"}, "2 Thes.": {"file": "74-2Th-morphgnt.txt", "code": "14"}, "1 Tim.": {"file": "75-1Ti-morphgnt.txt", "code": "15"}, "2 Tim.": {"file": "76-2Ti-morphgnt.txt", "code": "16"}, "Philem.": {"file": "78-Phm-morphgnt.txt", "code": "18"}, "Heb.": {"file": "79-Heb-morphgnt.txt", "code": "19"}, "1 Pet.": {"file": "81-1Pe-morphgnt.txt", "code": "21"}, "2 Pet.": {"file": "82-2Pe-morphgnt.txt", "code": "22"}, "1 John": {"file": "83-1Jn-morphgnt.txt", "code": "23"}, "Rev.": {"file": "87-Re-morphgnt.txt", "code": "27"}};
+const GLOSS={"θεός": ["God", ["God", "deity"]], "κύριος": ["Lord / master", ["Lord", "master", "owner"]], "Ἰησοῦς": ["Jesus", ["Jesus"]], "Χριστός": ["Christ / Messiah", ["Christ", "Messiah", "Anointed One"]], "πνεῦμα": ["spirit", ["spirit", "Spirit", "breath"]], "χάρις": ["grace / favor", ["grace", "favor", "gracious gift"]], "πίστις": ["faith / trust", ["faith", "trust", "faithfulness"]], "ἀγάπη": ["love", ["love", "affection", "devotion"]], "ζωή": ["life", ["life", "living", "divine life"]], "δικαιοσύνη": ["righteousness / justice", ["righteousness", "justice", "right standing"]], "σωτηρία": ["salvation / deliverance", ["salvation", "deliverance", "rescue"]], "ἐκκλησία": ["church / assembly", ["church", "assembly", "congregation"]], "σῶμα": ["body", ["body", "corporate body"]], "λόγος": ["word / message", ["word", "message", "matter", "account"]], "ἔργον": ["work / deed", ["work", "deed", "task"]], "διακονία": ["ministry / service", ["ministry", "service", "ministration"]], "οἰκοδομή": ["building / building up", ["building", "building up", "edification"]], "οἰκοδομέω": ["build / build up", ["build", "build up", "edify"]], "κατοικέω": ["dwell / settle down", ["dwell", "make home", "settle down"]], "ἅγιος": ["holy / saint", ["holy", "saint", "holy one"]], "ἄνθρωπος": ["human being / person", ["person", "human being", "man"]], "ἀδελφός": ["brother / fellow believer", ["brother", "fellow believer", "brother or sister"]], "καρδία": ["heart / inner person", ["heart", "inner person", "center of being"]], "δύναμις": ["power / ability", ["power", "ability", "effective power"]], "εὐσέβεια": ["godliness / piety", ["godliness", "piety", "devotion"]], "ἁμαρτία": ["sin", ["sin", "sinfulness"]], "θάνατος": ["death", ["death"]], "αἰώνιος": ["eternal / everlasting", ["eternal", "everlasting", "age-abiding"]], "βασιλεύω": ["reign / rule", ["reign", "rule", "exercise kingship"]], "λαμβάνω": ["receive / take", ["receive", "take", "obtain"]], "γινώσκω": ["know / recognize", ["know", "recognize", "understand"]], "ἔχω": ["have / hold", ["have", "hold", "possess"]], "λέγω": ["say / speak", ["say", "speak", "tell", "declare"]], "ποιέω": ["do / make", ["do", "make", "practice"]], "δίδωμι": ["give / grant", ["give", "grant", "bestow"]], "ἀκούω": ["hear / listen", ["hear", "listen", "heed"]], "βλέπω": ["see / perceive", ["see", "perceive", "look"]], "μένω": ["remain / abide", ["remain", "abide", "stay"]], "ἀρνέομαι": ["deny / disown", ["deny", "disown", "reject"]], "ἐργάζομαι": ["work / labor", ["work", "labor", "practice"]], "καταρτίζω": ["equip / perfect", ["equip", "perfect", "prepare", "restore"]], "κοινωνία": ["fellowship / sharing", ["fellowship", "sharing", "participation"]], "δόξα": ["glory", ["glory", "honor", "splendor"]], "ἀλήθεια": ["truth", ["truth", "reality"]], "εἰρήνη": ["peace", ["peace", "well-being"]], "παράκλησις": ["encouragement / comfort", ["encouragement", "comfort", "exhortation"]], "κληρονομία": ["inheritance", ["inheritance", "possession"]], "ἀνάστασις": ["resurrection", ["resurrection", "rising"]], "παρουσία": ["coming / presence", ["coming", "presence", "arrival"]], "κρίμα": ["judgment / verdict", ["judgment", "verdict", "sentence"]]};
+const VERBS=new Set(["βασιλεύσῃ", "βλεπομένων", "εἰμι", "εἶ", "εὐλαβηθεὶς", "κατεσκεύασεν", "κατοικῆσαι", "λέγω", "οἰκοδομήσω", "χρηματισθεὶς", "ἐβασίλευσεν", "ἐγενήθη", "ἐποικοδομεῖ"]);
+const NOUNS=new Set(["Νῶε", "Πέτρος", "Πίστει", "Χριστοῦ", "Χριστὸν", "διακονίας", "δικαιοσύνης", "ζωὴν", "θανάτῳ", "θεμέλιον", "θεοῦ", "καλάμην", "καρδίαις", "καταρτισμὸν", "κιβωτὸν", "κυρίου", "λίθους", "ξύλα", "οἰκοδομὴν", "οἴκου", "πέτρᾳ", "πίστεως", "πνεύματος", "σωτηρίαν", "σώματος", "χάρις", "χάριτι", "χρυσόν", "χόρτον", "ἀδελφοί", "ἁγίων", "ἁμαρτία", "ἄργυρον", "ἐκκλησίαν", "ἔργον", "Ἰησοῦ"]);
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById(b.dataset.tab).classList.add('active')});
+document.addEventListener('click',e=>{const r=e.target.closest('.ref');if(r){e.preventDefault();openVerse(r.dataset.ref);}});
+
+function cleanGreekToken(t){return t.replace(/[⸀⸂⸃·,.;·—“”()?!·]/g,'').trim();}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+
+function romanKoine(w){
+  let s=cleanGreekToken(w).normalize("NFD").toLowerCase();
+  const rough=/[\u0314]/.test(s);
+  s=s.replace(/[\u0300-\u036f]/g,"");
+  const map={"α":"a","β":"b","γ":"g","δ":"d","ε":"e","ζ":"z","η":"ē","θ":"th","ι":"i","κ":"k","λ":"l","μ":"m","ν":"n","ξ":"x","ο":"o","π":"p","ρ":"r","σ":"s","ς":"s","τ":"t","υ":"y","φ":"ph","χ":"ch","ψ":"ps","ω":"ō"};
+  let out="";
+  for(const ch of s) out+=map[ch]??ch;
+  if(rough && /^[aeēioōy]/.test(out)) out="h"+out;
+  return out;
+}
+
+function greekMarkup(g){
+  return g.split(/(\s+)/).map(t=>{
+    if(/^\s+$/.test(t)) return "";
+    const c=cleanGreekToken(t);
+    if(!c) return "";
+    const x=LEX[c];
+    const lemma=x?x[0]:c;
+    const pos=x?x[1]:"word";
+    const cls=pos==="verb"?"verb":(pos==="noun"||pos==="proper noun")?"noun":"";
+    return `<span class="gpair" data-lemma="${esc(lemma)}"><button type="button" class="gword ${cls}" data-word="${esc(c)}" data-lemma="${esc(lemma)}" data-pos="${esc(pos)}">${esc(t)}</button><span class="roman">${esc(romanKoine(c))}</span></span>`;
+  }).join("");
+}
+
+function parseNTRef(ref){
+  const books=Object.keys(NT_BOOKS).sort((a,b)=>b.length-a.length);
+  const book=books.find(b=>ref.startsWith(b+' '));
+  if(!book) return null;
+  const rest=ref.slice(book.length).trim().replace(/[ab]$/,'');
+  const m=rest.match(/^(\d+):(\d+)(?:-(\d+))?$/);
+  if(!m) return null;
+  return {book,chapter:+m[1],v1:+m[2],v2:+(m[3]||m[2]),...NT_BOOKS[book]};
+}
+
+function posName(code){
+  const x=(code||'').slice(0,2);
+  return {'V-':'verb','N-':'noun','A-':'adjective','D-':'adverb','P-':'preposition','C-':'conjunction',
+    'RA':'article','RD':'demonstrative pronoun','RI':'interrogative/indefinite pronoun',
+    'RP':'personal pronoun','RR':'relative pronoun','I-':'interjection','X-':'particle'}[x]||'word';
+}
+
+async function fetchTextWithTimeout(url,ms=6500){
+  const ctl=new AbortController();
+  const timer=setTimeout(()=>ctl.abort(),ms);
+  try{
+    const resp=await fetch(url,{cache:'force-cache',signal:ctl.signal});
+    if(!resp.ok)throw new Error('HTTP '+resp.status);
+    return await resp.text();
+  }finally{clearTimeout(timer);}
+}
+
+async function fetchFirstText(urls,ms=6500){
+  let lastErr=null;
+  for(const url of urls){
+    try{return {text:await fetchTextWithTimeout(url,ms),url};}
+    catch(err){lastErr=err;}
+  }
+  throw lastErr||new Error('Source unavailable');
+}
+
+async function loadRemoteGreek(ref){
+  const r=parseNTRef(ref);
+  if(!r) return false;
+  const box=document.getElementById('mgreek');
+  box.innerHTML='<div class="loadingGreek">Loading Greek text and morphology…</div>';
+  const urls=[
+    'https://cdn.jsdelivr.net/gh/morphgnt/sblgnt@master/'+r.file,
+    'https://raw.githubusercontent.com/morphgnt/sblgnt/master/'+r.file
+  ];
+  try{
+    const got=await fetchFirstText(urls,6500);
+    const text=got.text;
+    const rows=[];
+    for(const line of text.split(/\r?\n/)){
+      if(!line.trim()) continue;
+      const cols=line.trim().split(/\s+/);
+      if(cols.length<7) continue;
+      const code=cols[0];
+      const chapter=+code.slice(2,4), verse=+code.slice(4,6);
+      if(code.slice(0,2)!==r.code || chapter!==r.chapter || verse<r.v1 || verse>r.v2) continue;
+      rows.push({code,pos:cols[1],parse:cols[2],text:cols[3],word:cols[4],norm:cols[5],lemma:cols.slice(6).join(' ')});
+    }
+    if(!rows.length) throw new Error('Verse not found in MorphGNT');
+    let h='';
+    const byVerse={};
+    for(const row of rows){const verse=+row.code.slice(4,6);(byVerse[verse]??=[]).push(row);}
+    for(const [verseKey,vrows] of Object.entries(byVerse)){
+      const verse=Number(verseKey); let group=[];
+      const flushPhrase=()=>{
+        if(!group.length)return;
+        const words=group.map(row=>{
+          const pname=posName(row.pos);
+          const cls=pname==='verb'?'verb':pname==='noun'?'noun':'';
+          const roman=romanKoine(row.word);
+          return `<span class="gpair" data-v="${verse}" data-lemma="${esc(row.lemma)}"><button type="button" class="gword ${cls}" data-v="${verse}" data-word="${esc(row.word)}" data-norm="${esc(row.norm)}" data-lemma="${esc(row.lemma)}" data-pos="${esc(pname)}" data-parse="${esc(row.parse)}">${esc(row.text)}</button><span class="roman">${esc(roman)}</span></span>`;
+        }).join(' ');
+        h+=`<div class="gphrase" data-v="${verse}"><div class="greekline"><span class="verseTag">${verse}</span>${words}</div></div>`;
+        group=[];
+      };
+      for(const row of vrows){group.push(row);if(/[·,;·.?!]$/.test(row.text)||group.length>=7)flushPhrase();}
+      flushPhrase();
+    }
+    box.innerHTML=h+`<div class="sourceLine">SBLGNT Greek text · MorphGNT morphology/lemma · pronunciation is matched directly under each Greek word.</div>`;
+    return true;
+  }catch(err){
+    box.innerHTML=`<div class="loadingGreek">Greek text did not load. The request now stops instead of hanging.<br><small>${esc(err.name==='AbortError'?'Connection timed out':err.message)}</small><br><button class="retryOriginal" type="button" data-retry-ref="${esc(ref)}">↻ Retry original text</button></div>`;
+    return false;
+  }
+}
+
+let currentGreekRef='';
+
+function clearGreekMatches(){
+  document.querySelectorAll('#mgreek .gpair.gmatch,#mgreek .gphrase.gmatch,#mgreek .hpair.gmatch,#mgreek .gword.gmatch').forEach(x=>x.classList.remove('gmatch'));
+}
+
+
+/* 1 John-style English lexical dictionary.
+   Strong's data loads from the same public sources used by the Johannine app.
+   LOCAL_GLOSS_EXTRA keeps a useful English meaning visible immediately. */
+const STRONG_LEXEMES_URL='https://raw.githubusercontent.com/jtauber/greek-lemma-mappings/master/lexemes.yaml';
+const STRONG_XML_URL='https://raw.githubusercontent.com/morphgnt/strongs-dictionary-xml/master/strongsgreek.xml';
+let strongLexemesText=null,strongXmlDoc=null,strongLexicalLoading=null;
+
+const LOCAL_GLOSS_EXTRA={
+  "γίνομαι":["become / come to be / happen",["become","come to be","happen","take place"]],
+  "χρηματίζω":["be divinely instructed / warned",["be warned","be divinely instructed","receive a divine warning"]],
+  "Νῶε":["Noah",["Noah"]],
+  "περί":["concerning / about",["concerning","about","regarding"]],
+  "μηδέπω":["not yet",["not yet"]],
+  "εὐλαβέομαι":["be moved by reverent fear",["reverence","be moved by godly fear","act with cautious reverence"]],
+  "κατασκευάζω":["prepare / construct",["prepare","construct","build"]],
+  "κιβωτός":["ark / large vessel",["ark","vessel"]],
+  "εἰς":["into / to / for",["into","to","for","unto"]],
+  "οἶκος":["house / household",["house","household","family"]],
+  "διά":["through / by means of",["through","by","by means of"]],
+  "ὅς":["who / which / that",["who","which","that"]],
+  "κατακρίνω":["condemn / judge against",["condemn","judge against"]],
+  "κόσμος":["world / ordered world",["world","world order"]],
+  "κατά":["according to / in accordance with",["according to","in accordance with","by"]],
+  "κληρονόμος":["heir / inheritor",["heir","inheritor"]],
+  "ὁ":["the / definite article",["the"]],
+  "καί":["and / also / even",["and","also","even"]],
+  "δέ":["but / and / now",["but","and","now"]],
+  "γάρ":["for / because",["for","because"]],
+  "ἐν":["in / within / among",["in","within","among"]],
+  "ἐκ":["out of / from",["out of","from"]],
+  "πρός":["to / toward / with",["to","toward","with"]],
+  "ἀπό":["from / away from",["from","away from"]],
+  "μετά":["with / after",["with","after"]],
+  "ἐπί":["on / upon / over",["on","upon","over"]],
+  "ὑπό":["under / by",["under","by"]],
+  "αὐτός":["he / him / self / same",["he","him","self","same"]],
+  "οὗτος":["this / this one",["this","this one"]],
+  "ἐκεῖνος":["that / that one",["that","that one"]],
+  "πᾶς":["all / every",["all","every","each"]],
+  "μή":["not",["not"]],
+  "οὐ":["not / no",["not","no"]],
+  "εἰμί":["be / am / is",["be","am","is","exist"]]
+};
+
+async function ensureStrongLexicalData(){
+  if(strongLexemesText && strongXmlDoc)return;
+  if(strongLexicalLoading)return strongLexicalLoading;
+  strongLexicalLoading=Promise.all([
+    fetch(STRONG_LEXEMES_URL,{cache:'force-cache'}).then(r=>{if(!r.ok)throw new Error('lemma map');return r.text();}),
+    fetch(STRONG_XML_URL,{cache:'force-cache'}).then(r=>{if(!r.ok)throw new Error('Strong dictionary');return r.text();})
+  ]).then(([y,x])=>{
+    strongLexemesText=y;
+    strongXmlDoc=new DOMParser().parseFromString(x,'application/xml');
+  }).finally(()=>{strongLexicalLoading=null});
+  return strongLexicalLoading;
+}
+
+function strongLexKey(s){
+  return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[()]/g,'');
+}
+
+function strongForLemma(lemma){
+  if(strongLexemesText){
+    const escaped=String(lemma||'').replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    const re=new RegExp('(?:^|\\n)'+escaped+':\\s*\\n([\\s\\S]*?)(?=\\n\\S[^\\n]*:\\s*\\n|$)');
+    const m=strongLexemesText.match(re);
+    if(m){
+      const s=m[1].match(/\\n?\\s*strongs:\\s*["']?G?(\\d+)/i);
+      if(s)return String(Number(s[1]));
+    }
+  }
+  if(strongXmlDoc){
+    const key=strongLexKey(lemma);
+    for(const entry of strongXmlDoc.getElementsByTagName('entry')){
+      const gr=entry.getElementsByTagName('greek')[0];
+      if(gr && strongLexKey(gr.getAttribute('unicode'))===key){
+        const a=entry.getAttribute('strongs');
+        if(a)return String(Number(a));
+      }
+    }
+  }
+  return null;
+}
+
+function strongEnglishMeaning(num){
+  if(!strongXmlDoc||!num)return null;
+  const entry=[...strongXmlDoc.getElementsByTagName('entry')].find(el=>Number(el.getAttribute('strongs'))===Number(num));
+  if(!entry)return null;
+  const def=entry.getElementsByTagName('strongs_def')[0]?.textContent?.replace(/\s+/g,' ').trim()||'';
+  const kjv=entry.getElementsByTagName('kjv_def')[0]?.textContent?.replace(/\s+/g,' ').trim()||'';
+  return {def,kjv};
+}
+
+function localEnglishGloss(lemma){
+  const direct=LOCAL_GLOSS_EXTRA[lemma]||GLOSS[lemma];
+  if(direct)return {meaning:direct[0],renders:direct[1]||[]};
+
+  // Reverse the Week 3 semantic table as an offline fallback.
+  const lk=strongLexKey(lemma);
+  const words=[];
+  if(typeof EN_LEMMA_CANDIDATES!=='undefined'){
+    for(const [en,lemmas] of Object.entries(EN_LEMMA_CANDIDATES)){
+      if(lemmas.some(x=>strongLexKey(x)===lk))words.push(en);
+      if(words.length>=6)break;
+    }
+  }
+  if(words.length)return {meaning:words.join(' / '),renders:words};
+  return {meaning:'English definition loading…',renders:[]};
+}
+
+async function fillPopupStrongMeaning(lemma){
+  const strongEl=document.getElementById('wordDictStrong');
+  const defEl=document.getElementById('wordDictEnglishDef');
+  if(!strongEl||!defEl)return;
+  try{
+    await ensureStrongLexicalData();
+    const n=strongForLemma(lemma);
+    strongEl.textContent=n?'G'+n:'—';
+    const e=strongEnglishMeaning(n);
+    if(e && (e.def||e.kjv)){
+      defEl.textContent=e.def || e.kjv;
+    }else if(defEl.textContent==='Loading…'){
+      defEl.textContent='No additional Strong’s definition was found.';
+    }
+  }catch(err){
+    strongEl.textContent='—';
+    if(defEl.textContent==='Loading…')defEl.textContent='Dictionary could not be loaded; the local English meaning above remains available.';
+  }
+}
+
+function greekInfoFromElement(w){
+  const surface=w.dataset.word||cleanGreekToken(w.textContent);
+  const local=LEX[surface]||LEX[w.dataset.norm];
+  const lemma=w.dataset.lemma||(local?local[0]:surface);
+  const fallback=localEnglishGloss(lemma);
+  const pos=w.dataset.pos||(local?local[1]:'word');
+  const localMeaning=w.dataset.localmeaning||'';
+  const meaning=localMeaning || (local?local[2]:fallback.meaning);
+  const renders=localMeaning?[localMeaning]:(local?local[3]:fallback.renders);
+  return {surface,lemma,pos,meaning,renders,parse:w.dataset.parse||''};
+}
+
+function showGreekWordPopup(w){
+  if(!w) return;
+  const info=greekInfoFromElement(w);
+  document.getElementById('wordDictBody').innerHTML=`<div class="wordDictGreek">${esc(info.surface)}</div>
+    <div class="wordDictRoman">${esc(romanKoine(info.surface))}</div>
+    <div class="wordDictRow" style="font-size:1.08rem"><b>English:</b> ${esc(info.meaning)}</div>
+    <div class="wordDictRow"><b>Lemma:</b> ${esc(info.lemma)}</div>
+    <div class="wordDictRow"><b>Part of speech:</b> ${esc(info.pos)}</div>
+    ${info.parse?`<div class="wordDictRow"><b>Morphology:</b> ${esc(info.parse)}</div>`:''}
+    <div class="wordDictRow"><b>Possible English renderings:</b> ${info.renders.length?info.renders.map(esc).join(' · '):esc(info.meaning)}</div>
+    <div class="wordDictRow"><b>Strong’s:</b> <span id="wordDictStrong">Loading…</span></div>
+    <div class="wordDictRow"><b>Dictionary definition:</b><br><span id="wordDictEnglishDef">Loading…</span></div>`;
+  const d=document.getElementById('wordDict');
+  d.classList.add('show');
+  d.setAttribute('aria-hidden','false');
+  fillPopupStrongMeaning(info.lemma);
+}
+
+function closeGreekWordPopup(){
+  const d=document.getElementById('wordDict');
+  d.classList.remove('show');
+  d.setAttribute('aria-hidden','true');
+}
+
+
+function normEnglishWord(s){
+  return String(s||'').toLowerCase().replace(/[’]/g,"'").replace(/[^a-z0-9']/g,'');
+}
+function greekLemmaKey(s){
+  return String(s||'').normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[()]/g,'');
+}
+
+/* Week 3 lexical anchors.
+   These are used only to find the correct LOCAL Greek phrase.
+   When a phrase has no lexical anchor, the ordered local fallback below is used. */
+
+
+const OT_PHRASES={"Dan. 1:3-4": [{"v": 3, "g": "καὶ εἶπεν ὁ βασιλεὺς τῷ Ασϕανεζ τῷ ἀρχιευνούχῳ αὐτοῦ", "r": "kai eipen ho basileus tō Asphanez tō archieunouchō autou"}, {"v": 3, "g": "εἰσαγαγεῖν ἀπὸ τῶν υἱῶν τῆς αἰχμαλωσίας Ισραηλ", "r": "eisagagein apo tōn huiōn tēs aichmalōsias Israēl"}, {"v": 4, "g": "νεανίσκους οἷς οὐκ ἔστιν ἐν αὐτοῖς μῶμος καὶ καλοὺς τῇ ὄψει", "r": "neaniskous hois ouk estin en autois mōmos kai kalous tē opsei"}, {"v": 4, "g": "καὶ συνιέντας ἐν πάσῃ σοϕίᾳ καὶ γιγνώσκοντας γνῶσιν καὶ διανοουμένους ϕρόνησιν", "r": "kai synientas en pasē sophia kai gignōskontas gnōsin kai dianooumenous phronēsin"}, {"v": 4, "g": "καὶ οἷς ἐστιν ἰσχὺς ἐν αὐτοῖς ἑστάναι ἐν τῷ οἴκῳ τοῦ βασιλέως", "r": "kai hois estin ischys en autois hestanai en tō oikō tou basileōs"}], "Dan. 1:7": [{"v": 7, "g": "καὶ ἐπέθηκεν αὐτοῖς ὁ ἀρχιευνοῦχος ὀνόματα", "r": "kai epethēken autois ho archieunouchos onomata"}, {"v": 7, "g": "τῷ Δανιηλ Βαλτασαρ καὶ τῷ Ανανια Σεδραχ", "r": "tō Daniēl Baltasar kai tō Anania Sedrach"}, {"v": 7, "g": "καὶ τῷ Μισαηλ Μισαχ καὶ τῷ Αζαρια Αβδεναγω", "r": "kai tō Misaēl Misach kai tō Azaria Abdenagō"}], "Dan. 1:8": [{"v": 8, "g": "καὶ ἔθετο Δανιηλ ἐπὶ τὴν καρδίαν αὐτοῦ", "r": "kai etheto Daniēl epi tēn kardian autou"}, {"v": 8, "g": "ὡς οὐ μὴ ἀλισγηθῇ ἐν τῇ τραπέζῃ τοῦ βασιλέως", "r": "hōs ou mē alisgēthē en tē trapezē tou basileōs"}, {"v": 8, "g": "καὶ ἐν τῷ οἴνῳ τοῦ πότου αὐτοῦ", "r": "kai en tō oinō tou potou autou"}, {"v": 8, "g": "καὶ ἠξίωσε τὸν ἀρχιευνοῦχον ὡς οὐ μὴ ἀλισγηθῇ", "r": "kai ēxiōse ton archieunouchon hōs ou mē alisgēthē"}], "Dan. 1:16": [{"v": 16, "g": "καὶ ἐγένετο Αμελσαδ ἀναιρούμενος τὸ δεῖπνον αὐτῶν", "r": "kai egeneto Amelsad anairoumenos to deipnon autōn"}, {"v": 16, "g": "καὶ τὸν οἶνον τοῦ πόματος αὐτῶν", "r": "kai ton oinon tou pomatos autōn"}, {"v": 16, "g": "καὶ ἐδίδου αὐτοῖς σπέρματα", "r": "kai edidou autois spermata"}], "Dan. 3:17-18": [{"v": 17, "g": "ἔστι γὰρ θεὸς ἐν οὐρανοῖς εἷς κύριος ἡμῶν ὃν ϕοβούμεθα", "r": "esti gar theos en ouranois heis kyrios hēmōn hon phoboumetha"}, {"v": 17, "g": "ὅς ἐστι δυνατὸς ἐξελέσθαι ἡμᾶς ἐκ τῆς καμίνου τοῦ πυρός", "r": "hos esti dynatos exelesthai hēmas ek tēs kaminou tou pyros"}, {"v": 17, "g": "καὶ ἐκ τῶν χειρῶν σου βασιλεῦ ἐξελεῖται ἡμᾶς", "r": "kai ek tōn cheirōn sou basileu exeleitai hēmas"}, {"v": 18, "g": "καὶ τότε ϕανερόν σοι ἔσται", "r": "kai tote phaneron soi estai"}, {"v": 18, "g": "ὅτι οὔτε τῷ εἰδώλῳ σου λατρεύομεν", "r": "hoti oute tō eidōlō sou latreuomen"}, {"v": 18, "g": "οὔτε τῇ εἰκόνι σου τῇ χρυσῇ ἣν ἔστησας προσκυνοῦμεν", "r": "oute tē eikoni sou tē chrysē hēn estēsas proskynoumen"}], "Dan. 3:23": [{"v": 23, "g": "τοὺς μὲν οὖν ἄνδρας τοὺς συμποδίσαντας τοὺς περὶ τὸν Αζαριαν", "r": "tous men oun andras tous sympodisantas tous peri ton Azarian"}, {"v": 23, "g": "ἐξελθοῦσα ἡ ϕλὸξ ἐκ τῆς καμίνου ἐνεπύρισε καὶ ἀπέκτεινεν", "r": "exelthousa hē phlox ek tēs kaminou enepyrise kai apekteinen"}, {"v": 23, "g": "αὐτοὶ δὲ συνετηρήθησαν", "r": "autoi de synetērēthēsan"}], "Dan. 5:22-23": [{"v": 22, "g": "καὶ σὺ ὁ υἱὸς αὐτοῦ Βαλτασαρ οὐκ ἐταπείνωσας τὴν καρδίαν σου", "r": "kai sy ho huios autou Baltasar ouk etapeinōsas tēn kardian sou"}, {"v": 22, "g": "κατενώπιον οὗ πάντα ταῦτα ἔγνως", "r": "katenōpion hou panta tauta egnōs"}, {"v": 23, "g": "καὶ ἐπὶ τὸν κύριον θεὸν τοῦ οὐρανοῦ ὑψώθης", "r": "kai epi ton kyrion theon tou ouranou hypsōthēs"}, {"v": 23, "g": "καὶ τὰ σκεύη τοῦ οἴκου αὐτοῦ ἤνεγκαν ἐνώπιόν σου", "r": "kai ta skeuē tou oikou autou ēnenkan enōpion sou"}, {"v": 23, "g": "καὶ τοὺς θεοὺς τοὺς χρυσοῦς καὶ ἀργυροῦς καὶ χαλκοῦς καὶ σιδηροῦς", "r": "kai tous theous tous chrysous kai argyrous kai chalkous kai sidērous"}, {"v": 23, "g": "οἳ οὐ βλέπουσιν καὶ οὐκ ἀκούουσιν καὶ οὐ γινώσκουσιν", "r": "hoi ou blepousin kai ouk akouousin kai ou ginōskousin"}, {"v": 23, "g": "καὶ τὸν θεόν οὗ ἡ πνοή σου ἐν χειρὶ αὐτοῦ καὶ πᾶσαι αἱ ὁδοί σου αὐτὸν οὐκ ἐδόξασας", "r": "kai ton theon hou hē pnoē sou en cheiri autou kai pasai hai hodoi sou auton ouk edoxasas"}], "Dan. 6:10-11": [{"v": 10, "g": "καὶ Δανιηλ ἡνίκα ἔγνω ὅτι ἐνετάγη τὸ δόγμα", "r": "kai Daniēl hēnika egnō hoti enetagē to dogma"}, {"v": 10, "g": "εἰσῆλθεν εἰς τὸν οἶκον αὐτοῦ", "r": "eisēlthen eis ton oikon autou"}, {"v": 10, "g": "καὶ αἱ θυρίδες ἀνεῳγμέναι αὐτῷ ἐν τοῖς ὑπερῴοις αὐτοῦ κατέναντι Ιερουσαλημ", "r": "kai hai thyrides aneōgmenai autō en tois hyperōois autou katenanti Ierousalēm"}, {"v": 10, "g": "καὶ καιροὺς τρεῖς τῆς ἡμέρας ἦν κάμπτων ἐπὶ τὰ γόνατα αὐτοῦ", "r": "kai kairous treis tēs hēmeras ēn kamptōn epi ta gonata autou"}, {"v": 10, "g": "καὶ προσευχόμενος καὶ ἐξομολογούμενος ἐναντίον τοῦ θεοῦ αὐτοῦ", "r": "kai proseuchomenos kai exomologoumenos enantion tou theou autou"}, {"v": 10, "g": "καθὼς ἦν ποιῶν ἔμπροσθεν", "r": "kathōs ēn poiōn emprosthen"}]};
+const OT_ALIGN={"Dan. 1:8": [["set his heart not to defile himself", [0, 1]], ["king’s choice provision", [1]], ["wine that the king drank", [2]], ["requested of the leader of the eunuchs", [3]]], "Dan. 1:16": [["withheld their portion of the choice provision", [0]], ["wine that they were to drink", [1]], ["gave them vegetables", [2]]], "Dan. 3:17-18": [["our God whom we serve", [0]], ["able to deliver us from the blazing furnace of fire", [1]], ["deliver us out of your hand", [2]], ["But if He does not", [3]], ["we will not serve your gods", [4]], ["nor worship the golden image", [5]]], "Dan. 5:22-23": [["have not humbled your heart", [0]], ["though you knew all this", [1]], ["exalted yourself against the Lord of the heavens", [2]], ["vessels of His house", [3]], ["gods of silver and of gold, of bronze, iron", [4]], ["do not see nor hear nor know", [5]], ["God in whose hand is your breath", [6]]], "Dan. 6:10-11": [["came to know that the writing had been signed", [0]], ["went to his house", [1]], ["windows open toward Jerusalem", [2]], ["three times daily he knelt on his knees", [3]], ["prayed and gave thanks before his God", [4]], ["because he had always done so previously", [5]]]};
+const OT_VERB_FORMS=new Set(["εἶπεν","εἰσαγαγεῖν","ἔστιν","συνιέντας","γιγνώσκοντας","διανοουμένους","ἑστάναι","διδάξαι","ἐπέθηκεν","ἔθετο","ἀλισγηθῇ","ἠξίωσε","ἐγένετο","ἀναιρούμενος","ἐδίδου","ϕοβούμεθα","ἐξελέσθαι","ἐξελεῖται","ἔσται","λατρεύομεν","ἔστησας","προσκυνοῦμεν","ἐξελθοῦσα","ἐνεπύρισε","ἀπέκτεινεν","συνετηρήθησαν","ἐταπείνωσας","ἔγνως","ὑψώθης","ἤνεγκαν","βλέπουσιν","ἀκούουσιν","γινώσκουσιν","ἐδόξασας","ἐνετάγη","εἰσῆλθεν","ἀνεῳγμέναι","κάμπτων","προσευχόμενος","ἐξομολογούμενος","ἦν","ποιῶν"]);
+const OT_NOUN_FORMS=new Set(["βασιλεὺς","υἱῶν","αἰχμαλωσίας","σπέρματος","βασιλείας","νεανίσκους","μῶμος","ὄψει","σοϕίᾳ","γνῶσιν","ϕρόνησιν","ἰσχὺς","οἴκῳ","βασιλέως","γράμματα","γλῶσσαν","ὀνόματα","Δανιηλ","Ανανια","Μισαηλ","Αζαρια","καρδίαν","τραπέζῃ","οἴνῳ","πότου","ἀρχιευνοῦχον","δεῖπνον","πόματος","σπέρματα","θεὸς","οὐρανοῖς","κύριος","καμίνου","πυρός","χειρῶν","εἰδώλῳ","εἰκόνι","ἄνδρας","ϕλὸξ","υἱὸς","σκεύη","οἴκου","θεοὺς","πνοή","ὁδοί","δόγμα","θυρίδες","ἡμέρας","γόνατα"]);
+const OT_GLOSS={
+"θεὸς":"God","θεοῦ":"God","θεοὺς":"gods","κύριος":"Lord","Δανιηλ":"Daniel","καρδίαν":"heart",
+"οἶκον":"house","οἴκου":"house","βασιλεὺς":"king","βασιλέως":"king","οὐρανοῖς":"heavens",
+"καμίνου":"furnace","πυρός":"fire","χειρῶν":"hands","εἰδώλῳ":"idol","εἰκόνι":"image",
+"λατρεύομεν":"we serve","προσκυνοῦμεν":"we worship","ἀλισγηθῇ":"be defiled","οἴνῳ":"wine",
+"προσευχόμενος":"praying","ἐξομολογούμενος":"giving thanks / confessing","γόνατα":"knees",
+"δόγμα":"decree","πνοή":"breath","βλέπουσιν":"they see","ἀκούουσιν":"they hear","γινώσκουσιν":"they know"
+};
+
+function renderOTPhraseGreek(ref){
+  const items=OT_PHRASES[ref];
+  if(!items)return false;
+  let h='';
+  items.forEach((p,idx)=>{
+    const toks=p.g.split(/\s+/).filter(Boolean);
+    const wordHtml=toks.map(tok=>{
+      const clean=cleanGreekToken(tok);
+      const cls=OT_VERB_FORMS.has(clean)?'verb':(OT_NOUN_FORMS.has(clean)?'noun':'');
+      const gloss=OT_GLOSS[clean]||'';
+      return `<span class="gpair" data-otphrase="${idx}"><button type="button" class="gword ${cls}" data-v="${p.v}" data-otphrase="${idx}" data-word="${esc(clean)}" data-lemma="${esc(clean)}" data-pos="${cls==='verb'?'verb':cls==='noun'?'noun':'word'}" data-localmeaning="${esc(gloss)}">${esc(tok)}</button></span>`;
+    }).join(' ');
+    h+=`<div class="gphrase" data-phrase="${idx}"><div class="greekline">${wordHtml}</div><div class="romanline">${esc(p.r)}</div></div>`;
+  });
+  h+=`<div class="sourceLine">Greek OT · Daniel Greek tradition (Theodotion where verified). English-style learner romanization is shown beneath each phrase.</div>`;
+  document.getElementById('mgreek').innerHTML=h;
+  return true;
+}
+
+function renderOTEnglishLinks(ref){
+  const box=document.getElementById('mrv');
+  const maps=OT_ALIGN[ref]||[];
+  if(!maps.length){box.textContent=RV[ref]||'';return;}
+  const src=RV[ref]||'';
+  const found=[];
+  maps.forEach(([phrase,idxs])=>{
+    const re=new RegExp(escRE(phrase),'ig'); let m;
+    while((m=re.exec(src))){found.push({start:m.index,end:m.index+m[0].length,txt:m[0],idxs});}
+  });
+  found.sort((a,b)=>a.start-b.start);
+  let out='',cursor=0,last=-1;
+  found.forEach(f=>{
+    if(f.start<last)return;
+    out+=esc(src.slice(cursor,f.start));
+    out+=`<span class="transword verified" data-otidx="${f.idxs.join(',')}">${esc(f.txt)}</span>`;
+    cursor=f.end;last=f.end;
+  });
+  out+=esc(src.slice(cursor));
+  box.innerHTML=out;
+}
+
+function highlightOTPhrase(el){
+  clearGreekMatches(); closeGreekWordPopup();
+  const ids=(el.dataset.otidx||'').split(',').map(Number).filter(Number.isFinite);
+  ids.forEach(i=>{
+    const ph=document.querySelector(`#mgreek .gphrase[data-phrase="${i}"]`);
+    if(ph){ph.classList.add('gmatch');ph.querySelectorAll('.gpair').forEach(x=>x.classList.add('gmatch'));}
+  });
+  document.querySelector('#mgreek .gphrase.gmatch')?.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ----------------------------------------------------------
+   1 JOHN STYLE — MEANING-AUDITED TRANSLATION → GREEK LINKING
+
+   The completed 1 John app uses verified phrase→lemma maps and
+   then selects the tightest local occurrence of those lemmas.
+   Week 3 now follows the same safety principle:
+
+   1) Explicitly checked key phrases use VERIFIED_ALIGN_EN.
+   2) Other phrases use exact English-word → possible Greek-lemma
+      candidates, but ONLY if one of those lemmas is actually in
+      the current Greek verse.
+   3) There is NO position-only fallback.  If semantic evidence
+      is absent, the phrase is left plain rather than highlighting
+      a guessed Greek location.
+---------------------------------------------------------- */
+
+const VERIFIED_ALIGN_EN={
+  "Heb. 11:7":[
+    ["By faith",["πίστις"]],
+    ["Noah",["Νῶε"]],
+    ["having been divinely instructed",["χρηματίζω"]],
+    ["concerning things not yet seen",["περί","μηδέπω","βλέπω"]],
+    ["being moved by pious fear",["εὐλαβέομαι"]],
+    ["prepared an ark",["κατασκευάζω","κιβωτός"]],
+    ["for the salvation of his house",["εἰς","σωτηρία","οἶκος"]],
+    ["through which he condemned the world",["διά","ὅς","κατακρίνω","κόσμος"]],
+    ["became heir of the righteousness",["δικαιοσύνη","γίνομαι","κληρονόμος"]],
+    ["according to faith",["κατά","πίστις"]]
+  ],
+  "2 Tim. 2:22":[
+    ["flee youthful lusts",["φεύγω","νεωτερικός","ἐπιθυμία"]],
+    ["pursue righteousness, faith, love, peace",["διώκω","δικαιοσύνη","πίστις","ἀγάπη","εἰρήνη"]],
+    ["those who call on the Lord",["ἐπικαλέω","κύριος"]],
+    ["out of a pure heart",["καθαρός","καρδία"]]
+  ],
+  "1 Cor. 15:10":[
+    ["by the grace of God",["χάρις","θεός"]],
+    ["I am what I am",["εἰμί"]],
+    ["His grace unto me did not turn out to be in vain",["χάρις","κενός","γίνομαι"]],
+    ["I labored more abundantly",["κοπιάω"]],
+    ["the grace of God which is with me",["χάρις","θεός"]]
+  ],
+  "Rom. 5:21":[
+    ["sin reigned in death",["ἁμαρτία","βασιλεύω","θάνατος"]],
+    ["grace might reign through righteousness",["χάρις","βασιλεύω","δικαιοσύνη"]],
+    ["unto eternal life",["ζωή","αἰώνιος"]],
+    ["through Jesus Christ our Lord",["Ἰησοῦς","Χριστός","κύριος"]]
+  ],
+  "Matt. 16:18":[
+    ["you are Peter",["Πέτρος"]],
+    ["upon this rock",["πέτρα"]],
+    ["I will build My church",["οἰκοδομέω","ἐκκλησία"]]
+  ],
+  "Eph. 4:12":[
+    ["perfecting of the saints",["καταρτισμός","ἅγιος"]],
+    ["work of the ministry",["ἔργον","διακονία"]],
+    ["building up of the Body of Christ",["οἰκοδομή","σῶμα","Χριστός"]]
+  ],
+  "Eph. 3:17":[
+    ["Christ may make His home",["Χριστός","κατοικέω"]],
+    ["in your hearts",["καρδία"]],
+    ["through faith",["πίστις"]],
+    ["rooted and grounded in love",["ῥιζόω","θεμελιόω","ἀγάπη"]]
+  ],
+  "1 Cor. 3:12":[
+    ["builds upon the foundation",["ἐποικοδομέω","θεμέλιος"]],
+    ["gold, silver, precious stones",["χρυσός","ἄργυρος","λίθος","τίμιος"]],
+    ["wood, grass, stubble",["ξύλον","χόρτος","καλάμη"]]
+  ],
+  "2 Tim. 3:1-5":[
+    ["last days",["ἔσχατος","ἡμέρα"]],
+    ["difficult times",["χαλεπός","καιρός"]],
+    ["lovers of self",["φίλαυτος"]],
+    ["lovers of money",["φιλάργυρος"]],
+    ["boasters",["ἀλαζών"]],
+    ["arrogant",["ὑπερήφανος"]],
+    ["revilers",["βλάσφημος"]],
+    ["disobedient to parents",["ἀπειθής","γονεύς"]],
+    ["unthankful",["ἀχάριστος"]],
+    ["unholy",["ἀνόσιος"]],
+    ["Without natural affection",["ἄστοργος"]],
+    ["implacable",["ἄσπονδος"]],
+    ["slanderers",["διάβολος"]],
+    ["without self-control",["ἀκρατής"]],
+    ["savage",["ἀνήμερος"]],
+    ["not lovers of good",["ἀφιλάγαθος"]],
+    ["Traitors",["προδότης"]],
+    ["reckless",["προπετής"]],
+    ["blinded with pride",["τυφόω"]],
+    ["lovers of pleasure",["φιλήδονος"]],
+    ["lovers of God",["φιλόθεος"]],
+    ["outward form of godliness",["μόρφωσις","εὐσέβεια"]],
+    ["denying its power",["ἀρνέομαι","δύναμις"]],
+    ["turn away",["ἀποτρέπω"]]
+  ]
+};
+
+/* Exact English forms only; no startsWith() guessing.
+   Each value is an ALTERNATIVE SET: the Greek verse itself decides
+   which lemma is actually present. */
+const EN_LEMMA_CANDIDATES={
+  "faith":["πίστις"],"faithfulness":["πίστις"],"believe":["πιστεύω"],"believed":["πιστεύω"],
+  "grace":["χάρις"],"favor":["χάρις"],"god":["θεός"],"lord":["κύριος"],
+  "jesus":["Ἰησοῦς"],"christ":["Χριστός"],"spirit":["πνεῦμα"],
+  "love":["ἀγάπη","ἀγαπάω","φιλέω"],"loved":["ἀγαπάω","φιλέω"],
+  "peace":["εἰρήνη"],"life":["ζωή"],"live":["ζάω"],"living":["ζάω","ζωή"],
+  "death":["θάνατος"],"die":["ἀποθνῄσκω"],"died":["ἀποθνῄσκω"],
+  "salvation":["σωτηρία"],"saves":["σώζω"],"saved":["σώζω"],
+  "righteousness":["δικαιοσύνη"],"righteous":["δίκαιος","δικαιοσύνη"],
+  "church":["ἐκκλησία"],"body":["σῶμα"],"word":["λόγος","ῥῆμα"],"words":["λόγος","ῥῆμα"],
+  "truth":["ἀλήθεια"],"reality":["ἀλήθεια"],"power":["δύναμις"],"heart":["καρδία"],"hearts":["καρδία"],
+  "saints":["ἅγιος"],"holy":["ἅγιος"],"work":["ἔργον","ἐργάζομαι"],"working":["ἐργάζομαι","συνεργέω"],
+  "labor":["κόπος","κοπιάω"],"labored":["κοπιάω"],"ministry":["διακονία"],"ministering":["διακονέω"],
+  "build":["οἰκοδομέω"],"builds":["οἰκοδομέω","ἐποικοδομέω"],"building":["οἰκοδομή","οἰκοδομέω"],
+  "built":["οἰκοδομέω"],"dwell":["κατοικέω","ἐνοικέω"],"dwelling":["κατοικητήριον","κατοικέω","ἐνοικέω"],
+  "fellowship":["κοινωνία"],"inheritance":["κληρονομία"],"heir":["κληρονόμος"],"heirs":["κληρονόμος","συγκληρονόμος"],
+  "resurrection":["ἀνάστασις"],"coming":["παρουσία","ἔρχομαι"],
+  "judgment":["κρίμα","κρίσις"],"condemned":["κατακρίνω"],"call":["ἐπικαλέω","καλέω"],"calling":["κλῆσις","καλέω"],
+  "walk":["περιπατέω"],"walked":["περιπατέω"],"flee":["φεύγω"],"pursue":["διώκω"],
+  "lust":["ἐπιθυμία"],"lusts":["ἐπιθυμία"],"pure":["καθαρός"],"noah":["Νῶε"],"ark":["κιβωτός"],
+  "house":["οἶκος"],"household":["οἶκος"],"world":["κόσμος"],"seen":["βλέπω","ὁράω"],"see":["βλέπω","ὁράω"],
+  "beheld":["θεάομαι"],"instructed":["χρηματίζω"],"fear":["εὐλαβέομαι","φόβος"],"prepared":["κατασκευάζω"],
+  "eternal":["αἰώνιος"],"sin":["ἁμαρτία"],"know":["γινώσκω","οἶδα"],"known":["γινώσκω","οἶδα"],
+  "have":["ἔχω"],"having":["ἔχω"],"say":["λέγω"],"said":["λέγω"],"give":["δίδωμι"],"given":["δίδωμι"],
+  "hear":["ἀκούω"],"heard":["ἀκούω"],"remain":["μένω"],"abide":["μένω"],"deny":["ἀρνέομαι"],"denying":["ἀρνέομαι"],
+  "receive":["λαμβάνω","δέχομαι"],"received":["λαμβάνω","δέχομαι"],
+
+  "expectation":["ἀποκαραδοκία"],"hope":["ἐλπίς"],"shame":["αἰσχύνομαι"],"boldness":["παρρησία"],
+  "always":["πάντοτε"],"magnified":["μεγαλύνω"],"gain":["κέρδος"],"distinction":["διαστολή"],
+  "jew":["Ἰουδαῖος"],"greek":["Ἕλλην"],"rich":["πλουτέω","πλούσιος"],
+  "translated":["μετατίθημι"],"translation":["μετάθεσις"],"found":["εὑρίσκω"],
+  "testimony":["μαρτυρέω","μαρτύριον"],"pleasing":["εὐαρεστέω","εὐάρεστος"],
+  "rewarder":["μισθαποδότης"],"seek":["ἐκζητέω","ζητέω"],"tabernacle":["σκήνος","σκηνόω","ἐπισκηνόω"],
+  "tabernacled":["σκηνόω"],"groan":["στενάζω"],"burdened":["βαρέω"],"unclothed":["ἐκδύω"],
+  "clothed":["ἐπενδύω","ἐνδύω"],"mortal":["θνητός"],"swallowed":["καταπίνω"],"determined":["φιλοτιμέομαι"],
+  "constrains":["συνέχω"],"raised":["ἐγείρω"],"flesh":["σάρξ"],"entreat":["παρακαλέω"],
+  "day":["ἡμέρα"],"days":["ἡμέρα"],"flood":["κατακλυσμός"],"eating":["ἐσθίω"],"drinking":["πίνω"],
+  "marrying":["γαμέω"],"marriage":["γαμίζω","γάμος"],"entered":["εἰσέρχομαι"],"took":["αἴρω","λαμβάνω"],
+  "last":["ἔσχατος"],"difficult":["χαλεπός"],"times":["καιρός"],"men":["ἄνθρωπος"],
+  "lovers":["φίλαυτος","φιλάργυρος","φιλήδονος","φιλόθεος"],"self":["φίλαυτος"],"money":["φιλάργυρος"],
+  "boasters":["ἀλαζών"],"arrogant":["ὑπερήφανος"],"revilers":["βλάσφημος"],"disobedient":["ἀπειθής","ἀπειθέω"],
+  "parents":["γονεύς"],"unthankful":["ἀχάριστος"],"unholy":["ἀνόσιος"],"affection":["ἄστοργος"],
+  "implacable":["ἄσπονδος"],"slanderers":["διάβολος"],"control":["ἀκρατής"],"savage":["ἀνήμερος"],
+  "traitors":["προδότης"],"reckless":["προπετής"],"pride":["τυφόω"],"pleasure":["φιλήδονος"],
+  "godliness":["εὐσέβεια"],"form":["μόρφωσις"],"glory":["δόξα"],"begotten":["μονογενής"],
+  "father":["πατήρ"],"full":["πλήρης"],"fullness":["πλήρωμα"],"law":["νόμος"],"moses":["Μωϋσῆς"],
+  "came":["γίνομαι","ἔρχομαι"],"became":["γίνομαι"],"become":["γίνομαι"],"eaten":["ἀριστάω","ἐσθίω"],"breakfast":["ἀριστάω"],"son":["υἱός"],"john":["Ἰωάννης"],
+  "feed":["βόσκω"],"lambs":["ἀρνίον"],"shepherd":["ποιμαίνω"],"sheep":["πρόβατον"],"grieved":["λυπέω"],
+  "think":["δοκέω"],"worthy":["ἀξιόω"],"worse":["χείρων"],"punishment":["τιμωρία"],"trampled":["καταπατέω"],
+  "blood":["αἷμα"],"covenant":["διαθήκη"],"sanctified":["ἁγιάζω"],"common":["κοινός"],"insulted":["ἐνυβρίζω"],
+  "richly":["πλουσίως"],"wisdom":["σοφία"],"teaching":["διδάσκω"],"admonishing":["νουθετέω"],
+  "psalms":["ψαλμός"],"hymns":["ὕμνος"],"songs":["ᾠδή"],"singing":["ᾄδω"],
+  "husbands":["ἀνήρ"],"weaker":["ἀσθενής"],"female":["γυναικεῖος"],"vessel":["σκεῦος"],
+  "honor":["τιμή"],"prayers":["προσευχή"],"hindered":["ἐγκόπτω"],"apostles":["ἀπόστολος"],
+  "great":["μέγας"],"arrived":["παραγίνομαι"],"rejoiced":["χαίρω"],"encouraged":["παρακαλέω"],"purpose":["πρόθεσις"],
+  "sufficient":["ἀρκέω"],"perfected":["τελέω"],"weakness":["ἀσθένεια"],"gladly":["ἥδιστα"],"boast":["καυχάομαι"],
+  "vain":["κενός"],"abundantly":["περισσότερος","περισσεύω"],"steadfast":["ἑδραῖος"],"immovable":["ἀμετακίνητος"],
+  "abounding":["περισσεύω"],"foundation":["θεμέλιος"],"gold":["χρυσός"],"silver":["ἄργυρος"],
+  "precious":["τίμιος"],"stones":["λίθος"],"wood":["ξύλον"],"grass":["χόρτος"],"stubble":["καλάμη"],
+  "gift":["χάρισμα","δωρεά"],"stewards":["οἰκονόμος"],"varied":["ποικίλος"],"stewardship":["οἰκονομία"],
+  "confidence":["πεποίθησις"],"intended":["βούλομαι"],"previously":["πρότερος"],"corrupt":["σαπρός"],
+  "proceed":["ἐκπορεύομαι"],"need":["χρεία"],"offense":["παράπτωμα"],"abundance":["περισσεία"],
+  "new":["καινός"],"man":["ἄνθρωπος"],"gates":["πύλη"],"hades":["ᾅδης"],"prevail":["κατισχύω"],
+  "formerly":["ποτέ"],"long-suffering":["μακροθυμία"],"waited":["ἀπεκδέχομαι"],"few":["ὀλίγος"],
+  "eight":["ὀκτώ"],"souls":["ψυχή"],"safely":["διασώζω"],"water":["ὕδωρ"],"antitype":["ἀντίτυπος"],
+  "baptism":["βάπτισμα"],"putting":["ἀπόθεσις"],"filth":["ῥύπος"],"appeal":["ἐπερώτημα"],"conscience":["συνείδησις"],
+  "members":["μέλος"],"many":["πολύς"],"abolishing":["καταργέω"],"commandments":["ἐντολή"],
+  "ordinances":["δόγμα"],"create":["κτίζω"],"two":["δύο"],"reconcile":["ἀποκαταλλάσσω"],"cross":["σταυρός"],
+  "image":["εἰκών"],"created":["κτίζω"],"circumcision":["περιτομή"],"uncircumcision":["ἀκροβυστία"],
+  "barbarian":["βάρβαρος"],"scythian":["Σκύθης"],"slave":["δοῦλος"],"free":["ἐλεύθερος"],
+  "jerusalem":["Ἰερουσαλήμ"],"bride":["νύμφη"],"adorned":["κοσμέω"],"husband":["ἀνήρ"],
+  "workers":["συνεργός"],"cultivated":["γεώργιον"],"land":["γεώργιον"],"builder":["ἀρχιτέκτων"],
+  "laid":["τίθημι"],"heed":["βλέπω"],"pillar":["στῦλος"],"base":["ἑδραίωμα"],"mystery":["μυστήριον"],
+  "manifested":["φανερόω"],"justified":["δικαιόω"],"angels":["ἄγγελος"],"preached":["κηρύσσω"],
+  "nations":["ἔθνος"],"fitted":["συναρμολογέω"],"temple":["ναός"],"communion":["κοινωνία"],
+  "wise":["σοφός"],"forever":["αἰών"],"happened":["γίνομαι"],"destroyed":["ἀπόλλυμι"],
+  "brothers":["ἀδελφός"],"brother":["ἀδελφός"],"rock":["πέτρα"],"peter":["Πέτρος"],
+  "equipping":["καταρτισμός"],"perfecting":["καταρτισμός"],"amen":["ἀμήν"],
+  "delay":["βραδύνω"],"home":["ἐνδημέω"],"abroad":["ἐκδημέω"],"contrary":["ἀλλά"],
+  "fitted":["συναρμολογέω"]
+};
+
+function normEnglishWord(s){
+  return String(s||'')
+    .replace(/ﬁ/g,'fi').replace(/ﬂ/g,'fl')
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/[’]/g,"'")
+    .replace(/[^a-z0-9']/g,'');
+}
+function greekLemmaKey(s){
+  return String(s||'').normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[()]/g,'');
+}
+function greekWordsForVerse(v){
+  let gs=[...document.querySelectorAll(`#mgreek .gword[data-v="${v}"]`)];
+  if(!gs.length)gs=[...document.querySelectorAll('#mgreek .gword')];
+  return gs;
+}
+function tokenGreekKey(g){
+  return greekLemmaKey(g.dataset.lemma||g.dataset.norm||g.textContent||'');
+}
+
+function candidateGroupsForEnglishPhrase(text){
+  const words=String(text||'')
+    .replace(/ﬁ/g,'fi').replace(/ﬂ/g,'fl')
+    .match(/[A-Za-z’'-]+/g)||[];
+  const groups=[];
+  const seen=new Set();
+  for(const raw of words){
+    const w=normEnglishWord(raw);
+    const cands=EN_LEMMA_CANDIDATES[w];
+    if(!cands?.length)continue;
+    const kk=[...new Set(cands.map(greekLemmaKey))];
+    const sig=kk.join('|');
+    if(!seen.has(sig)){seen.add(sig);groups.push(kk);}
+  }
+  return groups;
+}
+
+function splitEnglishMeaningUnits(text){
+  const toks=String(text||'')
+    .replace(/ﬁ/g,'fi').replace(/ﬂ/g,'fl')
+    .trim().split(/\s+/).filter(Boolean);
+  if(!toks.length)return [];
+  const starters=new Set(["and","but","because","although","though","while","when","if","so","that","which","who","whom","whose","until"]);
+  const units=[];let cur=[];
+  const push=()=>{if(cur.length){units.push(cur.join(' '));cur=[];}};
+
+  for(const tok of toks){
+    const bare=normEnglishWord(tok);
+    if(cur.length>=5&&starters.has(bare))push();
+    cur.push(tok);
+    if(/[,:;.!?]$/.test(tok)||cur.length>=10)push();
+  }
+  push();
+
+  // Merge tiny fragments instead of treating prepositions/pronouns as fake phrases.
+  for(let i=0;i<units.length;i++){
+    const n=(units[i].replace(/ﬁ/g,'fi').match(/[A-Za-z]+/g)||[]).length;
+    if(n<=2&&units.length>1){
+      if(i>0){units[i-1]+=' '+units[i];units.splice(i,1);i--;}
+      else{units[1]=units[0]+' '+units[1];units.splice(0,1);i--;}
+    }
+  }
+  return units;
+}
+
+function splitRvIntoVerses(ref,text){
+  const parsed=parseNTRef(ref);
+  if(!parsed)return [{v:0,text:String(text||'')}];
+  const raw=String(text||'').replace(/\s+/g,' ').trim();
+  if(parsed.v1===parsed.v2)return [{v:parsed.v1,text:raw}];
+
+  // Handles both "17 For..." and PDF-extracted "17For..."
+  const markers=[];
+  const re=/(?<!\d)(\d+)\s*(?=[A-Z“"'(\[])/g;
+  let m;
+  while((m=re.exec(raw))){
+    const v=Number(m[1]);
+    if(v>parsed.v1&&v<=parsed.v2)markers.push({v,start:m.index,end:re.lastIndex});
+  }
+  const out=[];let v=parsed.v1,pos=0;
+  for(const x of markers){
+    const chunk=raw.slice(pos,x.start).trim();
+    if(chunk)out.push({v,text:chunk});
+    v=x.v;pos=x.end;
+  }
+  const tail=raw.slice(pos).trim();
+  if(tail)out.push({v,text:tail});
+  return out.length?out:[{v:parsed.v1,text:raw}];
+}
+
+/* 1 John-style exact local picker for an explicit lemma list. */
+function pickLocalGreekPhrase(gs,wanted,expectedCenter=0){
+  if(!gs.length||!wanted.length)return [];
+  const keys=gs.map(tokenGreekKey);
+  const wk=wanted.map(greekLemmaKey);
+
+  let best=null;
+  for(let i=0;i<gs.length;i++){
+    if(keys[i]!==wk[0])continue;
+    let pos=i,picked=[i],ok=true;
+    for(let j=1;j<wk.length;j++){
+      let found=-1;
+      for(let k=pos+1;k<Math.min(gs.length,pos+8);k++){
+        if(keys[k]===wk[j]){found=k;break;}
+      }
+      if(found<0){ok=false;break;}
+      picked.push(found);pos=found;
+    }
+    if(ok){
+      const width=picked[picked.length-1]-picked[0];
+      const center=(picked[0]+picked[picked.length-1])/2;
+      const score=width*2+Math.abs(center-expectedCenter);
+      if(!best||score<best.score)best={picked,score};
+    }
+  }
+  if(best)return best.picked.map(i=>gs[i]);
+
+  // Rarest-lemma local fallback — still semantic, never position-only.
+  const positions={};
+  wk.forEach(k=>{
+    positions[k]=[];
+    keys.forEach((x,i)=>{if(x===k)positions[k].push(i);});
+  });
+  const available=wk.filter(k=>positions[k]?.length);
+  if(!available.length)return [];
+
+  const anchorKey=available.slice().sort((a,b)=>positions[a].length-positions[b].length)[0];
+  let bestSet=null,bestScore=Infinity;
+  for(const anchor of positions[anchorKey]){
+    const chosen=[anchor];let score=Math.abs(anchor-expectedCenter);
+    for(const k of available){
+      if(k===anchorKey)continue;
+      let nearest=positions[k][0],dist=Math.abs(positions[k][0]-anchor);
+      for(const p of positions[k]){
+        const d=Math.abs(p-anchor);
+        if(d<dist){dist=d;nearest=p;}
+      }
+      chosen.push(nearest);score+=dist;
+    }
+    const uniq=[...new Set(chosen)].sort((a,b)=>a-b);
+    const width=uniq.length?uniq[uniq.length-1]-uniq[0]:999;
+    score+=width*2;
+    if(score<bestScore){bestScore=score;bestSet=uniq;}
+  }
+  return (bestSet||[]).map(i=>gs[i]);
+}
+
+/* For general Week 3 references, each English semantic word may have
+   alternative Greek lemmas.  We resolve ONLY alternatives actually present
+   in this verse and choose the local occurrence nearest the phrase position. */
+function pickSemanticGreekPhrase(gs,groups,expectedCenter){
+  if(!gs.length||!groups.length)return [];
+  const keys=gs.map(tokenGreekKey);
+  const usable=[];
+
+  for(const group of groups){
+    const positions=[];
+    group.forEach(k=>{
+      keys.forEach((x,i)=>{if(x===k)positions.push(i);});
+    });
+    const uniq=[...new Set(positions)];
+    if(uniq.length)usable.push(uniq);
+  }
+  if(!usable.length)return [];
+
+  // Anchor on the most selective semantic group.
+  const anchorGroup=usable.slice().sort((a,b)=>a.length-b.length)[0];
+  let best=null;
+  for(const anchor of anchorGroup){
+    const chosen=[anchor];
+    let score=Math.abs(anchor-expectedCenter);
+    for(const positions of usable){
+      if(positions===anchorGroup)continue;
+      let nearest=positions[0],dist=Math.abs(positions[0]-anchor);
+      for(const p of positions){
+        const d=Math.abs(p-anchor);
+        if(d<dist){dist=d;nearest=p;}
+      }
+      // Ignore a candidate if it is clearly from a distant clause.
+      if(dist<=8){chosen.push(nearest);score+=dist;}
+    }
+    const uniq=[...new Set(chosen)].sort((a,b)=>a-b);
+    const center=uniq.reduce((a,b)=>a+b,0)/uniq.length;
+    score+=Math.abs(center-expectedCenter);
+    if(!best||score<best.score)best={idx:uniq,score};
+  }
+  return (best?.idx||[]).map(i=>gs[i]);
+}
+
+function clearGreekMatches(){
+  document.querySelectorAll('#mgreek .gword.gmatch,#mgreek .gpair.gmatch,#mgreek .gphrase.gmatch')
+    .forEach(x=>x.classList.remove('gmatch'));
+}
+
+function escRE(s){return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
+
+function renderVerifiedPhrases(ref,text){
+  const maps=VERIFIED_ALIGN_EN[ref]||[];
+  if(!maps.length)return null;
+
+  let src=String(text||''),out='',cursor=0;
+  const found=[];
+  maps.forEach(([phrase,lems])=>{
+    const re=new RegExp(escRE(phrase),'ig');
+    let m;
+    while((m=re.exec(src))){
+      found.push({start:m.index,end:m.index+m[0].length,txt:m[0],lems});
+      if(m[0].length===0)break;
+    }
+  });
+  found.sort((a,b)=>a.start-b.start||(b.end-b.start)-(a.end-a.start));
+
+  let last=-1;
+  for(const f of found){
+    if(f.start<last)continue;
+    out+=esc(src.slice(cursor,f.start));
+    const parsed=parseNTRef(ref);
+    const verseNo=parsed?parsed.v1:0;
+    const gs=greekWordsForVerse(verseNo);
+    const expected=gs.length ? ((f.start + (f.end-f.start)/2) / Math.max(1,src.length)) * (gs.length-1) : 0;
+    out+=`<span class="transword verified" data-mode="verified" data-v="${verseNo}" data-lems="${esc(f.lems.join(','))}" data-expected="${expected.toFixed(2)}">${esc(f.txt)}</span>`;
+    cursor=f.end;last=f.end;
+  }
+  out+=esc(src.slice(cursor));
+  return out;
+}
+
+function renderEnglishPhraseLinks(ref){
+  const box=document.getElementById('mrv');
+  const text=RV[ref]||box.textContent||'';
+
+  // Key Week 3 texts use the same explicit phrase→lemma principle as 1 John.
+  const verified=renderVerifiedPhrases(ref,text);
+  if(verified!==null){
+    box.innerHTML=verified;
+    return;
+  }
+
+  const verseParts=splitRvIntoVerses(ref,text);
+  let h='';
+  verseParts.forEach((vp,verseIndex)=>{
+    const units=splitEnglishMeaningUnits(vp.text);
+    const gs=greekWordsForVerse(vp.v);
+    const n=Math.max(1,units.length);
+    if(verseParts.length>1)h+=`<sup>${vp.v}</sup>`;
+
+    units.forEach((unit,i)=>{
+      const groups=candidateGroupsForEnglishPhrase(unit);
+      const expected=gs.length?((i+.5)*gs.length/n-.5):0;
+      const hits=pickSemanticGreekPhrase(gs,groups,expected);
+
+      // IMPORTANT: only semantically resolved phrases get a yellow underline.
+      if(hits.length){
+        const resolved=[...new Set(hits.map(tokenGreekKey))];
+        h+=`<span class="transword verified" data-mode="semantic" data-v="${vp.v}" data-lems="${esc(resolved.join(','))}" data-expected="${expected.toFixed(2)}">${esc(unit)}</span>`;
+      }else{
+        h+=esc(unit);
+      }
+      if(i<units.length-1)h+=' ';
+    });
+    if(verseIndex<verseParts.length-1)h+=' ';
+  });
+  box.innerHTML=h;
+}
+
+function highlightFromEnglishPhrase(el){
+  clearGreekMatches();
+  closeGreekWordPopup(); // Translation touch never opens the dictionary.
+
+  const parsed=parseNTRef(currentGreekRef);
+  const v=Number(el.dataset.v||(parsed?parsed.v1:0));
+  const gs=greekWordsForVerse(v);
+  if(!gs.length)return;
+
+  const wanted=(el.dataset.lems||'').split(',').filter(Boolean);
+  const expected=Number(el.dataset.expected||0);
+  const hits=pickLocalGreekPhrase(gs,wanted,expected);
+
+  // Same behavior as 1 John: highlight ONLY the matched Greek lemma tokens.
+  // Do not expand to neighboring words and do not guess by position.
+  hits.forEach(g=>{
+    g.classList.add('gmatch');
+    g.closest('.gpair')?.classList.add('gmatch');
+  });
+  hits[0]?.closest('.gpair')?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'nearest'});
+}
+
+
+
+// ===== OLD TESTAMENT ORIGINAL LANGUAGE: WLC / OSHB =====
+// WLC Masoretic text is public domain; OSHB lemma/morphology is CC BY 4.0.
+const OT_BOOKS={
+  'Gen.':'Gen','1 Kings':'1Kgs','Prov.':'Prov','Isa.':'Isa','Jer.':'Jer','Dan.':'Dan','Zech.':'Zech'
+};
+const otBookCache=new Map();
+let verseMapPromise=null;
+let hebrewStrongPromise=null,hebrewStrongDoc=null;
+
+function parseOTRef(ref){
+  const books=Object.keys(OT_BOOKS).sort((a,b)=>b.length-a.length);
+  const book=books.find(b=>ref.startsWith(b+' '));
+  if(!book)return null;
+  const rest=ref.slice(book.length).trim().replace(/[ab]$/,'');
+  const m=rest.match(/^(\d+):(\d+)(?:-(\d+))?$/);
+  if(!m)return null;
+  return {book,osis:OT_BOOKS[book],chapter:+m[1],v1:+m[2],v2:+(m[3]||m[2])};
+}
+
+async function loadVerseMap(){
+  if(verseMapPromise)return verseMapPromise;
+  verseMapPromise=(async()=>{
+    const urls=[
+      'https://cdn.jsdelivr.net/npm/morphhb@2.0.2/wlc/VerseMap.xml',
+      'https://raw.githubusercontent.com/openscriptures/morphhb/master/wlc/VerseMap.xml'
+    ];
+    const got=await fetchFirstText(urls,6500);
+    const doc=new DOMParser().parseFromString(got.text,'application/xml');
+    if(doc.querySelector('parsererror'))throw new Error('Verse map XML parse error');
+    const map=new Map();
+    [...doc.getElementsByTagNameNS('*','verse')].forEach(v=>{
+      if(v.getAttribute('type')==='full' && v.getAttribute('kjv') && v.getAttribute('wlc')) map.set(v.getAttribute('kjv'),v.getAttribute('wlc'));
+    });
+    return map;
+  })();
+  return verseMapPromise;
+}
+
+async function loadOTBook(osis){
+  if(otBookCache.has(osis))return otBookCache.get(osis);
+  const urls=[
+    `https://cdn.jsdelivr.net/npm/morphhb@2.0.2/wlc/${osis}.xml`,
+    `https://raw.githubusercontent.com/openscriptures/morphhb/master/wlc/${osis}.xml`
+  ];
+  const got=await fetchFirstText(urls,7500);
+  const doc=new DOMParser().parseFromString(got.text,'application/xml');
+  if(doc.querySelector('parsererror'))throw new Error('OSHB XML parse error');
+  otBookCache.set(osis,doc);return doc;
+}
+
+function mapKJVtoWLC(map,osis,chapter,verse){
+  const key=`${osis}.${chapter}.${verse}`;
+  return (map&&map.get(key))||key;
+}
+
+function otPos(morph){
+  const parts=String(morph||'').split('/').map(x=>x.replace(/^[HA]/,''));
+  if(parts.some(x=>x.startsWith('V')))return 'verb';
+  if(parts.some(x=>x.startsWith('N')))return 'noun';
+  if(parts.some(x=>x.startsWith('A')))return 'adjective';
+  if(parts.some(x=>x.startsWith('R')))return 'preposition';
+  if(parts.some(x=>x.startsWith('C')))return 'conjunction';
+  return 'word';
+}
+
+function removeCantillation(s){
+  return String(s||'').normalize('NFD').replace(/[\u0591-\u05AF]/g,'');
+}
+function visibleSemitic(s){return String(s||'').replace(/\//g,'');}
+function romanSemitic(input){
+  let s=removeCantillation(visibleSemitic(input)).normalize('NFD');
+  const chars=[...s], out=[];
+  const vowels={'\u05B0':'e','\u05B1':'e','\u05B2':'a','\u05B3':'o','\u05B4':'i','\u05B5':'e','\u05B6':'e','\u05B7':'a','\u05B8':'a','\u05B9':'o','\u05BA':'o','\u05BB':'u','\u05C7':'a'};
+  const cons={'א':'ʾ','ב':'b','ג':'g','ד':'d','ה':'h','ו':'v','ז':'z','ח':'ḥ','ט':'ṭ','י':'y','כ':'kh','ך':'kh','ל':'l','מ':'m','ם':'m','נ':'n','ן':'n','ס':'s','ע':'ʿ','פ':'f','ף':'f','צ':'ts','ץ':'ts','ק':'q','ר':'r','ש':'sh','ת':'t'};
+  for(let i=0;i<chars.length;i++){
+    const ch=chars[i];
+    if(cons[ch]){
+      let c=cons[ch];
+      const look=chars.slice(i+1,i+4).join('');
+      const dagesh=look.includes('\u05BC');
+      const sin=look.includes('\u05C2'),shin=look.includes('\u05C1');
+      if(ch==='ב')c=dagesh?'b':'v';
+      if(ch==='כ'||ch==='ך')c=dagesh?'k':'kh';
+      if(ch==='פ'||ch==='ף')c=dagesh?'p':'f';
+      if(ch==='ש')c=sin?'s':'sh';
+      if(ch==='ו' && (look.includes('\u05B9')||look.includes('\u05BA')))c='';
+      if(ch==='ו' && dagesh)c='';
+      out.push(c);continue;
+    }
+    if(vowels[ch]){out.push(vowels[ch]);continue;}
+    if(ch==='\u05BC'){
+      const prev=chars[i-1];
+      if(prev==='ו' && !out.join('').endsWith('v'))out.push('u');
+      continue;
+    }
+    if(ch==='\u05C1'||ch==='\u05C2'||ch==='\u05BD'||ch==='\u05BF'||ch==='\u05C4'||ch==='\u05C5')continue;
+    if(/[-־׃]/.test(ch))out.push('-');
+  }
+  return out.join('').replace(/ʾ(?=[aeiou])/g,'').replace(/-{2,}/g,'-').replace(/^-|-$/g,'')||'—';
+}
+
+function strongNumberFromLemma(lemma){
+  const m=String(lemma||'').match(/(?:^|\/)(\d{1,5})/);return m?String(parseInt(m[1],10)):'';
+}
+
+async function loadHebrewStrongDoc(){
+  if(hebrewStrongDoc)return hebrewStrongDoc;
+  if(hebrewStrongPromise)return hebrewStrongPromise;
+  hebrewStrongPromise=(async()=>{
+    const urls=[
+      'https://cdn.jsdelivr.net/gh/openscriptures/strongs@master/hebrew/StrongHebrewG.xml',
+      'https://raw.githubusercontent.com/openscriptures/strongs/master/hebrew/StrongHebrewG.xml'
+    ];
+    const got=await fetchFirstText(urls,7000);
+    const doc=new DOMParser().parseFromString(got.text,'application/xml');
+    if(doc.querySelector('parsererror'))throw new Error('Hebrew lexicon XML parse error');
+    hebrewStrongDoc=doc;return doc;
+  })();
+  return hebrewStrongPromise;
+}
+
+async function fillOTMeaning(strongNum,targetId){
+  const target=document.getElementById(targetId);if(!target||!strongNum)return;
+  try{
+    const doc=await loadHebrewStrongDoc();
+    const entries=[...doc.getElementsByTagName('div')].filter(x=>x.getAttribute('type')==='entry');
+    let entry=null,head=null;
+    for(const d of entries){
+      const w=[...d.getElementsByTagName('w')].find(x=>String(x.getAttribute('ID')||'').replace(/^H0*/, '')===strongNum);
+      if(w){entry=d;head=w;break;}
+    }
+    if(!entry){target.textContent='Strong’s entry not found.';return;}
+    const xlit=head?.getAttribute('xlit')||'';
+    const pron=head?.getAttribute('POS')||'';
+    const notes=[...entry.getElementsByTagName('note')].map(n=>n.textContent.replace(/\s+/g,' ').trim()).filter(Boolean);
+    const desc=notes.join(' ').replace(/\s+/g,' ').trim();
+    target.innerHTML=`${xlit?'<b>Lexicon transliteration:</b> '+esc(xlit)+'<br>':''}${pron?'<b>Pronunciation:</b> '+esc(pron)+'<br>':''}${desc?'<b>Meaning:</b> '+esc(desc):'Lexical meaning unavailable.'}`;
+  }catch(err){target.textContent='Lexicon meaning could not be loaded; lemma and morphology above remain available.';}
+}
+
+function showOTWordPopup(el){
+  const word=el.dataset.word||el.textContent.trim();
+  const lemma=el.dataset.lemma||'';
+  const strong=el.dataset.strong||'';
+  const lang=el.dataset.lang||'Hebrew';
+  const body=document.getElementById('wordDictBody');
+  body.innerHTML=`<div class="wordDictGreek" dir="rtl">${esc(word)}</div>
+    <div class="wordDictRoman">${esc(el.dataset.roman||romanSemitic(word))}</div>
+    <div class="wordDictRow"><b>Language:</b> ${esc(lang)}</div>
+    <div class="wordDictRow"><b>Lemma / Strong:</b> ${esc(lemma)}${strong?' · H'+esc(strong):''}</div>
+    <div class="wordDictRow"><b>Part of speech:</b> ${esc(el.dataset.pos||'word')}</div>
+    <div class="wordDictRow"><b>Morphology:</b> ${esc(el.dataset.parse||'—')}</div>
+    <div class="wordDictRow" id="otLexMeaning">Loading lexical meaning…</div>
+    <div class="sourceLine">WLC/OSHB word data. Strong’s lexical meaning is loaded separately when available.</div>`;
+  const d=document.getElementById('wordDict');d.classList.add('show');d.setAttribute('aria-hidden','false');
+  if(strong)fillOTMeaning(strong,'otLexMeaning');else document.getElementById('otLexMeaning').textContent='No Strong number attached to this token.';
+}
+
+async function loadRemoteOT(ref){
+  const r=parseOTRef(ref);if(!r)return false;
+  const box=document.getElementById('mgreek');
+  box.innerHTML='<div class="loadingGreek">Loading Masoretic Hebrew / Biblical Aramaic text…</div>';
+  try{
+    const [doc,map]=await Promise.all([loadOTBook(r.osis),loadVerseMap()]);
+    let h='',seenLang=new Set();
+    for(let v=r.v1;v<=r.v2;v++){
+      const wlcRef=mapKJVtoWLC(map,r.osis,r.chapter,v);
+      const verse=[...doc.getElementsByTagNameNS('*','verse')].find(x=>x.getAttribute('osisID')===wlcRef);
+      if(!verse)throw new Error('Verse not found in WLC: '+wlcRef);
+      const words=[...verse.getElementsByTagNameNS('*','w')].filter(w=>{
+        let p=w.parentElement;
+        while(p&&p!==verse){if((p.localName||'').toLowerCase()==='note' && /ketiv/i.test(p.getAttribute('type')||''))return false;p=p.parentElement;}
+        return true;
+      });
+      const pairs=words.map(w=>{
+        const raw=visibleSemitic(w.textContent.trim());
+        const morph=w.getAttribute('morph')||'';
+        const lemma=w.getAttribute('lemma')||'';
+        const pos=otPos(morph),cls=pos==='verb'?'verb':pos==='noun'?'noun':'';
+        const lang=/^A/.test(morph)?'Biblical Aramaic':'Biblical Hebrew';seenLang.add(lang);
+        const roman=romanSemitic(raw),strong=strongNumberFromLemma(lemma);
+        return `<span class="hpair"><button type="button" class="hword ${cls}" data-word="${esc(raw)}" data-roman="${esc(roman)}" data-lemma="${esc(lemma)}" data-strong="${esc(strong)}" data-pos="${esc(pos)}" data-parse="${esc(morph)}" data-lang="${esc(lang)}">${esc(raw)}</button><span class="roman">${esc(roman)}</span></span>`;
+      }).join(' ');
+      h+=`<div class="gphrase"><div class="semiticline"><span class="verseTag">${v}</span>${pairs}</div></div>`;
+    }
+    const langs=[...seenLang];
+    const label=langs.length===1?langs[0]:langs.join(' / ');
+    box.innerHTML=h+`<div class="sourceLine">${esc(label)} · Westminster Leningrad Codex (WLC) text via Open Scriptures Hebrew Bible (OSHB) · OSHB lemma/morphology · KJV/English verse numbering remapped with OSHB VerseMap · learner transliteration directly under each word.</div>`;
+    document.getElementById('originalHeading').textContent=(langs.includes('Biblical Aramaic')?'HEBREW / ARAMAIC':'HEBREW (MASORETIC TEXT)')+' · ENGLISH PRONUNCIATION';
+    document.getElementById('originalHint').textContent='Tap a Hebrew/Aramaic word for lemma, Strong number, morphology, and lexical meaning. Verbs are red; nouns are green.';
+    return true;
+  }catch(err){
+    box.innerHTML=`<div class="loadingGreek">Old Testament original text did not load. The request now times out instead of remaining on “Loading.”<br><small>${esc(err.name==='AbortError'?'Connection timed out':err.message)}</small><br><button class="retryOriginal" type="button" data-retry-ref="${esc(ref)}">↻ Retry original text</button></div>`;
+    return false;
+  }
+}
+
+async function openVerse(ref){
+  currentGreekRef=ref;
+  document.getElementById('mref').textContent=ref;
+  document.getElementById('mrv').textContent=RV[ref]||'⚠ RV text not resolved — please report this reference.';
+  clearGreekMatches(); closeGreekWordPopup();
+  document.getElementById('modal').classList.add('show');
+  const heading=document.getElementById('originalHeading'),hint=document.getElementById('originalHint');
+
+  if(parseNTRef(ref)){
+    heading.textContent='GREEK · ENGLISH PRONUNCIATION';
+    hint.textContent='Greek pronunciation is matched directly under each word. Tap a Greek word for its English dictionary entry; verbs are red and nouns are green.';
+    const ok=await loadRemoteGreek(ref);
+    if(ok)renderEnglishPhraseLinks(ref);
+    return;
+  }
+  if(parseOTRef(ref)){
+    heading.textContent='HEBREW / ARAMAIC · ENGLISH PRONUNCIATION';
+    hint.textContent='Loading the Masoretic/WLC original-language layer. Tap a word after it appears.';
+    await loadRemoteOT(ref);
+    return;
+  }
+  heading.textContent='ORIGINAL LANGUAGE';
+  hint.textContent='No original-language source mapping is configured for this reference.';
+  document.getElementById('mgreek').innerHTML='<span class="pron">Original-language source mapping is not configured for this reference.</span>';
+}
+
+document.addEventListener('click',e=>{
+  const retry=e.target.closest('.retryOriginal');
+  if(retry){e.preventDefault();e.stopPropagation();openVerse(retry.dataset.retryRef);return;}
+
+  const hw=e.target.closest('.hword');
+  if(hw && document.getElementById('mgreek').contains(hw)){
+    e.preventDefault();e.stopPropagation();clearGreekMatches();
+    hw.closest('.hpair')?.classList.add('gmatch');showOTWordPopup(hw);return;
+  }
+
+  const w=e.target.closest('.gword');
+  if(w && document.getElementById('mgreek').contains(w)){
+    e.preventDefault();e.stopPropagation();
+    clearGreekMatches();
+    w.classList.add('gmatch');
+    w.closest('.gpair')?.classList.add('gmatch');
+    w.closest('.gphrase')?.classList.add('gmatch');
+    showGreekWordPopup(w);
+    return;
+  }
+
+  const phrase=e.target.closest('.transword.verified');
+  if(phrase && document.getElementById('mrv').contains(phrase)){
+    e.preventDefault();e.stopPropagation();
+    closeGreekWordPopup();
+    if(phrase.dataset.otidx!==undefined) highlightOTPhrase(phrase);
+    else highlightFromEnglishPhrase(phrase);
+    return;
+  }
+});
+
+document.getElementById('wordDictClose').onclick=(e)=>{e.preventDefault();e.stopPropagation();closeGreekWordPopup();};
+document.getElementById('wordDict').onclick=e=>{if(e.target.id==='wordDict')closeGreekWordPopup();};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeGreekWordPopup();});
+
+
+function plainText(el){
+  return (el?.textContent||'').replace(/\s+/g,' ').trim();
+}
+function dayCard(day){
+  return [...document.querySelectorAll('#daily .day.card')]
+    .find(x=>plainText(x.querySelector('.dayno'))===`DAY ${day}`) || null;
+}
+function englishScriptForDay(day){
+  const card=dayCard(day);
+  if(!card)return '';
+  const title=plainText(card.querySelector('h2'));
+  const refs=[...card.querySelectorAll('.mn .ref')].map(b=>b.dataset.ref).filter(Boolean);
+  const word=refs.map(r=>RV[r]||'').filter(Boolean).join(' ');
+  const focus=[...card.querySelectorAll('.focus3 li')].map(plainText).filter(Boolean).join(' ');
+  const prop=plainText(card.querySelector('.prop p'));
+  return `Week 3, Day ${day}. ${title}. Morning Nourishment. ${word}. Daily Focus. ${focus}. Prophesying. ${prop}`;
+}
+
+function getEnglishOutlineText(){
+  const root=document.getElementById('englishOutline');
+  if(!root) return '';
+  const clone=root.cloneNode(true);
+  clone.querySelectorAll('.ttsbar,button,select,label,textarea').forEach(x=>x.remove());
+  return clone.innerText.replace(/\s+/g,' ').trim();
+}
+function englishMaleScore(v){
+  const n=(v.name||'').toLowerCase();
+  let s=0;
+  if(/david|mark|ryan|brandon|guy|george|daniel|thomas|male|alex|fred/.test(n))s+=100;
+  if(/zira|jenny|aria|samantha|female|susan|victoria/.test(n))s-=100;
+  if(/^en-us/i.test(v.lang||''))s+=12;
+  else if(/^en-(ca|gb)/i.test(v.lang||''))s+=8;
+  if(v.localService)s+=3;
+  return s;
+}
+function englishVoices(){
+  return speechSynthesis.getVoices()
+    .filter(v=>/^en/i.test(v.lang||''))
+    .sort((a,b)=>englishMaleScore(b)-englishMaleScore(a));
+}
+function chooseEnglishVoice(){
+  return englishVoices()[0]||null;
+}
+function fillEnglishVoiceSelectors(){
+  const vv=englishVoices();
+  const fill=(sel,autoLabel)=>{
+    if(!sel)return;
+    const keep=sel.value;
+    sel.innerHTML=`<option value="">${autoLabel}</option>`+
+      vv.map(v=>`<option value="${v.voiceURI.replace(/"/g,'&quot;')}">${v.name} (${v.lang})</option>`).join('');
+    if([...sel.options].some(o=>o.value===keep))sel.value=keep;
+  };
+  fill(document.getElementById('topEnglishVoice'),'Auto — male first');
+  fill(document.getElementById('chunkVoice'),'Auto — male first');
+}
+speechSynthesis.addEventListener?.('voiceschanged',fillEnglishVoiceSelectors);
+setTimeout(fillEnglishVoiceSelectors,150);
+setTimeout(fillEnglishVoiceSelectors,900);
+function resetPauseLabels(){
+  const a=document.getElementById('outlinePause');
+  const b=document.getElementById('versePause');
+  if(a)a.textContent='⏸ Pause';
+  if(b)b.textContent='⏸ Pause';
+}
+function togglePause(btn){
+  if(speechSynthesis.paused){
+    speechSynthesis.resume();
+    btn.textContent='⏸ Pause';
+  }else if(speechSynthesis.speaking){
+    speechSynthesis.pause();
+    btn.textContent='▶ Resume';
+  }
+}
+
+let englishPlaybackToken=0;
+function selectedTopEnglishVoice(){
+  const sel=document.getElementById('topEnglishVoice');
+  if(sel?.value){const v=speechSynthesis.getVoices().find(x=>x.voiceURI===sel.value);if(v)return v;}
+  return chooseEnglishVoice();
+}
+function stopEnglishPlayback(){englishPlaybackToken++;speechSynthesis.cancel();resetPauseLabels();}
+function playEnglishRepeatable(text,rate,voice,kind='english'){
+  if(!text)return;
+  const token=++englishPlaybackToken;
+  speechSynthesis.cancel();resetPauseLabels();
+  const run=()=>{
+    if(token!==englishPlaybackToken)return;
+    const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=rate;u.pitch=.86;if(voice)u.voice=voice;
+    u.onend=()=>{resetPauseLabels();if(token===englishPlaybackToken && document.getElementById('englishRepeat')?.checked)setTimeout(run,260);};
+    u.onerror=()=>{resetPauseLabels();};
+    speechSynthesis.speak(u);
+  };
+  run();
+}
+
+document.getElementById('outlineListen').onclick=()=>playEnglishRepeatable(getEnglishOutlineText(),parseFloat(document.getElementById('outlineRate').value),selectedTopEnglishVoice(),'outline');
+document.getElementById('outlineDailyListen').onclick=()=>{
+  const day=Number(document.getElementById('outlineDailyDay').value||1);
+  const voice=selectedTopEnglishVoice();
+  playEnglishRepeatable(englishScriptForDay(day),parseFloat(document.getElementById('outlineRate').value),voice,'daily');
+};
+document.getElementById('outlinePause').onclick=function(){togglePause(this);};
+document.getElementById('outlineStop').onclick=stopEnglishPlayback;
+
+document.getElementById('listen').onclick=()=>{
+  playEnglishRepeatable(document.getElementById('mrv').textContent,parseFloat(document.getElementById('rate').value),selectedTopEnglishVoice(),'verse');
+};
+document.getElementById('versePause').onclick=function(){togglePause(this);};
+
+document.querySelector('.close').onclick=()=>{closeGreekWordPopup();document.getElementById('modal').classList.remove('show')};document.getElementById('modal').onclick=e=>{if(e.target.id==='modal'){closeGreekWordPopup();e.currentTarget.classList.remove('show')}};
+document.querySelectorAll('.note').forEach(n=>{n.value=localStorage.getItem('week3note:'+n.dataset.key)||'';n.oninput=()=>localStorage.setItem('week3note:'+n.dataset.key,n.value)});
+
+
+
+// ===== ESSENTIAL CHUNK LISTENING =====
+const WEEK3_CHUNKS = {
+  1: ["through a small group of young men","their inward belonging to God","redefine identity and allegiance","does not have the final word","remain inwardly clear about whom I belong to"],
+  2: ["set his heart not to be defiled","before it became an outward practice","connected with an idolatrous environment","refusing participation in what compromises our relationship with God","those who call on Him out of a pure heart"],
+  3: ["God was able to deliver them","But if He does not","their loyalty to God was settled","in the midst of suffering","a faith that does not bargain with God"],
+  4: ["the Most High rules over human kingdoms","by the might of his power","the illusion of human self-sufficiency","give Christ the first place","recognize Your hand in my circumstances"],
+  5: ["though you knew all this","you have not humbled your heart","in whose hand was his breath","spiritual knowledge creates responsibility","familiar with spiritual things"],
+  6: ["as he had always done previously","an established prayer life","political pressure to redefine worship","practical dependence on God","a steady part of my daily living"]
+};
+
+let chunkPlayToken=0;
+function selectedChunkVoice(){
+  const sel=document.getElementById('chunkVoice');
+  if(sel?.value){
+    const v=speechSynthesis.getVoices().find(x=>x.voiceURI===sel.value);
+    if(v)return v;
+  }
+  return selectedTopEnglishVoice();
+}
+function stopChunkPlayback(){
+  chunkPlayToken++;
+  englishPlaybackToken++;
+  speechSynthesis.cancel();
+  const b=document.getElementById('chunkPause');
+  if(b)b.textContent='⏸ Pause';
+}
+function playChunkTexts(texts,repeats=1){
+  if(!texts?.length)return;
+  const token=++chunkPlayToken;
+  englishPlaybackToken++;
+  speechSynthesis.cancel();
+  const rate=parseFloat(document.getElementById('chunkRate')?.value||1);
+  const voice=selectedChunkVoice();
+  const queue=[];
+  texts.forEach(t=>{for(let i=0;i<repeats;i++)queue.push(t);});
+  let i=0;
+  const next=()=>{
+    if(token!==chunkPlayToken || i>=queue.length)return;
+    const u=new SpeechSynthesisUtterance(queue[i++]);
+    u.lang='en-US';u.rate=rate;u.pitch=.9;
+    if(voice)u.voice=voice;
+    u.onend=()=>{if(token===chunkPlayToken)setTimeout(next,360);};
+    u.onerror=()=>{if(token===chunkPlayToken)setTimeout(next,360);};
+    speechSynthesis.speak(u);
+  };
+  next();
+}
+document.querySelectorAll('.chunkPlay').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const day=Number(btn.dataset.day);
+    const idx=Number(btn.dataset.index);
+    const reps=Number(document.getElementById('chunkRepeat')?.value||1);
+    playChunkTexts([WEEK3_CHUNKS[day][idx]],reps);
+  });
+});
+document.getElementById('chunkDayListen')?.addEventListener('click',()=>{
+  const day=Number(document.getElementById('chunkDaySelect')?.value||1);
+  const reps=Number(document.getElementById('chunkRepeat')?.value||1);
+  playChunkTexts(WEEK3_CHUNKS[day],reps);
+});
+document.getElementById('chunkPause')?.addEventListener('click',function(){
+  if(speechSynthesis.paused){
+    speechSynthesis.resume();this.textContent='⏸ Pause';
+  }else if(speechSynthesis.speaking){
+    speechSynthesis.pause();this.textContent='▶ Resume';
+  }
+});
+document.getElementById('chunkStop')?.addEventListener('click',stopChunkPlayback);
+
+</script></body></html>
