@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 4 — Job and the Two Trees</title>
+<style>
+:root{--bg:#f4f1ea;--card:#fff;--ink:#24221f;--muted:#6e675f;--line:#ddd5ca;--accent:#8b2d2d;--blue:#294e7a;--green:#167347;--red:#b72828;--gold:#9b6c2f}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans KR",sans-serif;line-height:1.55}
+header{max-width:1100px;margin:0 auto;padding:24px 18px 12px} h1{font-family:Georgia,serif;margin:.2rem 0;font-size:clamp(1.7rem,4vw,2.55rem)} .subtitle{color:var(--muted)} .ko{font-family:"Malgun Gothic","Noto Sans KR",sans-serif}
+nav{position:sticky;top:0;z-index:20;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;gap:5px;overflow-x:auto;padding:8px max(10px,calc((100vw - 1100px)/2))}
+nav button{white-space:nowrap;border:1px solid #cfc6ba;background:#fff;border-radius:999px;padding:7px 11px;cursor:pointer;font-weight:700} nav button.tabActive{background:#2f4f78;color:#fff;border-color:#2f4f78}
+main{max-width:1100px;margin:0 auto;padding:14px 14px 80px} .panel{display:none} .panel.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:12px 0;box-shadow:0 1px 5px #0000000c}
+.ol{margin:8px 0;padding-left:8px} .major{color:var(--accent);font-weight:700;font-size:1.06rem;border-left:4px solid #c86868;padding:8px 10px;background:#fff8f8;border-radius:5px} .sub{margin-left:20px} .sub2{margin-left:42px}
+.refs{display:inline-flex;flex-wrap:wrap;gap:5px;margin-left:5px} .ref{border:0;background:#eef4ff;color:#174f94;text-decoration:underline;border-radius:5px;padding:2px 5px;cursor:pointer;font:inherit}
+.outlineDayMark{margin:16px 0 6px} .outlineDayLink{touch-action:manipulation;-webkit-tap-highlight-color:rgba(184,140,84,.22);background:#fff3d9;border:1px solid #d7ad62;border-radius:999px;padding:6px 12px;font-weight:800;cursor:pointer}
+.ttsbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#f5f7fb;border:1px solid #d6dce7;border-radius:10px;padding:9px;margin:10px 0 16px} .ttsbar button,.ttsbar select{padding:6px 9px;border-radius:7px;border:1px solid #b8bfc9;background:white;cursor:pointer}
+.audioNote{font-size:.82rem;color:var(--muted)} .mn{background:#f7f5f0;border-left:4px solid #8c7c68;padding:12px;margin:10px 0} .focus3{background:#f6f8fb;border-left:4px solid #5d78a0;padding:12px;margin:12px 0} .prop{background:#fbf8f1;border:1px solid #e3d8c7;border-radius:10px;padding:13px;margin:12px 0;white-space:pre-line} .prayer{background:#f5fbf7;border-left:4px solid #4f8a69;padding:12px;margin:10px 0} .dayno{font-size:.78rem;font-weight:900;letter-spacing:.1em;color:#7a5123}
+.note{width:100%;min-height:120px;border:1px solid #cfc8bd;border-radius:9px;padding:10px;font:inherit} .notesGrid{display:grid;gap:12px} .noteActions{display:flex;gap:8px;flex-wrap:wrap} .noteActions button{padding:7px 10px}
+.chunkIntro{background:#f6f8fb;border-left:4px solid #566f9f;padding:13px 15px;border-radius:10px;margin:10px 0 16px} .chunkControls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff} .chunkControls button,.chunkControls select{padding:7px 10px;border:1px solid #bbb;border-radius:8px;background:#fff}
+.chunkDay{margin:20px 0} .chunkRow{display:grid;grid-template-columns:auto 1fr;gap:10px;border:1px solid #ddd7ce;border-radius:10px;padding:10px;margin:7px 0} .chunkPlay{border:1px solid #aaa;background:#fff;border-radius:8px;padding:6px 9px;cursor:pointer} .chunkText{font-weight:800;color:#1f2e44} .chunkKo{color:#625b53;font-size:.93rem}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:60;padding:12px;overflow:auto} .modal.show{display:block} .modalBox{max-width:920px;margin:3vh auto;background:#fff;border-radius:15px;padding:18px;position:relative} .closeBtn{position:absolute;right:12px;top:10px;border:1px solid #bbb;background:#fff;border-radius:50%;width:35px;height:35px;cursor:pointer}
+.translationBox{padding:12px;border-radius:10px;background:#f7f7f5;margin:10px 0} .originalBox{border-top:1px solid var(--line);margin-top:12px;padding-top:10px} .gphrase{margin:10px 0} .greekline,.semiticline{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start} .semiticline{direction:rtl;justify-content:flex-start} .gpair,.hpair{display:inline-flex;flex-direction:column;align-items:center;min-width:max-content} .gword,.hword{font-family:"Times New Roman",serif;font-size:1.18rem;border:0;background:transparent;cursor:pointer;padding:0} .gword.verb,.hword.verb{color:var(--red);font-weight:700} .gword.noun,.hword.noun{color:var(--green);font-weight:700} .roman{font-size:.68rem;color:#6e6e6e;direction:ltr;line-height:1.05} .sourceLine{font-size:.78rem;color:var(--muted);margin-top:8px} .loadingGreek{padding:12px;background:#fff8e8;border-radius:8px}
+.wordDict{display:none;position:fixed;inset:0;background:#0007;z-index:80;padding:20px} .wordDict.show{display:block} .wordDictBox{max-width:520px;margin:12vh auto;background:#fff;border-radius:14px;padding:18px;position:relative} .wordDictGreek{font-size:2rem;font-family:"Times New Roman",serif} .wordDictRoman{font-weight:700;color:#5b6577;margin:3px 0 10px} .wordDictRow{margin:7px 0}
+.hymnLink{display:inline-block;padding:9px 12px;border-radius:9px;background:#f2f6ff;border:1px solid #b9c9e3;color:#174f94;text-decoration:none;font-weight:800}
+.dayFlash{outline:4px solid #e2b35d;outline-offset:4px;transition:outline .3s}
+@media(max-width:650px){.sub{margin-left:10px} .sub2{margin-left:20px} .chunkRow{grid-template-columns:1fr}}
+
+.propPrayer{display:block;margin-top:12px;color:#167347;font-weight:700}
+.roman{font-size:18px !important;line-height:1.15 !important;color:#5f6773}
+
+
+.meaningMain{font-size:1.05rem;background:#f5f8fd;border-left:4px solid #5579a5;padding:10px;border-radius:7px}
+.meaningKo{font-size:1rem;background:#f5fbf7;border-left:4px solid #4b8b68;padding:10px;border-radius:7px}
+.dictNote{font-size:.82rem;color:#6e675f;border-top:1px solid #ddd5ca;padding-top:8px}
+.wordDictRow b{color:#313a46}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="subtitle">2026 INTERNATIONAL CHINESE-SPEAKING CONFERENCE · WEEK 4</div>
+  <h1>Job and the Two Trees</h1>
+  <h2 class="ko">욥과 두 나무</h2>
+  <p>Scripture Reading: <button type="button" class="ref" data-ref="Gen. 2:9">Gen. 2:9</button> <button type="button" class="ref" data-ref="Gen. 2:17">Gen. 2:17</button> <button type="button" class="ref" data-ref="Rev. 22:1-2">Rev. 22:1-2</button> <button type="button" class="ref" data-ref="Rev. 22:14">Rev. 22:14</button> <button type="button" class="ref" data-ref="Job 1:1">Job 1:1</button> <button type="button" class="ref" data-ref="Job 2:3">Job 2:3</button> <button type="button" class="ref" data-ref="Job 42:1-6">Job 42:1-6</button></p>
+  <div class="audioNote">🔊 음성이 카카오톡 안에서 나오지 않으면 <b>다른 앱으로 열기 → Chrome</b>을 사용하세요.</div>
+</header>
+
+<nav>
+<button type="button" data-tab="outline">OUTLINE</button>
+<button type="button" data-tab="weekly">WEEKLY FOCUS</button>
+<button type="button" data-tab="daily">DAILY FOCUS</button>
+<button type="button" data-tab="notes">MY NOTES</button>
+<button type="button" data-tab="hymn">HYMN</button>
+<button type="button" data-tab="chunks">🎧 ENGLISH CHUNKS</button>
+<button type="button" data-tab="review">THEOLOGICAL REVIEW</button>
+<button type="button" data-tab="check">SCRIPTURE CHECK</button>
+</nav>
+
+<main>
+<section id="outline" class="panel active">
+<div class="card" id="englishOutline">
+<h2>ENGLISH OUTLINE</h2>
+<div class="ttsbar">
+<button type="button" id="outlineListen">🔊 Outline English</button>
+<label>Day <select id="outlineDaySelect"><option value="1">Day 1</option><option value="2">Day 2</option><option value="3">Day 3</option><option value="4">Day 4</option><option value="5">Day 5</option><option value="6">Day 6</option></select></label>
+<button type="button" id="outlineDailyListen">🔊 Daily English</button>
+<label><input id="englishRepeat" type="checkbox"> 🔁 Auto Repeat</label>
+<button type="button" id="outlinePause">⏸ Pause</button>
+<button type="button" id="outlineStop">⏹ Stop</button>
+<label>Voice <select id="topEnglishVoice"><option value="">Auto — male first</option></select></label>
+<label>Speed <select id="outlineRate"><option>.75</option><option>.9</option><option selected>1.0</option><option>1.1</option><option>1.25</option></select></label>
+</div>
+<h3>Message Four — Job and the Two Trees</h3>
+<p><b>Scripture Reading:</b> <button type="button" class="ref" data-ref="Gen. 2:9">Gen. 2:9</button> <button type="button" class="ref" data-ref="Gen. 2:17">Gen. 2:17</button> <button type="button" class="ref" data-ref="Rev. 22:1-2">Rev. 22:1-2</button> <button type="button" class="ref" data-ref="Rev. 22:14">Rev. 22:14</button> <button type="button" class="ref" data-ref="Job 1:1">Job 1:1</button> <button type="button" class="ref" data-ref="Job 2:3">Job 2:3</button> <button type="button" class="ref" data-ref="Job 42:1-6">Job 42:1-6</button></p>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="1">DAY 1 · 1일</button></div>
+<div class="ol major"><b>I.</b> In the divine revelation there are two trees, two sources, two ways, two principles, and two consummations:
+</div>
+<div class="ol sub"><b>A.</b> Two trees:
+</div>
+<div class="ol sub2"><b>1.</b> The tree of life signifies the Triune God as life to man in man’s relationship with Him.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 2:9" data-version="rv">Gen. 2:9</button> <button type="button" class="ref" data-ref="Psa. 36:9" data-version="rv">Psa. 36:9</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> The tree of the knowledge of good and evil signifies Satan, the devil, the evil one, as death to man in man’s fall before God.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 2:17" data-version="rv">Gen. 2:17</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="2">DAY 2 · 2일</button></div>
+<div class="ol sub"><b>B.</b> Two sources:
+</div>
+<div class="ol sub2"><b>1.</b> The tree of life is the source of men who seek God as life for their supply and enjoyment.
+ <span class="refs"><button type="button" class="ref" data-ref="John 1:4" data-version="rv">John 1:4</button> <button type="button" class="ref" data-ref="John 15:1" data-version="rv">John 15:1</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> The tree of the knowledge of good and evil is the source of men who follow Satan as their poison unto death and eternal perdition.
+ <span class="refs"><button type="button" class="ref" data-ref="John 8:44" data-version="rv">John 8:44</button></span>
+</div>
+<div class="ol sub2"><b>3.</b> The outcome of these two sources is two kingdoms—the kingdom of God and the kingdom of Satan.
+ <span class="refs"><button type="button" class="ref" data-ref="Matt. 21:43" data-version="rv">Matt. 21:43</button> <button type="button" class="ref" data-ref="Matt. 12:26" data-version="rv">Matt. 12:26</button> <button type="button" class="ref" data-ref="Col. 1:13" data-version="rv">Col. 1:13</button></span>
+</div>
+<div class="ol sub"><b>C.</b> Two ways:
+</div>
+<div class="ol sub2"><b>1.</b> The first way is the way of life, the constricted way, for men to seek God, to gain God, and to enjoy God in His eternal life as the supply.
+ <span class="refs"><button type="button" class="ref" data-ref="Matt. 7:14" data-version="rv">Matt. 7:14</button> <button type="button" class="ref" data-ref="Acts 9:2" data-version="rv">Acts 9:2</button> <button type="button" class="ref" data-ref="Acts 16:17" data-version="rv">Acts 16:17</button> <button type="button" class="ref" data-ref="Acts 18:25-26" data-version="rv">Acts 18:25-26</button> <button type="button" class="ref" data-ref="2 Pet. 2:15" data-version="rv">2 Pet. 2:15</button> <button type="button" class="ref" data-ref="2 Pet. 2:21" data-version="rv">2 Pet. 2:21</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> The second way is the way of death and of good and evil, the broad way, for men to follow Satan to be his children.
+ <span class="refs"><button type="button" class="ref" data-ref="Matt. 7:13" data-version="rv">Matt. 7:13</button> <button type="button" class="ref" data-ref="1 John 3:10" data-version="rv">1 John 3:10</button></span>
+</div>
+<div class="ol sub"><b>D.</b> Two principles:
+</div>
+<div class="ol sub2"><b>1.</b> The first principle is the principle of life—the principle of dependence on God.
+ <span class="refs"><button type="button" class="ref" data-ref="John 15:5" data-version="rv">John 15:5</button> <button type="button" class="ref" data-ref="Gen. 4:4" data-version="rv">Gen. 4:4</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> The second principle is the principle of death and of good and evil—the principle of independence from God.
+ <span class="refs"><button type="button" class="ref" data-ref="Jer. 17:5-6" data-version="rv">Jer. 17:5-6</button> <button type="button" class="ref" data-ref="Gen. 4:3" data-version="rv">Gen. 4:3</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="3">DAY 3 · 3일</button></div>
+<div class="ol sub"><b>E.</b> The two consummations are the final outcome of the two ways men take in their relationship with God:
+</div>
+<div class="ol sub2"><b>1.</b> The consummation of God’s way of life is a city of water of life, the New Jerusalem.
+ <span class="refs"><button type="button" class="ref" data-ref="Rev. 21:2" data-version="rv">Rev. 21:2</button> <button type="button" class="ref" data-ref="Rev. 21:10-11" data-version="rv">Rev. 21:10-11</button> <button type="button" class="ref" data-ref="Rev. 22:1-2" data-version="rv">Rev. 22:1-2</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> The consummation of the way of death and of good and evil is a lake of fire.
+ <span class="refs"><button type="button" class="ref" data-ref="Rev. 19:20" data-version="rv">Rev. 19:20</button> <button type="button" class="ref" data-ref="Rev. 20:10" data-version="rv">Rev. 20:10</button> <button type="button" class="ref" data-ref="Rev. 20:14-15" data-version="rv">Rev. 20:14-15</button> <button type="button" class="ref" data-ref="Rev. 21:8" data-version="rv">Rev. 21:8</button></span>
+</div>
+<div class="ol major"><b>II.</b> God’s intention was not to have a Job in the line of the tree of the knowledge of good and evil but a Job in the line of the tree of life:
+</div>
+<div class="ol sub"><b>A.</b> The logic of Job and his friends was according to the line of the tree of the knowledge of good and evil.
+ <span class="refs"><button type="button" class="ref" data-ref="Job 2:11-32:1" data-version="rv">Job 2:11-32:1</button></span>
+</div>
+<div class="ol sub"><b>B.</b> Job, like his friends, was halted in the knowledge of right and wrong, not knowing God’s economy.
+ <span class="refs"><button type="button" class="ref" data-ref="Job 4:7-8" data-version="rv">Job 4:7-8</button></span>
+</div>
+<div class="ol sub"><b>C.</b> Job and his friends were in the realm of the tree of the knowledge of good and evil; God was trying to rescue them from that realm and put them into the realm of the tree of life.
+ <span class="refs"><button type="button" class="ref" data-ref="Job 1:1" data-version="rv">Job 1:1</button> <button type="button" class="ref" data-ref="Job 2:3" data-version="rv">Job 2:3</button> <button type="button" class="ref" data-ref="Job 19:10" data-version="rv">Job 19:10</button></span>
+</div>
+<div class="ol sub"><b>D.</b> God’s purpose in dealing with Job was to turn him from the way of good and evil to the way of life so that he might gain God to the fullest extent.
+ <span class="refs"><button type="button" class="ref" data-ref="Job 42:1-6" data-version="rv">Job 42:1-6</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="4">DAY 4 · 4일</button></div>
+<div class="ol major"><b>III.</b> We need a vision of the tree of life—a vision of God in Christ as our food.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 2:9" data-version="rv">Gen. 2:9</button> <button type="button" class="ref" data-ref="Rev. 22:1-2" data-version="rv">Rev. 22:1-2</button> <button type="button" class="ref" data-ref="Rev. 22:14" data-version="rv">Rev. 22:14</button></span>
+</div>
+<div class="ol sub"><b>A.</b> The tree of life signifies the Triune God in Christ to dispense Himself into His chosen people as life in the form of food.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 2:9" data-version="rv">Gen. 2:9</button></span>
+</div>
+<div class="ol sub"><b>B.</b> The tree of life is the center of the universe:
+</div>
+<div class="ol sub2"><b>1.</b> According to the purpose of God, the earth is the center of the universe, the garden of Eden is the center of the earth, and the tree of life is the center of the garden of Eden; hence, the universe is centered on the tree of life.
+</div>
+<div class="ol sub2"><b>2.</b> Nothing is more central and crucial to both God and man than the tree of life.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 3:22" data-version="rv">Gen. 3:22</button> <button type="button" class="ref" data-ref="Rev. 22:14" data-version="rv">Rev. 22:14</button></span>
+</div>
+<div class="ol sub"><b>C.</b> The New Testament reveals that Christ is the fulfillment of the figure of the tree of life.
+ <span class="refs"><button type="button" class="ref" data-ref="John 1:4" data-version="rv">John 1:4</button> <button type="button" class="ref" data-ref="John 15:5" data-version="rv">John 15:5</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="5">DAY 5 · 5일</button></div>
+<div class="ol sub"><b>D.</b> All the aspects of the all-inclusive Christ revealed in the Gospel of John are the outcome of the tree of life.
+ <span class="refs"><button type="button" class="ref" data-ref="John 6:48" data-version="rv">John 6:48</button> <button type="button" class="ref" data-ref="John 8:12" data-version="rv">John 8:12</button> <button type="button" class="ref" data-ref="John 10:11" data-version="rv">John 10:11</button> <button type="button" class="ref" data-ref="John 11:25" data-version="rv">John 11:25</button> <button type="button" class="ref" data-ref="John 14:6" data-version="rv">John 14:6</button></span>
+</div>
+<div class="ol sub"><b>E.</b> The enjoyment of the tree of life will be the eternal portion of all of God’s redeemed.
+ <span class="refs"><button type="button" class="ref" data-ref="Rev. 22:1-2" data-version="rv">Rev. 22:1-2</button> <button type="button" class="ref" data-ref="Rev. 22:14" data-version="rv">Rev. 22:14</button></span>
+</div>
+<div class="ol sub2"><b>1.</b> The tree of life fulfills for eternity what God intended for man from the beginning.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 1:26" data-version="rv">Gen. 1:26</button> <button type="button" class="ref" data-ref="Gen. 2:9" data-version="rv">Gen. 2:9</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> The fruits of the tree of life will be the food for God’s redeemed in eternity; these fruits will be continually fresh, being produced every month.
+ <span class="refs"><button type="button" class="ref" data-ref="Rev. 22:2" data-version="rv">Rev. 22:2</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="6">DAY 6 · 6일</button></div>
+<div class="ol major"><b>IV.</b> When we were regenerated, Christ planted Himself into us as the tree of life.
+ <span class="refs"><button type="button" class="ref" data-ref="John 1:12-13" data-version="rv">John 1:12-13</button> <button type="button" class="ref" data-ref="John 3:3" data-version="rv">John 3:3</button> <button type="button" class="ref" data-ref="John 3:5-6" data-version="rv">John 3:5-6</button> <button type="button" class="ref" data-ref="John 3:15" data-version="rv">John 3:15</button> <button type="button" class="ref" data-ref="John 11:25" data-version="rv">John 11:25</button> <button type="button" class="ref" data-ref="John 15:1" data-version="rv">John 15:1</button> <button type="button" class="ref" data-ref="John 15:5" data-version="rv">John 15:5</button></span>
+</div>
+<div class="ol sub"><b>A.</b> In our practical living, we may not be in the line of the tree of life but in the line of the tree of the knowledge of good and evil.
+ <span class="refs"><button type="button" class="ref" data-ref="Prov. 16:25" data-version="rv">Prov. 16:25</button> <button type="button" class="ref" data-ref="Prov. 21:2" data-version="rv">Prov. 21:2</button></span>
+</div>
+<div class="ol sub"><b>B.</b> Job pursued something in the realm of ethics, but we, the believers in Christ, should pursue something in the realm of God.
+ <span class="refs"><button type="button" class="ref" data-ref="1 Cor. 15:28" data-version="rv">1 Cor. 15:28</button> <button type="button" class="ref" data-ref="Eph. 3:16-21" data-version="rv">Eph. 3:16-21</button></span>
+</div>
+<div class="ol sub"><b>C.</b> In our daily living, we should not be in the realm of the tree of the knowledge of good and evil but in the realm of the life-giving Spirit.
+ <span class="refs"><button type="button" class="ref" data-ref="1 Cor. 15:45" data-version="rv">1 Cor. 15:45</button> <button type="button" class="ref" data-ref="Rom. 8:2" data-version="rv">Rom. 8:2</button></span>
+</div>
+<div class="ol sub"><b>D.</b> God’s intention is to tear us down and rebuild us with Himself as our life and nature so that we may be persons absolutely one with Him.
+ <span class="refs"><button type="button" class="ref" data-ref="2 Cor. 1:9" data-version="rv">2 Cor. 1:9</button> <button type="button" class="ref" data-ref="2 Cor. 4:14" data-version="rv">2 Cor. 4:14</button></span>
+</div>
+</div>
+
+<div class="card" id="koreanOutline">
+<h2>한글 개요</h2>
+<h3>메시지 4 — 욥과 두 나무</h3>
+<p class="ko"><b>성경:</b> 창 2:9, 17, 계 22:1-2, 14, 욥 1:1, 2:3, 42:1-6</p>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="1">DAY 1 · 1일</button></div>
+<div class="ol major"><b>Ⅰ.</b> 신성한 계시에는 두 나무, 두 근원, 두 길, 두 원칙, 두 완결이 있다.
+</div>
+<div class="ol sub"><b>A.</b> 두 나무.
+</div>
+<div class="ol sub2"><b>1.</b> 생명나무는 사람과 하나님의 관계에서 사람에게 생명이 되시는 삼일 하나님을 상징한다.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 2:9" data-version="rv">Gen. 2:9</button> <button type="button" class="ref" data-ref="Psa. 36:9" data-version="rv">Psa. 36:9</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> 선과 악의 지식나무는 사람이 하나님 앞에서 타락할 때 사람에게 죽음이 된 악한 자 사탄 마귀를 상징한다.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 2:17" data-version="rv">Gen. 2:17</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="2">DAY 2 · 2일</button></div>
+<div class="ol sub"><b>B.</b> 두 근원.
+</div>
+<div class="ol sub2"><b>1.</b> 생명나무는 자신의 공급과 누림을 위해 생명이신 하나님을 추구하는 사람들의 근원이다.
+ <span class="refs"><button type="button" class="ref" data-ref="John 1:4" data-version="rv">John 1:4</button> <button type="button" class="ref" data-ref="John 15:1" data-version="rv">John 15:1</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> 선과 악의 지식나무는 죽음과 영원한 멸망에 이르게 하는 독인 사탄을 따르는 사람들의 근원이다.
+ <span class="refs"><button type="button" class="ref" data-ref="John 8:44" data-version="rv">John 8:44</button></span>
+</div>
+<div class="ol sub2"><b>3.</b> 이 두 근원의 결과는 두 왕국, 곧 하나님의 왕국과 사탄의 왕국이다.
+ <span class="refs"><button type="button" class="ref" data-ref="Matt. 21:43" data-version="rv">Matt. 21:43</button> <button type="button" class="ref" data-ref="Matt. 12:26" data-version="rv">Matt. 12:26</button> <button type="button" class="ref" data-ref="Col. 1:13" data-version="rv">Col. 1:13</button></span>
+</div>
+<div class="ol sub"><b>C.</b> 두 길.
+</div>
+<div class="ol sub2"><b>1.</b> 첫 번째 길은 생명의 길 곧 비좁은 길이며, 사람들이 하나님을 찾고, 하나님을 얻으며, 하나님을 그분의 영원한 생명 안에서 공급으로 누리게 하는 길이다.
+ <span class="refs"><button type="button" class="ref" data-ref="Matt. 7:14" data-version="rv">Matt. 7:14</button> <button type="button" class="ref" data-ref="Acts 9:2" data-version="rv">Acts 9:2</button> <button type="button" class="ref" data-ref="Acts 16:17" data-version="rv">Acts 16:17</button> <button type="button" class="ref" data-ref="Acts 18:25-26" data-version="rv">Acts 18:25-26</button> <button type="button" class="ref" data-ref="2 Pet. 2:15" data-version="rv">2 Pet. 2:15</button> <button type="button" class="ref" data-ref="2 Pet. 2:21" data-version="rv">2 Pet. 2:21</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> 두 번째 길은 죽음과 선악의 길 곧 널찍한 길이며, 사람들이 사탄을 따라가 사탄의 자녀가 되게 하는 길이다.
+ <span class="refs"><button type="button" class="ref" data-ref="Matt. 7:13" data-version="rv">Matt. 7:13</button> <button type="button" class="ref" data-ref="1 John 3:10" data-version="rv">1 John 3:10</button></span>
+</div>
+<div class="ol sub"><b>D.</b> 두 원칙.
+</div>
+<div class="ol sub2"><b>1.</b> 첫 번째 원칙은 생명의 원칙, 곧 하나님을 의지하는 원칙이다.
+ <span class="refs"><button type="button" class="ref" data-ref="John 15:5" data-version="rv">John 15:5</button> <button type="button" class="ref" data-ref="Gen. 4:4" data-version="rv">Gen. 4:4</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> 두 번째 원칙은 죽음과 선악의 원칙, 곧 하나님에게서 독립하는 원칙이다.
+ <span class="refs"><button type="button" class="ref" data-ref="Jer. 17:5-6" data-version="rv">Jer. 17:5-6</button> <button type="button" class="ref" data-ref="Gen. 4:3" data-version="rv">Gen. 4:3</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="3">DAY 3 · 3일</button></div>
+<div class="ol sub"><b>E.</b> 두 완결은 사람들이 하나님과의 관계에서 취한 두 길의 최종 결과이다.
+</div>
+<div class="ol sub2"><b>1.</b> 하나님의 생명의 길의 완결은 생명수의 성인 새 예루살렘이다.
+ <span class="refs"><button type="button" class="ref" data-ref="Rev. 21:2" data-version="rv">Rev. 21:2</button> <button type="button" class="ref" data-ref="Rev. 21:10-11" data-version="rv">Rev. 21:10-11</button> <button type="button" class="ref" data-ref="Rev. 22:1-2" data-version="rv">Rev. 22:1-2</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> 죽음과 선악의 길의 완결은 불 못이다.
+ <span class="refs"><button type="button" class="ref" data-ref="Rev. 19:20" data-version="rv">Rev. 19:20</button> <button type="button" class="ref" data-ref="Rev. 20:10" data-version="rv">Rev. 20:10</button> <button type="button" class="ref" data-ref="Rev. 20:14-15" data-version="rv">Rev. 20:14-15</button> <button type="button" class="ref" data-ref="Rev. 21:8" data-version="rv">Rev. 21:8</button></span>
+</div>
+<div class="ol major"><b>Ⅱ.</b> 하나님의 의도는 선과 악의 지식나무의 노선 안에 머무는 욥이 아닌, 생명나무의 노선 안에 머무는 욥을 얻으시려는 것이었다.
+</div>
+<div class="ol sub"><b>A.</b> 욥과 그의 친구들의 논리는 선과 악의 지식나무의 노선에 따른 것이었다.
+ <span class="refs"><button type="button" class="ref" data-ref="Job 2:11-32:1" data-version="rv">Job 2:11-32:1</button></span>
+</div>
+<div class="ol sub"><b>B.</b> 욥은 자신의 친구들과 마찬가지로, 하나님의 경륜을 알지 못한 채 옳고 그름에 대한 지식에만 머물러 있었다.
+ <span class="refs"><button type="button" class="ref" data-ref="Job 4:7-8" data-version="rv">Job 4:7-8</button></span>
+</div>
+<div class="ol sub"><b>C.</b> 욥과 그의 친구들은 선과 악의 지식나무의 영역에 있었다. 하나님은 그들을 그 영역에서 구출하여 생명나무의 영역에 넣으려고 하셨다.
+ <span class="refs"><button type="button" class="ref" data-ref="Job 1:1" data-version="rv">Job 1:1</button> <button type="button" class="ref" data-ref="Job 2:3" data-version="rv">Job 2:3</button> <button type="button" class="ref" data-ref="Job 19:10" data-version="rv">Job 19:10</button></span>
+</div>
+<div class="ol sub"><b>D.</b> 하나님께서 욥을 다루신 목적은 그를 선과 악의 길에서 생명의 길로 돌이키게 하여 하나님을 극도로 얻게 하시려는 것이었다.
+ <span class="refs"><button type="button" class="ref" data-ref="Job 42:1-6" data-version="rv">Job 42:1-6</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="4">DAY 4 · 4일</button></div>
+<div class="ol major"><b>Ⅲ.</b> 우리는 생명나무에 대한 이상, 곧 그리스도 안에서 우리의 음식이 되시는 하나님에 대한 이상이 필요하다.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 2:9" data-version="rv">Gen. 2:9</button> <button type="button" class="ref" data-ref="Rev. 22:1-2" data-version="rv">Rev. 22:1-2</button> <button type="button" class="ref" data-ref="Rev. 22:14" data-version="rv">Rev. 22:14</button></span>
+</div>
+<div class="ol sub"><b>A.</b> 생명나무는 생명이신 그분 자신을 음식의 형태로 그분께서 선택하신 사람들 안으로 분배하시는, 그리스도 안에 계신 삼일 하나님을 상징한다.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 2:9" data-version="rv">Gen. 2:9</button></span>
+</div>
+<div class="ol sub"><b>B.</b> 생명나무는 우주의 중심이다.
+</div>
+<div class="ol sub2"><b>1.</b> 하나님의 목적에 따르면, 우주의 중심은 땅이고, 땅의 중심은 에덴동산이며, 에덴동산의 중심은 생명나무이다. 그러므로 우주는 생명나무에 초점이 맞추어져 있다.
+</div>
+<div class="ol sub2"><b>2.</b> 하나님과 사람 모두에게 생명나무보다 더 중심적이고 중요한 것은 없다.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 3:22" data-version="rv">Gen. 3:22</button> <button type="button" class="ref" data-ref="Rev. 22:14" data-version="rv">Rev. 22:14</button></span>
+</div>
+<div class="ol sub"><b>C.</b> 신약은 그리스도께서 생명나무라는 상징의 성취이심을 계시한다.
+ <span class="refs"><button type="button" class="ref" data-ref="John 1:4" data-version="rv">John 1:4</button> <button type="button" class="ref" data-ref="John 15:5" data-version="rv">John 15:5</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="5">DAY 5 · 5일</button></div>
+<div class="ol sub"><b>D.</b> 요한복음에 계시된 모든 것을 포함하신 그리스도의 모든 방면은 생명나무의 결과이다.
+ <span class="refs"><button type="button" class="ref" data-ref="John 6:48" data-version="rv">John 6:48</button> <button type="button" class="ref" data-ref="John 8:12" data-version="rv">John 8:12</button> <button type="button" class="ref" data-ref="John 10:11" data-version="rv">John 10:11</button> <button type="button" class="ref" data-ref="John 11:25" data-version="rv">John 11:25</button> <button type="button" class="ref" data-ref="John 14:6" data-version="rv">John 14:6</button></span>
+</div>
+<div class="ol sub"><b>E.</b> 생명나무를 누리는 것이 하나님께서 구속하신 모든 사람의 영원한 몫일 것이다.
+ <span class="refs"><button type="button" class="ref" data-ref="Rev. 22:1-2" data-version="rv">Rev. 22:1-2</button> <button type="button" class="ref" data-ref="Rev. 22:14" data-version="rv">Rev. 22:14</button></span>
+</div>
+<div class="ol sub2"><b>1.</b> 생명나무는 하나님께서 사람에 대해 태초부터 의도하셨던 것을 영원히 이룬다.
+ <span class="refs"><button type="button" class="ref" data-ref="Gen. 1:26" data-version="rv">Gen. 1:26</button> <button type="button" class="ref" data-ref="Gen. 2:9" data-version="rv">Gen. 2:9</button></span>
+</div>
+<div class="ol sub2"><b>2.</b> 생명나무의 열매는 영원토록 하나님께서 구속하신 사람들의 음식이 될 것이다. 이 열매는 달마다 맺혀 언제까지나 신선할 것이다.
+ <span class="refs"><button type="button" class="ref" data-ref="Rev. 22:2" data-version="rv">Rev. 22:2</button></span>
+</div>
+<div class="outlineDayMark"><button type="button" class="outlineDayLink" data-day="6">DAY 6 · 6일</button></div>
+<div class="ol major"><b>Ⅳ.</b> 우리가 거듭났을 때, 그리스도는 그분 자신을 생명나무로서 우리 안에 심으셨다.
+ <span class="refs"><button type="button" class="ref" data-ref="John 1:12-13" data-version="rv">John 1:12-13</button> <button type="button" class="ref" data-ref="John 3:3" data-version="rv">John 3:3</button> <button type="button" class="ref" data-ref="John 3:5-6" data-version="rv">John 3:5-6</button> <button type="button" class="ref" data-ref="John 3:15" data-version="rv">John 3:15</button> <button type="button" class="ref" data-ref="John 11:25" data-version="rv">John 11:25</button> <button type="button" class="ref" data-ref="John 15:1" data-version="rv">John 15:1</button> <button type="button" class="ref" data-ref="John 15:5" data-version="rv">John 15:5</button></span>
+</div>
+<div class="ol sub"><b>A.</b> 우리는 우리의 실지적인 생활에서 생명나무의 노선 안에 있지 않고 선과 악의 지식나무의 노선 안에 있을지도 모른다.
+ <span class="refs"><button type="button" class="ref" data-ref="Prov. 16:25" data-version="rv">Prov. 16:25</button> <button type="button" class="ref" data-ref="Prov. 21:2" data-version="rv">Prov. 21:2</button></span>
+</div>
+<div class="ol sub"><b>B.</b> 욥은 윤리의 영역에 있는 것을 추구했지만, 그리스도 안에 있는 믿는 이들인 우리는 하나님의 영역에 있는 것을 추구해야 한다.
+ <span class="refs"><button type="button" class="ref" data-ref="1 Cor. 15:28" data-version="rv">1 Cor. 15:28</button> <button type="button" class="ref" data-ref="Eph. 3:16-21" data-version="rv">Eph. 3:16-21</button></span>
+</div>
+<div class="ol sub"><b>C.</b> 우리는 일상생활에서 선과 악의 지식나무의 영역에 있지 않고, 생명 주시는 영의 영역에 있어야 한다.
+ <span class="refs"><button type="button" class="ref" data-ref="1 Cor. 15:45" data-version="rv">1 Cor. 15:45</button> <button type="button" class="ref" data-ref="Rom. 8:2" data-version="rv">Rom. 8:2</button></span>
+</div>
+<div class="ol sub"><b>D.</b> 하나님의 의도는 우리를 허무시고 우리의 생명과 본성이신 그분 자신으로 우리를 재건축하시어, 우리를 그분과 완전히 하나인 사람들이 되게 하시는 것이다.
+ <span class="refs"><button type="button" class="ref" data-ref="2 Cor. 1:9" data-version="rv">2 Cor. 1:9</button> <button type="button" class="ref" data-ref="2 Cor. 4:14" data-version="rv">2 Cor. 4:14</button></span>
+</div>
+</div>
+</section>
+
+<section id="weekly" class="panel">
+<div class="card"><h2>WEEKLY FOCUS</h2><ol><li>The Bible’s opening picture of the two trees presents a fundamental choice between receiving life from God and taking a way that ends in death.</li><li>The outline develops this into two sources, two ways, two principles, and two consummations, emphasizing dependence on God rather than independence from Him.</li><li>Job becomes the main experiential example: his concern for integrity and right-and-wrong reasoning had to give way to a deeper encounter with God Himself.</li><li>The tree of life is interpreted christologically: Christ is received as life, food, the vine, and the believer’s continuing life supply.</li><li>The week ends in practical experience—turning from self-confidence and natural judgment to the life-giving Spirit and the God who raises the dead.</li></ol></div>
+<div class="card ko"><h2>주간 중점</h2><ol><li>성경의 시작에 있는 두 나무는 하나님에게서 생명을 받아들이는 길과 죽음에 이르는 길의 근본적인 대조를 보여 준다.</li><li>개요는 이를 두 근원, 두 길, 두 원칙, 두 완결로 발전시키며 하나님을 의지하는 생명의 원칙을 강조한다.</li><li>욥은 체험적인 본이다. 그의 순전함과 옳고 그름에 관한 논리보다 하나님 자신을 더 깊이 얻는 것이 중심이 된다.</li><li>생명나무는 그리스도와 연결되어 해석된다. 그리스도는 생명과 음식과 참포도나무와 계속되는 생명 공급으로 누려진다.</li><li>마지막 적용은 자기 확신과 천연적인 판단에서 돌이켜 생명 주시는 영과 죽은 사람을 살리시는 하나님을 의지하는 것이다.</li></ol></div>
+</section>
+
+<section id="daily" class="panel">
+
+<section class="day card" id="daily-day-1">
+  <div class="dayno">DAY 1</div>
+  <h2>Two trees: life and knowledge</h2>
+  <h3 class="ko">두 나무 — 생명과 지식</h3>
+  <div class="mn"><b>MORNING NOURISHMENT</b><div><button type="button" class="ref" data-ref="Gen. 2:9" data-version="rv">Gen. 2:9</button> <button type="button" class="ref" data-ref="Gen. 2:17" data-version="rv">Gen. 2:17</button></div>
+    <p class="ko sourceverse">창 2:9 — 여호와 하나님은 그 땅에 보기 즐겁고 먹기 좋은 온갖 나무를 자라게 하셨고, 동산 한가운데 있는 생명나무와 선과 악의 지식나무도 자라게 하셨다. 창 2:17 — 그러나 선과 악의 지식나무의 열매는 먹어서는 안 된다. 그것을 먹는 날에는 반드시 죽을 것이다.</p>
+  </div>
+  <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3 · 4 · 5</h3>
+    <ol><li>Genesis places two named trees before humanity: the tree of life and the tree of the knowledge of good and evil.</li><li>The ministry reading interprets the tree of life as God as life to man and the other tree as the satanic source of death; this is a typological reading, not the literal wording of Genesis 2.</li><li>The central biblical contrast is life received from God versus a way that ends in death.</li><li>Revelation 22 returns to the tree of life, now in the New Jerusalem beside the river of life.</li><li>For practical Christian living, the key question is not merely, “Is this right or wrong?” but, “Does this keep me receiving God as life?”</li></ol>
+  </div>
+  <p class="ko">성경의 시작에는 생명나무와 선과 악의 지식나무가 있고, 마지막에는 생명수의 강과 생명나무가 있는 새 예루살렘이 나온다. 이번 주의 핵심은 단지 선악을 판단하는 데 머무르지 않고 하나님을 생명으로 받아들이는 길을 보는 것이다.</p>
+  <div class="prop"><b>~2:30 PROPHESYING</b><p>This week begins with a very simple but profound picture: two trees. Genesis does not first present us with a system of doctrines or a list of achievements. It places man before the tree of life and the tree of the knowledge of good and evil. The direct text says that one tree is the tree of life and that eating from the other brings death.
+
+The ministry reading develops this into a spiritual contrast. It sees the tree of life as God coming to man as life, and the other tree as the source of death associated with Satan. I want to hold both the biblical text and the application carefully. Genesis itself does not say, in those exact words, that the two trees are God and Satan. Yet the larger biblical story does repeatedly contrast life in God with death through sin and separation from God.
+
+What touches me practically is that my Christian life can become occupied with knowing what is right and wrong while I neglect receiving Christ as life. I can be correct and still be dry. I can analyze other people and still fail to abide in the Lord.
+
+The tree of life brings me back to dependence. God does not merely want me to improve myself; He wants me to receive life from Him. Revelation ends with the river of life and the tree of life, showing that God’s purpose is not abandoned.
+
+<span class="propPrayer">Lord, keep me from living merely by my own knowledge. Bring me again and again to Yourself as life. In my choices, relationships, and service, may I learn to receive You, depend on You, and live by the life that comes from You.</span></p></div>
+  <div class="prayer"><b>PRAYER · 기도</b><p class="ko">주님, 제가 선악의 판단만으로 살지 않고 당신을 생명으로 받아들이게 하소서. 지식으로 옳아지는 것보다 당신을 의지하고 누리는 것을 더 귀하게 여기게 하시며, 오늘도 생명나무이신 그리스도께 나아가게 하소서.</p></div>
+  <textarea class="note" data-key="week4-day1" placeholder="My private note…"></textarea>
+</section>
+<section class="day card" id="daily-day-2">
+  <div class="dayno">DAY 2</div>
+  <h2>Two sources, two ways, and two principles</h2>
+  <h3 class="ko">두 근원, 두 길, 두 원칙</h3>
+  <div class="mn"><b>MORNING NOURISHMENT</b><div><button type="button" class="ref" data-ref="Matt. 7:13-14" data-version="rv">Matt. 7:13-14</button></div>
+    <p class="ko sourceverse">마 7:13-14 — 좁은 문을 통해 들어가십시오. 파멸로 이끄는 문은 넓고 그 길이 널찍하여 그리로 들어가는 사람이 많으며, 생명으로 이끄는 문은 좁고 그 길이 비좁아 찾는 사람이 적습니다.</p>
+  </div>
+  <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3 · 4 · 5</h3>
+    <ol><li>What we take in becomes part of us; the reading uses eating as a picture of receiving and assimilating a source.</li><li>The outline traces two sources into two ways: the way of life and the broad way that ends in destruction.</li><li>The way of life is marked by seeking God, gaining God, and enjoying God as our supply.</li><li>The first principle is dependence on God; the contrasting principle is independence from God.</li><li>Matthew 7 directly speaks of the narrow gate and constricted way leading to life; connecting this with Genesis 2 is a broader canonical application.</li></ol>
+  </div>
+  <p class="ko">두 나무는 두 근원이 되고, 두 근원은 두 길과 두 원칙으로 발전한다. 생명의 원칙은 하나님을 의지하는 것이고, 반대 원칙은 하나님에게서 독립하는 것이다. 실제 생활에서 무엇을 받아들이고 무엇을 의지하는지가 결국 우리의 길을 형성한다.</p>
+  <div class="prop"><b>~2:30 PROPHESYING</b><p>Day 2 helps me see that a source eventually becomes a way. What I continually receive does not remain outside of me; it influences my thinking, my desires, and my direction. The reading uses eating as a picture of taking something into us, digesting it, and assimilating it.
+
+The outline speaks of two sources and two ways. The way of life is the constricted way. It is not simply a harder religious path. It is a life of seeking God, gaining God, and enjoying God as our supply. The contrasting way is broad because independence from God feels natural to the fallen human being.
+
+John 15 makes the principle very clear: the branch must abide in the vine, because apart from Christ we can do nothing. That is the principle of dependence. Even when I am doing something outwardly good, I need to ask whether I am doing it in fellowship with the Lord or merely from myself.
+
+I also want to be careful not to turn this teaching into a simplistic claim that every form of knowledge or every human activity is evil. Scripture itself values truth, wisdom, and knowledge that come from God. The issue is the source and our relationship to God.
+
+So today I want to choose the constricted way—not by self-effort, but by dependence. <span class="propPrayer">Lord, make me a branch abiding in You. Teach me to seek You, gain You, and enjoy You in the ordinary decisions of the day. Keep me from the hidden independence that makes me strong in myself but weak in fellowship with You.</span></p></div>
+  <div class="prayer"><b>PRAYER · 기도</b><p class="ko">주님, 오늘 제 안의 독립을 드러내 주소서. 제가 스스로 옳다고 여기는 길보다 당신을 의지하는 생명의 길을 택하게 하시고, 모든 일에서 당신을 찾고 얻고 누리게 하소서.</p></div>
+  <textarea class="note" data-key="week4-day2" placeholder="My private note…"></textarea>
+</section>
+<section class="day card" id="daily-day-3">
+  <div class="dayno">DAY 3</div>
+  <h2>The two consummations and God’s intention with Job</h2>
+  <h3 class="ko">두 완결과 욥에 대한 하나님의 의도</h3>
+  <div class="mn"><b>MORNING NOURISHMENT</b><div><button type="button" class="ref" data-ref="Rev. 22:1-2" data-version="rv">Rev. 22:1-2</button></div>
+    <p class="ko sourceverse">계 22:1-2 — 또 그 천사는 나에게 수정처럼 빛나는 생명수의 강을 보여 주었습니다. 그 강은 하나님과 어린양의 보좌에서 흘러나와 그 성의 길 가운데로 흐르고 있었습니다. 강의 이쪽과 저쪽에 생명나무가 있어서 …</p>
+  </div>
+  <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3 · 4 · 5</h3>
+    <ol><li>Revelation presents two final realities: the New Jerusalem with the river and tree of life, and the lake of fire.</li><li>The outline treats these as the consummations of two spiritual ways traced from Genesis.</li><li>Job and his friends were occupied with the logic of right and wrong, retribution, and human integrity.</li><li>The ministry interprets God’s dealing with Job as a turn from the realm of ethical self-perfection to the realm of receiving God as life.</li><li>Job 42 explicitly records a decisive change: Job moves from hearing about God to seeing God and responds in humility and repentance.</li></ol>
+  </div>
+  <p class="ko">새 예루살렘과 불 못은 계시록의 두 최종 장면이다. 개요는 이것을 창세기의 두 나무에서 시작된 두 길의 완결로 본다. 욥에 대한 적용의 핵심은 옳고 그름에 관한 논쟁을 넘어 하나님 자신을 더 깊이 아는 데 있다.</p>
+  <div class="prop"><b>~2:30 PROPHESYING</b><p>Day 3 moves from the two ways to their final outcomes and then applies the same principle to Job. Revelation gives us the bright picture of the New Jerusalem, with the river of water of life and the tree of life. It also gives the solemn picture of the lake of fire. The outline connects these two endings with the two lines that begin in Genesis.
+
+Then the focus turns to Job. Job was described as perfect and upright, and he cared deeply about integrity. Yet much of the dialogue in Job revolves around the question, “Who is right? Who is wrong? Why is suffering happening?” Job and his friends argue within a moral framework of cause and effect.
+
+The ministry interprets God’s purpose as something deeper than settling the argument. God wanted Job to move beyond confidence in his own integrity and come into a more direct knowledge of God Himself. Job 42 gives us the clearest biblical anchor for this: “I had heard of You by the hearing of the ear, but now my eye has seen You.”
+
+That is a word I need. I can know many correct teachings about God and still need God Himself. I can defend my righteousness and still need to be brought into humility before Him.
+
+<span class="propPrayer">Lord, do not allow my Christian life to become only an argument about right and wrong. Lead me into the knowledge of Yourself. When You touch my self-confidence, may I not merely defend myself. May I gain You more deeply and learn the way of life.</span></p></div>
+  <div class="prayer"><b>PRAYER · 기도</b><p class="ko">주님, 제가 옳고 그름의 논쟁에만 머물지 않게 하소서. 욥처럼 귀로만 듣는 데서 당신을 보는 데로 나아가게 하시고, 제 자신에 대한 확신보다 하나님 자신을 더 얻도록 이끌어 주소서.</p></div>
+  <textarea class="note" data-key="week4-day3" placeholder="My private note…"></textarea>
+</section>
+<section class="day card" id="daily-day-4">
+  <div class="dayno">DAY 4</div>
+  <h2>A vision of God in Christ as our food</h2>
+  <h3 class="ko">그리스도 안에서 우리의 음식이 되시는 하나님</h3>
+  <div class="mn"><b>MORNING NOURISHMENT</b><div><button type="button" class="ref" data-ref="John 1:4" data-version="rv">John 1:4</button> <button type="button" class="ref" data-ref="John 15:1" data-version="rv">John 15:1</button></div>
+    <p class="ko sourceverse">요 1:4 — 그분 안에 생명이 있었으며, 그 생명은 사람들의 빛이었다. 요 15:1 — “나는 참포도나무요, 나의 아버지는 농부이십니다.”</p>
+  </div>
+  <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3 · 4 · 5</h3>
+    <ol><li>The tree of life is presented as the central item in Eden because it concerns life, not human production or achievement.</li><li>The ministry sees the tree as a picture of God in Christ becoming available to man in the form of food.</li><li>John says that life is in Christ and portrays Him as the true vine; these themes support a Christian typological reading of the tree of life.</li><li>Spiritual life is sustained by receiving Christ, just as physical life is sustained by food.</li><li>The practical emphasis is availability: Christ as life is not merely a high doctrine to admire but a Person to receive, enjoy, and abide in.</li></ol>
+  </div>
+  <p class="ko">생명나무는 인간의 성취보다 생명과 음식에 초점을 둔다. 요한복음은 그리스도 안에 생명이 있고 그분이 참포도나무이심을 계시한다. 이번 날의 핵심은 그리스도를 분석하는 데 그치지 않고 생명 공급으로 받아들이고 누리는 것이다.</p>
+  <div class="prop"><b>~2:30 PROPHESYING</b><p>Day 4 gives us a vision of God in Christ as our food. The Genesis account says that the trees in the garden were good for food. The ministry emphasizes that this picture is not about producing materials for human achievement; it is about receiving a life supply.
+
+In the New Testament, John tells us that in Christ was life. Jesus also says, “I am the true vine,” and elsewhere in John He calls Himself the bread of life, the resurrection and the life, and the way, the reality, and the life. The New Testament never simply says, “Jesus is the tree of life,” but these themes make the Christian typological connection understandable.
+
+What helps me is the thought that Christ is not only someone to believe in objectively but also someone to receive and abide in. Food must be taken in. A vine supplies life to its branches from within. This means my need each day is not merely more information about Christ but more fellowship with Christ.
+
+The Lord is high and glorious, but He also makes Himself available to us. He comes near enough to be received. Prayer, the word, calling on His name, and fellowship can become ways of opening to Him as our life supply.
+
+<span class="propPrayer">Lord Jesus, be more than a doctrine to me today. Be my food and my life. Keep me abiding in You as a branch in the vine. Supply me from within so that my living is not produced merely by effort but by the life that flows from You.</span></p></div>
+  <div class="prayer"><b>PRAYER · 기도</b><p class="ko">주 예수님, 당신을 단지 연구하는 데 머물지 않고 생명 공급으로 받아들이게 하소서. 참포도나무이신 당신 안에 거하고, 말씀과 기도 안에서 당신을 먹고 누리며, 당신의 생명으로 살게 하소서.</p></div>
+  <textarea class="note" data-key="week4-day4" placeholder="My private note…"></textarea>
+</section>
+<section class="day card" id="daily-day-5">
+  <div class="dayno">DAY 5</div>
+  <h2>Christ as our continuing life supply</h2>
+  <h3 class="ko">계속되는 생명 공급이신 그리스도</h3>
+  <div class="mn"><b>MORNING NOURISHMENT</b><div><button type="button" class="ref" data-ref="Rev. 22:14" data-version="rv">Rev. 22:14</button> <button type="button" class="ref" data-ref="John 14:6" data-version="rv">John 14:6</button></div>
+    <p class="ko sourceverse">계 22:14 — 생명나무에 이르는 권리를 얻고 문들을 통하여 그 성안으로 들어가도록 자기의 겉옷을 빠는 사람들은 복이 있다. 요 14:6 — 예수님께서 말씀하셨다. “내가 곧 길이요 실재요 생명이니, 나를 통하지 않고서는 아무도 아버지께로 가지 못합니다.”</p>
+  </div>
+  <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3 · 4 · 5</h3>
+    <ol><li>Revelation 22 presents the tree of life beside the river of life and describes access to the tree as a blessing.</li><li>The Christian reading identifies Christ as our life supply and His redemption as opening the way for believers to enjoy life.</li><li>The picture of the street, river, and tree is used devotionally to describe God’s nature, the Spirit’s flow, and Christ’s life supply working together.</li><li>The lesson is practical: when inner fellowship is disturbed, we should turn back to the Lord rather than justify ourselves.</li><li>The tree bears fruit continually; the image emphasizes a life supply that remains fresh and available.</li></ol>
+  </div>
+  <p class="ko">계시록 22장의 길과 강과 생명나무는 생명 공급의 풍성한 그림을 보여 준다. 사역의 글은 이를 일상생활에 적용하여, 내적인 생명의 느낌을 무시하지 않고 주님께 돌이킬 때 생명의 흐름과 공급을 누릴 수 있다고 설명한다.</p>
+  <div class="prop"><b>~2:30 PROPHESYING</b><p>Day 5 brings us to Revelation 22, where the tree of life grows by the river of water of life. The picture is one of continual supply. The tree produces fruit month by month, and the river flows from the throne of God and of the Lamb.
+
+The ministry applies this picture to our daily experience. It connects the way, the river, and the tree with God’s nature, the Spirit’s flow, and Christ as our life supply. We should recognize that this is a spiritual application of Revelation’s imagery, but it gives us a useful practical question: am I walking in fellowship with the Lord, or am I arguing against the inner sense of life?
+
+Sometimes we know inwardly that something is disturbing our fellowship, but we justify ourselves. The result is often dryness. When we turn back to the Lord and say Amen to His inward speaking, fellowship is restored and the sense of life becomes fresh again.
+
+I am also encouraged by the freshness of the tree. It bears fruit every month. Christ is not yesterday’s supply only. He is present and available today.
+
+<span class="propPrayer">Lord Jesus, thank You for redemption that opens the way to life. Keep me in the flow of the Spirit. Make me sensitive to Your inward leading, but save me from introspection and legalism. Bring me back to simple fellowship with You, where Your life is fresh, flowing, and sufficient for every situation.</span></p></div>
+  <div class="prayer"><b>PRAYER · 기도</b><p class="ko">주님, 오늘도 생명수의 흐름 안에서 당신을 생명 공급으로 누리게 하소서. 제 안의 생명의 느낌을 무시하거나 스스로 변명하지 않게 하시고, 단순히 당신께 돌이켜 신선한 공급을 받게 하소서.</p></div>
+  <textarea class="note" data-key="week4-day5" placeholder="My private note…"></textarea>
+</section>
+<section class="day card" id="daily-day-6">
+  <div class="dayno">DAY 6</div>
+  <h2>Turning from self-confidence to the life-giving Spirit</h2>
+  <h3 class="ko">자기 확신에서 생명 주시는 영께로 돌이킴</h3>
+  <div class="mn"><b>MORNING NOURISHMENT</b><div><button type="button" class="ref" data-ref="Prov. 16:25" data-version="rv">Prov. 16:25</button> <button type="button" class="ref" data-ref="John 11:25" data-version="rv">John 11:25</button> <button type="button" class="ref" data-ref="Rom. 8:2" data-version="rv">Rom. 8:2</button></div>
+    <p class="ko sourceverse">잠 16:25 — 사람에게는 바른길로 보이나 그 끝은 죽음에 이르는 길이 있다. 요 11:25 — “… 나는 부활이요 생명이니, 나를 믿는 사람은 죽어도 살 것이고,” 롬 8:2 — 생명의 영의 법이 그리스도 예수님 안에서 나를 죄와 죽음의 법에서 해방하였다.</p>
+  </div>
+  <div class="focus3"><h3>DAILY FOCUS — 1 · 2 · 3 · 4 · 5</h3>
+    <ol><li>Regeneration means that divine life has entered the believer; the outline pictures this as Christ planted in us as the tree of life.</li><li>A way may seem right to us and still end in death; therefore self-certainty is not a sufficient guide.</li><li>The practical alternative is the realm of the life-giving Spirit and the law of the Spirit of life in Christ.</li><li>The ministry uses Job to expose confidence in natural integrity and self-perfection, not to deny the biblical value of moral goodness.</li><li>God’s deeper work is described as bringing us out of confidence in ourselves so that we live by the God who raises the dead.</li></ol>
+  </div>
+  <p class="ko">거듭남 이후에도 실제 생활에서는 선악과 자기 판단의 영역으로 쉽게 돌아갈 수 있다. 마지막 날의 적용은 자신을 신뢰하는 데서 돌이켜 생명 주시는 영과 부활의 하나님을 의지하며, 그리스도께서 우리 안에서 사시도록 길을 내어 드리는 것이다.</p>
+  <div class="prop"><b>~2:30 PROPHESYING</b><p>Day 6 makes the week very practical. The outline says that when we were regenerated, Christ planted Himself into us as the tree of life. Whether or not we use that exact picture, the New Testament is clear that believers receive divine life and that Christ lives in them.
+
+Yet after regeneration we can still live from ourselves. Proverbs warns that a way can seem right to a person and still end in death. That means sincerity and self-confidence are not enough. I may be convinced that I am right and still be operating apart from the Lord.
+
+Romans 8 gives a positive alternative: the law of the Spirit of life in Christ Jesus. First Corinthians speaks of Christ as the life-giving Spirit. The point is not to become passive or morally careless. Scripture still calls us to righteousness and obedience. The issue is the source from which we live.
+
+The ministry uses Job as a picture of a person whose natural integrity had to be touched so that his confidence would no longer rest in himself. Second Corinthians 1:9 gives a strong New Testament principle: we should not base our confidence on ourselves but on God who raises the dead.
+
+This is where I want to end the week. <span class="propPrayer">Lord, turn me from self-confidence to resurrection dependence. When I face a difficult conversation, a decision, or a trial, keep me from merely asking what I can accomplish by myself. Teach me to contact You, receive Your life, and allow Christ to live in me. Make the tree of life not only a teaching I understand but a daily experience in my spirit.</span></p></div>
+  <div class="prayer"><b>PRAYER · 기도</b><p class="ko">주님, 제 눈에 바르게 보이는 길과 제 자신의 능력을 신뢰하지 않게 하소서. 생명 주시는 영께 돌이키고 부활의 하나님을 의지하게 하시며, 모든 일에서 “내가 아니라 그리스도께서 내 안에 사신다”는 실제 안에 살게 하소서.</p></div>
+  <textarea class="note" data-key="week4-day6" placeholder="My private note…"></textarea>
+</section>
+</section>
+
+<section id="notes" class="panel">
+<div class="card">
+<h2>MY NOTES</h2>
+<p>Day 1–6의 개인 노트는 이 기기의 브라우저에 자동 저장됩니다.</p>
+<div id="notesAggregate" class="notesGrid"></div>
+<div class="noteActions"><button type="button" id="exportNotes">Export Notes</button><button type="button" id="importNotesBtn">Import Notes</button><input type="file" id="importNotes" accept=".json" hidden></div>
+</div>
+</section>
+
+<section id="hymn" class="panel">
+<div class="card">
+<h2>HYMN</h2>
+<h3>Only in Thee · Hymn #509</h3>
+<p class="ko"><b>4주 찬송:</b> 하나의 강과 한 나무 · 그리스도를 체험함 — 음식으로 · 영 509장</p>
+<a class="hymnLink" href="https://www.hymnal.net/en/hymn/h/509" target="_blank" rel="noopener">Open Hymn #509</a>
+<p class="sourceLine">찬송 가사는 저작권을 존중하여 앱에 전체 복제하지 않고 연결만 제공합니다.</p>
+</div>
+</section>
+
+<section id="chunks" class="panel">
+<div class="card">
+<h2>THIS WEEK’S ESSENTIAL ENGLISH CHUNKS · INTERMEDIATE</h2>
+<div class="chunkIntro"><b>선정 기준:</b> 이번 주 내용을 들을 때 원어민이 한 덩어리로 처리하는 의미 단위, 핵심 신학 표현, 중급 학습자가 연결 발음에서 놓치기 쉬운 표현을 우선했습니다.</div>
+<div class="chunkControls">
+<label>Day <select id="chunkDaySelect"><option value="1">Day 1</option><option value="2">Day 2</option><option value="3">Day 3</option><option value="4">Day 4</option><option value="5">Day 5</option><option value="6">Day 6</option></select></label>
+<label>Repeat <select id="chunkRepeat"><option value="1">1×</option><option value="2" selected>2×</option><option value="3">3×</option></select></label>
+<label>Speed <select id="chunkRate"><option value=".85">0.85</option><option value=".9">0.9</option><option value="1" selected>1.0</option><option value="1.1">1.1</option><option value="1.2">1.2</option></select></label>
+<label>Voice <select id="chunkVoice"><option value="">Auto — male first</option></select></label>
+<button type="button" id="chunkDayListen">▶ Selected Day</button>
+<button type="button" id="chunkPause">⏸ Pause</button>
+<button type="button" id="chunkStop">⏹ Stop</button>
+</div>
+<div class="chunkDay" data-chunk-day="1"><h3>DAY 1</h3><div class="chunkRow"><button type="button" class="chunkPlay" data-day="1" data-index="0">🔊 1</button>
+        <div><div class="chunkText">two trees, two sources, two ways</div><div class="chunkKo">두 나무, 두 근원, 두 길</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="1" data-index="1">🔊 2</button>
+        <div><div class="chunkText">in man’s relationship with Him</div><div class="chunkKo">사람과 그분의 관계에서</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="1" data-index="2">🔊 3</button>
+        <div><div class="chunkText">the tree of life signifies</div><div class="chunkKo">생명나무는 …을 상징한다</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="1" data-index="3">🔊 4</button>
+        <div><div class="chunkText">as death to man</div><div class="chunkKo">사람에게 죽음으로</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="1" data-index="4">🔊 5</button>
+        <div><div class="chunkText">the central biblical contrast</div><div class="chunkKo">성경의 중심적인 대조</div></div></div></div><div class="chunkDay" data-chunk-day="2"><h3>DAY 2</h3><div class="chunkRow"><button type="button" class="chunkPlay" data-day="2" data-index="0">🔊 1</button>
+        <div><div class="chunkText">the constricted way</div><div class="chunkKo">비좁은 길</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="2" data-index="1">🔊 2</button>
+        <div><div class="chunkText">seek God, gain God, and enjoy God</div><div class="chunkKo">하나님을 찾고 얻고 누리다</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="2" data-index="2">🔊 3</button>
+        <div><div class="chunkText">the principle of dependence on God</div><div class="chunkKo">하나님을 의지하는 원칙</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="2" data-index="3">🔊 4</button>
+        <div><div class="chunkText">independence from God</div><div class="chunkKo">하나님에게서 독립함</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="2" data-index="4">🔊 5</button>
+        <div><div class="chunkText">what we take in becomes part of us</div><div class="chunkKo">우리가 받아들이는 것은 우리의 일부가 된다</div></div></div></div><div class="chunkDay" data-chunk-day="3"><h3>DAY 3</h3><div class="chunkRow"><button type="button" class="chunkPlay" data-day="3" data-index="0">🔊 1</button>
+        <div><div class="chunkText">the final outcome of the two ways</div><div class="chunkKo">두 길의 최종 결과</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="3" data-index="1">🔊 2</button>
+        <div><div class="chunkText">gain God to the fullest extent</div><div class="chunkKo">하나님을 가장 충만한 정도로 얻다</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="3" data-index="2">🔊 3</button>
+        <div><div class="chunkText">halted in the knowledge of right and wrong</div><div class="chunkKo">옳고 그름의 지식에 머물다</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="3" data-index="3">🔊 4</button>
+        <div><div class="chunkText">rescue them from that realm</div><div class="chunkKo">그 영역에서 그들을 구출하다</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="3" data-index="4">🔊 5</button>
+        <div><div class="chunkText">my eye has seen You</div><div class="chunkKo">제 눈이 주님을 보았습니다</div></div></div></div><div class="chunkDay" data-chunk-day="4"><h3>DAY 4</h3><div class="chunkRow"><button type="button" class="chunkPlay" data-day="4" data-index="0">🔊 1</button>
+        <div><div class="chunkText">a vision of God in Christ as our food</div><div class="chunkKo">그리스도 안에서 음식이 되시는 하나님에 대한 이상</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="4" data-index="1">🔊 2</button>
+        <div><div class="chunkText">the center of the universe</div><div class="chunkKo">우주의 중심</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="4" data-index="2">🔊 3</button>
+        <div><div class="chunkText">in the form of food</div><div class="chunkKo">음식의 형태로</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="4" data-index="3">🔊 4</button>
+        <div><div class="chunkText">the fulfillment of the figure</div><div class="chunkKo">그 상징의 성취</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="4" data-index="4">🔊 5</button>
+        <div><div class="chunkText">apart from Me you can do nothing</div><div class="chunkKo">나를 떠나서는 아무것도 할 수 없다</div></div></div></div><div class="chunkDay" data-chunk-day="5"><h3>DAY 5</h3><div class="chunkRow"><button type="button" class="chunkPlay" data-day="5" data-index="0">🔊 1</button>
+        <div><div class="chunkText">the eternal portion of all God’s redeemed</div><div class="chunkKo">하나님께서 구속하신 모든 사람의 영원한 몫</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="5" data-index="1">🔊 2</button>
+        <div><div class="chunkText">our life supply</div><div class="chunkKo">우리의 생명 공급</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="5" data-index="2">🔊 3</button>
+        <div><div class="chunkText">along the flow of the water of life</div><div class="chunkKo">생명수의 흐름을 따라</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="5" data-index="3">🔊 4</button>
+        <div><div class="chunkText">continually fresh</div><div class="chunkKo">계속 신선한</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="5" data-index="4">🔊 5</button>
+        <div><div class="chunkText">have right to the tree of life</div><div class="chunkKo">생명나무에 이르는 권리를 가지다</div></div></div></div><div class="chunkDay" data-chunk-day="6"><h3>DAY 6</h3><div class="chunkRow"><button type="button" class="chunkPlay" data-day="6" data-index="0">🔊 1</button>
+        <div><div class="chunkText">Christ planted Himself into us</div><div class="chunkKo">그리스도께서 그분 자신을 우리 안에 심으셨다</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="6" data-index="1">🔊 2</button>
+        <div><div class="chunkText">in our practical living</div><div class="chunkKo">우리의 실제 생활에서</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="6" data-index="2">🔊 3</button>
+        <div><div class="chunkText">the realm of the life-giving Spirit</div><div class="chunkKo">생명 주시는 영의 영역</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="6" data-index="3">🔊 4</button>
+        <div><div class="chunkText">not base our confidence on ourselves</div><div class="chunkKo">우리 자신을 신뢰하지 않다</div></div></div><div class="chunkRow"><button type="button" class="chunkPlay" data-day="6" data-index="4">🔊 5</button>
+        <div><div class="chunkText">tear us down and rebuild us with Himself</div><div class="chunkKo">우리를 허무시고 그분 자신으로 재건축하시다</div></div></div></div>
+</div>
+</section>
+
+<section id="review" class="panel">
+<div class="card">
+<h2>THEOLOGICAL REVIEW · TEXT-CENTERED</h2>
+<p><b>1. The two trees.</b> Genesis 2 explicitly names the tree of life and the tree of the knowledge of good and evil and gives the warning of death. Identifying the tree of life specifically with the Triune God and the other tree specifically with Satan is a Christian/ministry typological interpretation rather than the direct wording of Genesis.</p>
+<p><b>2. “Knowledge, good, and evil are Satan.”</b> This should not be universalized as though Scripture condemns all knowledge or all goodness. Scripture elsewhere commends wisdom, knowledge of God, truth, and doing good. In this ministry framework, the stronger statement functions as a warning against pursuing even “good” independently of God.</p>
+<p><b>3. The narrow and broad ways.</b> Matthew 7 explicitly contrasts the constricted way leading to life with the broad way leading to destruction. Linking these ways to the two trees is a canonical theological synthesis, not an explicit connection made in Matthew 7.</p>
+<p><b>4. Job.</b> The book of Job clearly shows Job’s integrity, his dispute with his friends, God’s speeches, and Job’s climactic response in 42:5-6. Describing God’s purpose as “stripping,” “consuming,” and “rebuilding Job with God Himself” is a ministry interpretation of the narrative and should be distinguished from the explicit wording of Job.</p>
+<p><b>5. Christ and the tree of life.</b> John explicitly says that life is in Christ, that He is the bread of life, the resurrection and the life, the way and the life, and the true vine. Revelation presents the tree of life in the New Jerusalem. Reading Christ as the fulfillment of the tree-of-life figure is a coherent Christian typology, but the New Testament does not state the equation in that exact sentence.</p>
+<p><b>6. The two consummations.</b> Revelation explicitly presents the New Jerusalem and the lake of fire. Treating them as the final outcomes of two lines beginning with Genesis 2 is a theological synthesis of the canon.</p>
+</div>
+</section>
+
+<section id="check" class="panel">
+<div class="card">
+<h2>SCRIPTURE CHECK</h2>
+<p><b>Main reading:</b> Genesis 2:9, 17; Revelation 22:1-2, 14; Job 1:1; 2:3; 42:1-6.</p>
+<p><b>English:</b> every Scripture reference opens first with the Recovery Version wording printed in the supplied Message Four material. For the main Scripture Reading references, Darby remains underneath as a comparison where embedded.</p>
+<p><b>Original language:</b> core Daily Morning Nourishment references have a built-in Hebrew/Greek layer so they do not depend on loading from the internet. Other outline references attempt SBLGNT/MorphGNT (NT) or WLC/OSHB (OT) and stop with Retry rather than remaining on “Loading.”</p>
+<p><b>Color:</b> verbs red · nouns green. Pronunciation/romanization is placed directly beneath the matching original word.</p>
+</div>
+</section>
+</main>
+
+<div id="modal" class="modal" aria-hidden="true"><div class="modalBox">
+<button type="button" id="modalClose" class="closeBtn">✕</button>
+<h2 id="mref"></h2>
+<div class="translationBox"><b id="translationLabel">RECOVERY VERSION · supplied text</b><p id="mrv"></p>
+<div id="darbyCompare" style="display:none;margin-top:12px;padding-top:10px;border-top:1px solid #ddd5ca">
+  <b>DARBY COMPARISON</b><p id="mdarby"></p>
+</div>
+<div class="ttsbar"><button type="button" id="verseListen">🔊 Listen</button><button type="button" id="versePause">⏸ Pause</button><button type="button" id="verseStop">⏹ Stop</button></div></div>
+<div class="originalBox"><h3 id="originalHeading">ORIGINAL LANGUAGE</h3><p id="originalHint" class="sourceLine"></p><div id="mgreek"></div></div>
+</div></div>
+
+<div id="wordDict" class="wordDict" aria-hidden="true"><div class="wordDictBox">
+<button type="button" id="wordDictClose" class="closeBtn">✕</button><div id="wordDictBody"></div>
+</div></div>
+
+<script>
+const RV={"Gen. 2:9": "And out of the ground Jehovah God caused to grow every tree that is pleasant to the sight and good for food, as well as the tree of life in the middle of the garden and the tree of the knowledge of good and evil.", "Gen. 2:17": "But of the tree of the knowledge of good and evil, of it you shall not eat; for in the day that you eat of it you shall surely die.", "Rev. 22:1-2": "And he showed me a river of water of life, bright as crystal, proceeding out of the throne of God and of the Lamb in the middle of its street. 2And on this side and", "Rev. 22:14": "Blessed are those who wash their robes that they may have right to the tree of life and may enter by the gates into the city.", "Job 1:1": "There was a man in the land of Uz whose name was Job; and this man was perfect and upright, and he feared God and turned away from evil.", "Job 2:3": "And Jehovah said to Satan, Have you considered My servant Job? For there is none like him on the earth, a perfect and upright man, who fears God and turns away from evil. And he still holds fast his integrity, though you have moved Me against him to destroy him without cause.", "Job 42:1-6": "Then Job answered Jehovah and said, 2I know that You can do all things And that no purpose of Yours can be restrained. 3Who is this who hides counsel without knowledge? Therefore I have uttered what I did not understand, Things too wonderful for me, which I did not know. 4Hear now, and I will speak; I will ask of You, and You shall inform me. 5I had heard of You by the hearing of the ear, But now my eye has seen You; 6 Therefore I abhor myself, and I repent In dust and ashes.", "Psa. 36:9": "For with You is the fountain of life; In Your light we see light.", "John 1:4": "In Him was life, and the life was the light of men.", "John 15:1": "I am the true vine, and My Father is the husbandman.", "John 8:44": "You are of your father the devil, and you want to do the desires of your father. He was a murderer from the beginning and does not stand in the truth, because there is no truth in him. When he speaks the lie, he speaks it out of his own possessions; for he is a liar and the father of it.", "Matt. 21:43": "Therefore I say to you that the kingdom of God shall be taken from you and shall be given to a nation producing its fruit.", "Matt. 12:26": "And if Satan casts out Satan, he is divided against himself. How then will his kingdom stand?", "Col. 1:13": "Who delivered us out of the authority of darkness and transferred us into the kingdom of the Son of His love,", "Matt. 7:14": "Because narrow is the gate and constricted is the way that leads to life, and few are those who find it.", "Acts 9:2": "And asked for letters from him to Damascus for the synagogues, so that if he found any who were of the Way, both men and women, he might bring them bound to Jerusalem.", "Acts 16:17": "This woman followed after Paul and us and cried out, saying, These men are slaves of the Most High God, who announce to you a way of salvation.", "Acts 18:25-26": "This man was instructed in the way of the Lord, and being fervent in spirit, he spoke and taught accurately the things concerning Jesus, though he knew only the baptism of John. 26And this man began to speak boldly in the synagogue. And when Priscilla and Aquila heard him, they took him to themselves and expounded the way of God to him more accurately.", "2 Pet. 2:15": "Forsaking the straight way, they have gone astray, following the way of Balaam, the son of Beor, who loved the wages of unrighteousness", "2 Pet. 2:21": "For it would be better for them not to have known the way of righteousness than, knowing it, to turn back from the holy commandment delivered to them.", "Matt. 7:13": "Enter in through the narrow gate, for wide is the gate and broad is the way that leads to destruction, and many are those who enter through it.", "1 John 3:10": "In this the children of God and the children of the devil are manifest. Everyone who does not practice righteousness is not of God, neither he who does not love his brother.", "John 15:5": "I am the vine; you are the branches. He who abides in Me and I in him, he bears much fruit; for apart from Me you can do nothing.", "Gen. 4:4": "And Abel also brought an offering, from the firstlings of his flock, that is, from their fat portions. And Jehovah had regard for Abel and for his offering.", "Jer. 17:5-6": "Thus says Jehovah, Cursed is the man who trusts in man And makes flesh his arm And whose heart turns away from Jehovah. 6And he will be like a shrub in the desert And will not see when good comes; But he will dwell in the parched places in the wilderness, A land of salt and uninhabited.", "Gen. 4:3": "And in the course of time Cain brought an offering to Jehovah from the fruit of the ground.", "Rev. 21:2": "And I saw the holy city, New Jerusalem, coming down out of heaven from God, prepared as a bride adorned for her husband.", "Rev. 21:10-11": "And he carried me away in spirit onto a great and high mountain and showed me the holy city, Jerusalem, coming down out of heaven from God, 11 Having the glory of God. Her light was like a most precious stone, like a jasper stone, as clear as crystal.", "Rev. 19:20": "And the beast was seized, and with him the false prophet, who in his presence had done the signs by which he deceived those who received the mark of the beast and those who worshipped his image. These two were cast alive into the lake of fire, which burns with brimstone.", "Rev. 20:10": "And the devil, who deceived them, was cast into the lake of fire and brimstone, where also the beast and the false prophet were; and they will be tormented day and night forever and ever.", "Rev. 20:14-15": "And death and Hades were cast into the lake of fire. This is the second death, the lake of fire. 15And if anyone was not found written in the book of life, he was cast into the lake of fire.", "Rev. 21:8": "But the cowardly and unbelieving and abominable and murderers and fornicators and sorcerers and idolaters and all the false, their part will be in the lake which burns with fire and brimstone, which is the second death.", "Job 4:7-8": "Remember now, who, being innocent, has ever perished? And where have the upright ever been cut off? 8According to what I have seen, those who plow iniquity And those who sow trouble reap the same.", "Job 19:10": "He has broken me all around, and I am gone; And He has plucked up my hope like a tree.", "Gen. 3:22": "And Jehovah God said, Behold, the man has become like one of Us, knowing good and evil; and now, lest he put forth his hand and take also from the tree of life and eat and live forever—", "John 6:48": "I am the bread of life.", "John 8:12": "Again therefore Jesus spoke to them, saying, I am the light of the world; he who follows Me shall by no means walk in darkness, but shall have the light of life.", "John 10:11": "I am the good Shepherd; the good Shepherd lays down His life for the sheep.", "John 11:25": "Jesus said to her, I am the resurrection and the life; he who believes into Me, even if he should die, shall live;", "John 14:6": "Jesus said to him, I am the way and the reality and the life; no one comes to the Father except through Me.", "Gen. 1:26": "And God said, Let Us make man in Our image, according to Our likeness; and let them have dominion over the fish of the sea and over the birds of heaven and over the cattle and over all the earth and over every creeping thing that creeps upon the earth.", "Rev. 22:2": "And on this side and on that side of the river was the tree of life, producing twelve fruits, yielding its fruit each month; and the leaves of the tree are for the healing of the nations.", "John 1:12-13": "But as many as received Him, to them He gave the authority to become children of God, to those who believe into His name, 13Who were begotten not of blood, nor of the will of the flesh, nor of the will of man, but of God.", "John 3:3": "Jesus answered and said to him, Truly, truly, I say to you, Unless one is born anew, he cannot see the kingdom of God.", "John 3:5-6": "Jesus answered, Truly, truly, I say to you, Unless one is born of water and the Spirit, he cannot enter into the kingdom of God. 6That which is born of the flesh is flesh, and that which is born of the Spirit is spirit.", "John 3:15": "That everyone who believes into Him may have eternal life.", "Prov. 16:25": "There is a way which seems right to a man, But the end of it is the ways of death.", "Prov. 21:2": "Every way of a man is right in his own eyes, But Jehovah weighs the hearts.", "1 Cor. 15:28": "And when all things have been subjected to Him, then the Son Himself also will be subjected to Him who has subjected all things to Him, that God may be all in all.", "Eph. 3:16-21": "That He would grant you, according to the riches of His glory, to be strengthened with power through His Spirit into the inner man, 17That Christ may make His home in your hearts through faith, that you, being rooted and grounded in love, 18 May be full of strength to apprehend with all the saints what the breadth and length and height and depth are 19And to know the knowledge-surpassing love of Christ, that you may be filled unto all the fullness of God. 20But to Him who is able to do superabundantly above all that we ask or think, according to the power which operates in us, 21To Him be the glory in the church and in Christ Jesus unto all the generations forever and ever. Amen.", "1 Cor. 15:45": "So also it is written, “The first man, Adam, became a living soul”; the last Adam became a life-giving Spirit.", "Rom. 8:2": "For the law of the Spirit of life has freed me in Christ Jesus from the law of sin and of death.", "2 Cor. 1:9": "Indeed we ourselves had the response of death in ourselves, that we should not base our confidence on ourselves but on God, who raises the dead;", "2 Cor. 4:14": "Knowing that He who raised the Lord Jesus will raise us also with Jesus and will make us stand before Him with you.", "Matt. 7:13-14": "Enter in through the narrow gate, for wide is the gate and broad is the way that leads to destruction, and many are those who enter through it. Because narrow is the gate and constricted is the way that leads to life, and few are those who find it.", "Job 2:11-32:1": "The supplied Message Four outline cites Job 2:11—32:1 as an extended passage, but does not print the full Recovery Version text for this range. The Recovery Version text that is actually printed in the supplied outline is included in this app."};
+const DARBY={"Gen. 2:9": "And out of the ground Jehovah Elohim made every tree grow that is pleasant to the sight, and good for food; and the tree of life, in the midst of the garden, and the tree of the knowledge of good and evil.", "Gen. 2:17": "But of the tree of the knowledge of good and evil, thou shalt not eat of it; for in the day that thou eatest of it thou shalt certainly die.", "Rev. 22:1-2": "And he shewed me a river of water of life, bright as crystal, going out of the throne of God and of the Lamb. In the midst of its street, and of the river, on this side and on that side, the tree of life, producing twelve fruits, in each month yielding its fruit; and the leaves of the tree for healing of the nations.", "Rev. 22:14": "Blessed are they that wash their robes, that they may have right to the tree of life, and that they should go in by the gates into the city.", "Job 1:1": "There was a man in the land of Uz whose name was Job; and this man was perfect and upright, and one that feared God and abstained from evil.", "Job 2:3": "And Jehovah said to Satan, Hast thou considered my servant Job, that there is none like him on the earth, a perfect and an upright man, one that feareth God and abstaineth from evil? and still he remaineth firm in his integrity, though thou movedst me against him, to swallow him up without cause.", "Job 42:1-6": "And Job answered Jehovah and said, I know that thou canst do everything, and that thou canst be hindered in no thought of thine. Who is he that obscureth counsel without knowledge? therefore have I uttered what I did not understand; things too wonderful for me, which I knew not. Hear, I beseech thee, and I will speak: I will demand of thee, and inform me. I had heard of thee by the hearing of the ear, but now mine eye seeth thee: Wherefore I abhor myself, and repent in dust and ashes."};
+const STATIC_ORIGINAL={"Gen. 2:9": {"lang": "Hebrew", "text": "וַיַּצְמַח יְהוָה אֱלֹהִים מִן־הָאֲדָמָה כָּל־עֵץ נֶחְמָד לְמַרְאֶה וְטוֹב לְמַאֲכָל וְעֵץ הַחַיִּים בְּתוֹךְ הַגָּן וְעֵץ הַדַּעַת טוֹב וָרָע׃"}, "Gen. 2:17": {"lang": "Hebrew", "text": "וּמֵעֵץ הַדַּעַת טוֹב וָרָע לֹא תֹאכַל מִמֶּנּוּ כִּי בְּיוֹם אֲכָלְךָ מִמֶּנּוּ מוֹת תָּמוּת׃"}, "Prov. 16:25": {"lang": "Hebrew", "text": "יֵשׁ דֶּרֶךְ יָשָׁר לִפְנֵי־אִישׁ וְאַחֲרִיתָהּ דַּרְכֵי־מָוֶת׃"}, "Matt. 7:13-14": {"lang": "Greek", "text": "Εἰσέλθατε διὰ τῆς στενῆς πύλης· ὅτι πλατεῖα ἡ πύλη καὶ εὐρύχωρος ἡ ὁδὸς ἡ ἀπάγουσα εἰς τὴν ἀπώλειαν, καὶ πολλοί εἰσιν οἱ εἰσερχόμενοι δι’ αὐτῆς· τί στενὴ ἡ πύλη καὶ τεθλιμμένη ἡ ὁδὸς ἡ ἀπάγουσα εἰς τὴν ζωήν, καὶ ὀλίγοι εἰσὶν οἱ εὑρίσκοντες αὐτήν."}, "Rev. 22:1-2": {"lang": "Greek", "text": "Καὶ ἔδειξέν μοι ποταμὸν ὕδατος ζωῆς λαμπρὸν ὡς κρύσταλλον, ἐκπορευόμενον ἐκ τοῦ θρόνου τοῦ θεοῦ καὶ τοῦ ἀρνίου. ἐν μέσῳ τῆς πλατείας αὐτῆς καὶ τοῦ ποταμοῦ ἐντεῦθεν καὶ ἐκεῖθεν ξύλον ζωῆς ποιοῦν καρποὺς δώδεκα, κατὰ μῆνα ἕκαστον ἀποδιδοῦν τὸν καρπὸν αὐτοῦ, καὶ τὰ φύλλα τοῦ ξύλου εἰς θεραπείαν τῶν ἐθνῶν."}, "John 1:4": {"lang": "Greek", "text": "ἐν αὐτῷ ζωὴ ἦν, καὶ ἡ ζωὴ ἦν τὸ φῶς τῶν ἀνθρώπων·"}, "John 15:1": {"lang": "Greek", "text": "Ἐγώ εἰμι ἡ ἄμπελος ἡ ἀληθινή, καὶ ὁ πατήρ μου ὁ γεωργός ἐστιν."}, "Rev. 22:14": {"lang": "Greek", "text": "Μακάριοι οἱ πλύνοντες τὰς στολὰς αὐτῶν, ἵνα ἔσται ἡ ἐξουσία αὐτῶν ἐπὶ τὸ ξύλον τῆς ζωῆς καὶ τοῖς πυλῶσιν εἰσέλθωσιν εἰς τὴν πόλιν."}, "John 14:6": {"lang": "Greek", "text": "Λέγει αὐτῷ ὁ Ἰησοῦς· Ἐγώ εἰμι ἡ ὁδὸς καὶ ἡ ἀλήθεια καὶ ἡ ζωή· οὐδεὶς ἔρχεται πρὸς τὸν πατέρα εἰ μὴ δι’ ἐμοῦ."}, "John 11:25": {"lang": "Greek", "text": "Εἶπεν αὐτῇ ὁ Ἰησοῦς· Ἐγώ εἰμι ἡ ἀνάστασις καὶ ἡ ζωή· ὁ πιστεύων εἰς ἐμὲ κἂν ἀποθάνῃ ζήσεται."}, "Rom. 8:2": {"lang": "Greek", "text": "ὁ γὰρ νόμος τοῦ πνεύματος τῆς ζωῆς ἐν Χριστῷ Ἰησοῦ ἠλευθέρωσέν σε ἀπὸ τοῦ νόμου τῆς ἁμαρτίας καὶ τοῦ θανάτου."}};
+const CHUNKS={"1": ["two trees, two sources, two ways", "in man’s relationship with Him", "the tree of life signifies", "as death to man", "the central biblical contrast"], "2": ["the constricted way", "seek God, gain God, and enjoy God", "the principle of dependence on God", "independence from God", "what we take in becomes part of us"], "3": ["the final outcome of the two ways", "gain God to the fullest extent", "halted in the knowledge of right and wrong", "rescue them from that realm", "my eye has seen You"], "4": ["a vision of God in Christ as our food", "the center of the universe", "in the form of food", "the fulfillment of the figure", "apart from Me you can do nothing"], "5": ["the eternal portion of all God’s redeemed", "our life supply", "along the flow of the water of life", "continually fresh", "have right to the tree of life"], "6": ["Christ planted Himself into us", "in our practical living", "the realm of the life-giving Spirit", "not base our confidence on ourselves", "tear us down and rebuild us with Himself"]};
+
+const NT_BOOKS={"Matt.":{file:"61-Mt-morphgnt.txt",code:"01"},"John":{file:"64-Jn-morphgnt.txt",code:"04"},"Acts":{file:"65-Ac-morphgnt.txt",code:"05"},"Rom.":{file:"66-Ro-morphgnt.txt",code:"06"},"1 Cor.":{file:"67-1Co-morphgnt.txt",code:"07"},"2 Cor.":{file:"68-2Co-morphgnt.txt",code:"08"},"Eph.":{file:"70-Eph-morphgnt.txt",code:"10"},"Col.":{file:"72-Col-morphgnt.txt",code:"12"},"1 Pet.":{file:"81-1Pe-morphgnt.txt",code:"21"},"2 Pet.":{file:"82-2Pe-morphgnt.txt",code:"22"},"1 John":{file:"83-1Jn-morphgnt.txt",code:"23"},"Rev.":{file:"87-Re-morphgnt.txt",code:"27"}};
+const OT_BOOKS={"Gen.":"Gen","Psa.":"Ps","Prov.":"Prov","Jer.":"Jer","Job":"Job"};
+
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function plainText(el){return (el?.textContent||"").replace(/\s+/g," ").trim();}
+
+/* Stable tabs */
+function activatePanel(id,scrollTop=true){
+  const target=document.getElementById(id); if(!target)return;
+  document.querySelectorAll("main>.panel").forEach(p=>{p.classList.remove("active");p.style.display="none";});
+  target.classList.add("active");target.style.display="block";
+  document.querySelectorAll("nav [data-tab]").forEach(b=>b.classList.toggle("tabActive",b.dataset.tab===id));
+  if(scrollTop) window.scrollTo({top:document.querySelector("nav").offsetTop,behavior:"auto"});
+}
+document.querySelectorAll("nav [data-tab]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();activatePanel(b.dataset.tab);}));
+activatePanel("outline",false);
+
+/* Outline Day -> exact Daily Focus */
+function goToDailyDay(day){
+  activatePanel("daily",false);
+  const target=document.getElementById("daily-day-"+day); if(!target)return;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    target.scrollIntoView({behavior:"smooth",block:"start"});target.classList.add("dayFlash");
+    setTimeout(()=>target.classList.remove("dayFlash"),1500);
+  }));
+}
+document.addEventListener("click",e=>{const b=e.target.closest(".outlineDayLink");if(b){e.preventDefault();goToDailyDay(Number(b.dataset.day));}});
+
+/* Notes */
+document.querySelectorAll("textarea.note").forEach(t=>{
+  t.value=localStorage.getItem(t.dataset.key)||"";
+  t.addEventListener("input",()=>localStorage.setItem(t.dataset.key,t.value));
+});
+function refreshNotes(){
+  const box=document.getElementById("notesAggregate");
+  box.innerHTML="";
+  for(let d=1;d<=6;d++){
+    const key="week4-day"+d,val=localStorage.getItem(key)||"";
+    box.insertAdjacentHTML("beforeend",`<div class="card"><b>DAY ${d}</b><p>${esc(val||"—")}</p></div>`);
+  }
+}
+document.querySelector('[data-tab="notes"]').addEventListener("click",refreshNotes);
+document.getElementById("exportNotes").onclick=()=>{
+  const data={};for(let d=1;d<=6;d++)data["week4-day"+d]=localStorage.getItem("week4-day"+d)||"";
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));a.download="week4-my-notes.json";a.click();URL.revokeObjectURL(a.href);
+};
+document.getElementById("importNotesBtn").onclick=()=>document.getElementById("importNotes").click();
+document.getElementById("importNotes").onchange=async e=>{try{const data=JSON.parse(await e.target.files[0].text());Object.entries(data).forEach(([k,v])=>{if(k.startsWith("week4-day"))localStorage.setItem(k,String(v));});location.reload();}catch(err){alert("Invalid notes file.");}};
+
+/* English browser TTS */
+function englishMaleScore(v){
+ const n=(v.name||"").toLowerCase();let s=0;
+ if(/david|mark|ryan|brandon|guy|george|daniel|thomas|male|alex|fred/.test(n))s+=100;
+ if(/zira|jenny|aria|samantha|female|susan|victoria/.test(n))s-=100;
+ if(/^en-us/i.test(v.lang||""))s+=12; else if(/^en-(ca|gb)/i.test(v.lang||""))s+=8;
+ return s+(v.localService?3:0);
+}
+function englishVoices(){return speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang||"")).sort((a,b)=>englishMaleScore(b)-englishMaleScore(a));}
+function fillVoices(){
+ const vv=englishVoices();
+ for(const id of ["topEnglishVoice","chunkVoice"]){
+  const s=document.getElementById(id);if(!s)continue;const keep=s.value;
+  s.innerHTML='<option value="">Auto — male first</option>'+vv.map(v=>`<option value="${esc(v.voiceURI)}">${esc(v.name)} (${esc(v.lang)})</option>`).join("");
+  if([...s.options].some(o=>o.value===keep))s.value=keep;
+ }
+}
+speechSynthesis.addEventListener?.("voiceschanged",fillVoices);setTimeout(fillVoices,150);setTimeout(fillVoices,900);
+function chosenVoice(selId="topEnglishVoice"){const s=document.getElementById(selId);if(s?.value){const v=speechSynthesis.getVoices().find(x=>x.voiceURI===s.value);if(v)return v;}return englishVoices()[0]||null;}
+let playToken=0;
+function speakText(text,rate=1,repeat=false,voice=chosenVoice()){
+ const token=++playToken;speechSynthesis.cancel();
+ const go=()=>{if(token!==playToken)return;const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=rate;u.pitch=.9;if(voice)u.voice=voice;u.onend=()=>{if(repeat&&token===playToken)setTimeout(go,450);};speechSynthesis.speak(u);};go();
+}
+function stopSpeech(){playToken++;speechSynthesis.cancel();document.getElementById("outlinePause").textContent="⏸ Pause";document.getElementById("chunkPause").textContent="⏸ Pause";}
+function togglePause(btn){if(speechSynthesis.paused){speechSynthesis.resume();btn.textContent="⏸ Pause";}else if(speechSynthesis.speaking){speechSynthesis.pause();btn.textContent="▶ Resume";}}
+function dayCard(d){return document.getElementById("daily-day-"+d);}
+function dailyEnglish(d){const c=dayCard(d);const title=plainText(c.querySelector("h2"));const word=[...c.querySelectorAll(".mn .ref")].map(b=>RV[b.dataset.ref]||"").join(" ");const f=[...c.querySelectorAll(".focus3 li")].map(plainText).join(" ");const p=plainText(c.querySelector(".prop p"));return `Week 4, Day ${d}. ${title}. Morning Nourishment. ${word}. Daily Focus. ${f}. Prophesying. ${p}`;}
+document.getElementById("outlineListen").onclick=()=>{const clone=document.getElementById("englishOutline").cloneNode(true);clone.querySelectorAll(".ttsbar,button,select,label").forEach(x=>x.remove());speakText(plainText(clone),parseFloat(document.getElementById("outlineRate").value),document.getElementById("englishRepeat").checked);};
+document.getElementById("outlineDailyListen").onclick=()=>{const d=Number(document.getElementById("outlineDaySelect").value);speakText(dailyEnglish(d),parseFloat(document.getElementById("outlineRate").value),document.getElementById("englishRepeat").checked);};
+document.getElementById("outlinePause").onclick=function(){togglePause(this)};document.getElementById("outlineStop").onclick=stopSpeech;
+
+/* Chunk TTS */
+function playChunks(texts,reps){
+ const q=[];texts.forEach(t=>{for(let i=0;i<reps;i++)q.push(t);});
+ const token=++playToken;speechSynthesis.cancel();let i=0;const rate=parseFloat(document.getElementById("chunkRate").value);const voice=chosenVoice("chunkVoice");
+ const next=()=>{if(token!==playToken||i>=q.length)return;const u=new SpeechSynthesisUtterance(q[i++]);u.lang="en-US";u.rate=rate;u.pitch=.9;if(voice)u.voice=voice;u.onend=()=>setTimeout(next,300);speechSynthesis.speak(u);};next();
+}
+document.querySelectorAll(".chunkPlay").forEach(b=>b.onclick=()=>{const d=+b.dataset.day,i=+b.dataset.index,r=+document.getElementById("chunkRepeat").value;playChunks([CHUNKS[d][i]],r);});
+document.getElementById("chunkDayListen").onclick=()=>{const d=+document.getElementById("chunkDaySelect").value,r=+document.getElementById("chunkRepeat").value;playChunks(CHUNKS[d],r);};
+document.getElementById("chunkPause").onclick=function(){togglePause(this)};document.getElementById("chunkStop").onclick=stopSpeech;
+
+/* Original-language helpers */
+function stripGreek(s){return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[·.,;·!?“”'’]/g,"").toLowerCase();}
+const GREEK_NOUNS=new Set(["πυλη","οδος","απωλειαν","ζωην","ποταμον","υδατος","ζωης","κρυσταλλον","θρονου","θεου","αρνιου","πλατειας","ξυλον","καρπους","μηνα","καρπον","φυλλα","θεραπειαν","εθνων","φως","ανθρωπων","αμπελος","πατηρ","γεωργος","στολας","εξουσια","πολιν","αληθεια","αναστασις","νομος","πνευματος","χριστω","ιησου","αμαρτιας","θανατου"]);
+const GREEK_VERBS=new Set(["εισελθατε","εισιν","εισερχομενοι","απαγουσα","ευρισκοντες","εδειξεν","εκπορευομενον","ποιουν","αποδιδουν","πλυνοντες","εσται","εισελθωσιν","ην","ειμι","εστιν","λεγει","ερχεται","ειπεν","πιστευων","αποθανη","ζησεται","ηλευθερωσεν"]);
+const GLOSS={"ζωη":"life","θεος":"God","ξυλον":"tree / wood","οδος":"way / road","απωλεια":"destruction / perdition","πυλη":"gate","ποταμος":"river","υδωρ":"water","θρονος":"throne","αρνιον":"Lamb","καρπος":"fruit","φως":"light","ανθρωπος":"human being / person","αμπελος":"vine","πατηρ":"father","γεωργος":"farmer / vinedresser","αληθεια":"truth / reality","αναστασις":"resurrection","νομος":"law","πνευμα":"spirit / Spirit","αμαρτια":"sin","θανατος":"death","ειμι":"be / am / is","πιστευω":"believe / trust"};
+const GREEK_SURFACE_TO_LEMMA={"εισελθατε": "εισερχομαι", "δια": "δια", "της": "ο", "στενης": "στενος", "πυλης": "πυλη", "οτι": "οτι", "πλατεια": "πλατυς", "η": "ο", "πυλη": "πυλη", "και": "και", "ευρυχωρος": "ευρυχωρος", "οδος": "οδος", "απαγουσα": "απαγω", "εις": "εις", "την": "ο", "απωλειαν": "απωλεια", "πολλοι": "πολυς", "εισιν": "ειμι", "οι": "ο", "εισερχομενοι": "εισερχομαι", "δι": "δια", "αυτης": "αυτος", "τι": "τι", "στενη": "στενος", "τεθλιμμενη": "θλιβω", "ζωην": "ζωη", "ολιγοι": "ολιγος", "ευρισκοντες": "ευρισκω", "αυτην": "αυτος", "εδειξεν": "δεικνυμι", "μοι": "εγω", "ποταμον": "ποταμος", "υδατος": "υδωρ", "ζωης": "ζωη", "λαμπρον": "λαμπρος", "ως": "ως", "κρυσταλλον": "κρυσταλλος", "εκπορευομενον": "εκπορευομαι", "εκ": "εκ", "του": "ο", "θρονου": "θρονος", "θεου": "θεος", "αρνιου": "αρνιον", "εν": "εν", "μεσω": "μεσος", "πλατειας": "πλατεια", "ποταμου": "ποταμος", "εντευθεν": "εντευθεν", "εκειθεν": "εκειθεν", "ξυλον": "ξυλον", "ποιουν": "ποιεω", "καρπους": "καρπος", "δωδεκα": "δωδεκα", "κατα": "κατα", "μηνα": "μην", "εκαστον": "εκαστος", "αποδιδουν": "αποδιδωμι", "τον": "ο", "καρπον": "καρπος", "αυτου": "αυτος", "τα": "ο", "φυλλα": "φυλλον", "ξυλου": "ξυλον", "θεραπειαν": "θεραπεια", "των": "ο", "εθνων": "εθνος", "αυτω": "αυτος", "ζωη": "ζωη", "ην": "ειμι", "το": "ο", "φως": "φως", "ανθρωπων": "ανθρωπος", "εγω": "εγω", "ειμι": "ειμι", "αμπελος": "αμπελος", "αληθινη": "αληθινος", "ο": "ο", "πατηρ": "πατηρ", "μου": "εγω", "γεωργος": "γεωργος", "εστιν": "ειμι", "μακαριοι": "μακαριος", "πλυνοντες": "πλυνω", "τας": "ο", "στολας": "στολη", "αυτων": "αυτος", "ινα": "ινα", "εσται": "ειμι", "εξουσια": "εξουσια", "επι": "επι", "τοις": "ο", "πυλωσιν": "πυλων", "εισελθωσιν": "εισερχομαι", "πολιν": "πολις", "λεγει": "λεγω", "ιησους": "ιησους", "αληθεια": "αληθεια", "ουδεις": "ουδεις", "ερχεται": "ερχομαι", "προς": "προς", "πατερα": "πατηρ", "ει": "ει", "μη": "μη", "εμου": "εγω", "ειπεν": "λεγω", "αυτη": "αυτος", "αναστασις": "αναστασις", "πιστευων": "πιστευω", "εμε": "εγω", "καν": "καν", "αποθανη": "αποθνησκω", "ζησεται": "ζαω", "γαρ": "γαρ", "νομος": "νομος", "πνευματος": "πνευμα", "χριστω": "χριστος", "ιησου": "ιησους", "ηλευθερωσεν": "ελευθεροω", "σε": "συ", "απο": "απο", "νομου": "νομος", "αμαρτιας": "αμαρτια", "θανατου": "θανατος"};
+const GREEK_LEXICON={"εισερχομαι": ["εἰσέρχομαι", "verb", "to enter; to go in", "들어가다", "enter; go in; come in"], "δια": ["διά", "preposition", "through; by means of", "통하여, ~을 통해", "through; by; by means of; because of"], "ο": ["ὁ", "article", "the; marks a definite noun", "정관사 ‘그’", "the"], "στενος": ["στενός", "adjective", "narrow", "좁은", "narrow; confined; restricted"], "πυλη": ["πύλη", "noun", "gate; entrance", "문, 성문", "gate; gateway; entrance"], "οτι": ["ὅτι", "conjunction", "because; that", "왜냐하면, ~라는 것", "because; that; since"], "πλατυς": ["πλατύς", "adjective", "wide; broad", "넓은", "wide; broad"], "και": ["καί", "conjunction", "and; also; even", "그리고, 또한", "and; also; even"], "ευρυχωρος": ["εὐρύχωρος", "adjective", "broad; spacious", "넓고 광활한", "broad; spacious; roomy"], "οδος": ["ὁδός", "noun", "way; road; path", "길", "way; road; path; manner"], "απαγω": ["ἀπάγω", "verb", "to lead away; lead toward", "이끌어 가다", "lead away; lead; bring"], "εις": ["εἰς", "preposition", "into; to; toward", "~안으로, ~을 향하여", "into; to; toward; for"], "απωλεια": ["ἀπώλεια", "noun", "destruction; ruin; perdition", "멸망, 파멸", "destruction; ruin; loss; perdition"], "πολυς": ["πολύς", "adjective", "many; much", "많은", "many; much; great"], "ειμι": ["εἰμί", "verb", "to be; am/is/are", "~이다, 존재하다", "be; am; is; are; exist"], "αυτος": ["αὐτός", "pronoun", "he, she, it; self; same", "그/그녀/그것, 자신", "he; she; it; self; same"], "τι": ["τί", "particle/pronoun", "how? what?; here emphasizing the narrowness", "어찌, 얼마나; 무엇", "how?; what?; why?"], "θλιβω": ["θλίβω", "verb", "to press; constrict; afflict", "압박하다, 비좁게 하다", "press; constrict; afflict; trouble"], "ζωη": ["ζωή", "noun", "life; in these verses, life from God / eternal life", "생명", "life; living; eternal life"], "ολιγος": ["ὀλίγος", "adjective", "few; little", "적은, 소수의", "few; little; small"], "ευρισκω": ["εὑρίσκω", "verb", "to find; discover", "찾다, 발견하다", "find; discover; obtain"], "δεικνυμι": ["δείκνυμι", "verb", "to show; point out", "보여 주다", "show; point out; reveal"], "εγω": ["ἐγώ", "pronoun", "I; me", "나, 나를", "I; me"], "ποταμος": ["ποταμός", "noun", "river; stream", "강", "river; stream"], "υδωρ": ["ὕδωρ", "noun", "water", "물", "water"], "λαμπρος": ["λαμπρός", "adjective", "bright; shining; radiant", "빛나는, 밝은", "bright; shining; radiant"], "ως": ["ὡς", "conjunction/adverb", "as; like", "~처럼, ~같이", "as; like; as though"], "κρυσταλλος": ["κρύσταλλος", "noun", "crystal", "수정, 크리스털", "crystal"], "εκπορευομαι": ["ἐκπορεύομαι", "verb", "to go out; proceed from", "나오다, 흘러나오다", "go out; proceed; come forth"], "εκ": ["ἐκ", "preposition", "out of; from", "~에서부터, ~밖으로", "from; out of; from within"], "θρονος": ["θρόνος", "noun", "throne", "보좌", "throne"], "θεος": ["θεός", "noun", "God; god", "하나님, 신", "God; god; deity"], "αρνιον": ["ἀρνίον", "noun", "lamb; in Revelation, the Lamb", "어린양", "lamb; young lamb"], "εν": ["ἐν", "preposition", "in; within; among", "~안에, 가운데", "in; within; among; by"], "μεσος": ["μέσος", "adjective/noun", "middle; midst", "가운데, 중앙", "middle; midst; among"], "πλατεια": ["πλατεῖα", "noun", "street; broad way", "거리, 길", "street; broad street; way"], "εντευθεν": ["ἐντεῦθεν", "adverb", "from here; on this side", "이쪽에서, 이편에", "from here; hence; on this side"], "εκειθεν": ["ἐκεῖθεν", "adverb", "from there; on that side", "저쪽에서, 저편에", "from there; thence; on that side"], "ξυλον": ["ξύλον", "noun", "tree; wood", "나무, 목재", "tree; wood; timber"], "ποιεω": ["ποιέω", "verb", "to do; make; produce", "하다, 만들다, 맺다", "do; make; produce; cause"], "καρπος": ["καρπός", "noun", "fruit", "열매", "fruit; crop; result"], "δωδεκα": ["δώδεκα", "number", "twelve", "열둘, 12", "twelve"], "κατα": ["κατά", "preposition", "according to; by; per", "~에 따라, ~마다", "according to; by; per; down"], "μην": ["μήν", "noun", "month", "달, 월", "month"], "εκαστος": ["ἕκαστος", "adjective/pronoun", "each; every one", "각각, 각 사람", "each; every; each one"], "αποδιδωμι": ["ἀποδίδωμι", "verb", "to give back; render; yield", "돌려주다, 산출하다", "give; render; yield; repay"], "φυλλον": ["φύλλον", "noun", "leaf", "잎", "leaf; foliage"], "θεραπεια": ["θεραπεία", "noun", "healing; service/care", "치유, 돌봄", "healing; care; service"], "εθνος": ["ἔθνος", "noun", "nation; Gentile people", "민족, 이방인", "nation; people; Gentiles"], "φως": ["φῶς", "noun", "light", "빛", "light"], "ανθρωπος": ["ἄνθρωπος", "noun", "human being; person", "사람, 인간", "person; human being; man"], "αμπελος": ["ἄμπελος", "noun", "vine; grapevine", "포도나무", "vine; grapevine"], "αληθινος": ["ἀληθινός", "adjective", "true; genuine; real", "참된, 진정한", "true; genuine; real"], "πατηρ": ["πατήρ", "noun", "father", "아버지", "father"], "γεωργος": ["γεωργός", "noun", "farmer; vinedresser", "농부, 포도원지기", "farmer; vinedresser; cultivator"], "μακαριος": ["μακάριος", "adjective", "blessed; fortunate", "복된, 복이 있는", "blessed; happy; fortunate"], "πλυνω": ["πλύνω", "verb", "to wash", "씻다, 빨다", "wash; cleanse"], "στολη": ["στολή", "noun", "robe; long garment", "겉옷, 긴 옷", "robe; garment; long robe"], "ινα": ["ἵνα", "conjunction", "so that; in order that", "~하도록, ~하기 위하여", "so that; in order that"], "εξουσια": ["ἐξουσία", "noun", "authority; right; permission", "권리, 권위", "authority; right; power; permission"], "επι": ["ἐπί", "preposition", "on; upon; over; to", "~위에, ~에 대한", "on; upon; over; at; to"], "πυλων": ["πυλών", "noun", "gateway; gate", "성문, 출입문", "gateway; gate; entrance"], "πολις": ["πόλις", "noun", "city", "성, 도시", "city; town"], "λεγω": ["λέγω", "verb", "to say; speak; tell", "말하다", "say; speak; tell"], "ιησους": ["Ἰησοῦς", "proper noun", "Jesus", "예수", "Jesus"], "αληθεια": ["ἀλήθεια", "noun", "truth; reality", "진리, 실재", "truth; reality; truthfulness"], "ουδεις": ["οὐδείς", "pronoun", "no one; nobody", "아무도 ~않다", "no one; nobody; nothing"], "ερχομαι": ["ἔρχομαι", "verb", "to come; go", "오다, 가다", "come; go; arrive"], "προς": ["πρός", "preposition", "to; toward; with", "~에게, ~을 향하여, 함께", "to; toward; with; before"], "ει": ["εἰ", "conjunction", "if", "만일", "if; whether"], "μη": ["μή", "particle", "not; lest", "~아니다, ~하지 않도록", "not; lest"], "αναστασις": ["ἀνάστασις", "noun", "resurrection; rising", "부활, 일으킴", "resurrection; rising; raising"], "πιστευω": ["πιστεύω", "verb", "to believe; trust", "믿다, 신뢰하다", "believe; trust; have faith"], "καν": ["κἄν", "conjunction", "even if; and if", "비록 ~할지라도", "even if; even though; and if"], "αποθνησκω": ["ἀποθνῄσκω", "verb", "to die", "죽다", "die; pass away"], "ζαω": ["ζάω", "verb", "to live; be alive", "살다", "live; be alive"], "γαρ": ["γάρ", "conjunction", "for; because", "왜냐하면, 이는", "for; because"], "νομος": ["νόμος", "noun", "law; principle", "법, 법칙", "law; principle; rule"], "πνευμα": ["πνεῦμα", "noun", "spirit; Spirit", "영, 성령", "spirit; Spirit; breath"], "χριστος": ["Χριστός", "proper noun", "Christ; the Anointed One", "그리스도, 기름부음받은 이", "Christ; Messiah; Anointed One"], "ελευθεροω": ["ἐλευθερόω", "verb", "to set free; liberate", "해방하다, 자유롭게 하다", "set free; free; liberate"], "συ": ["σύ", "pronoun", "you", "너, 당신", "you"], "απο": ["ἀπό", "preposition", "from; away from", "~로부터, ~에서 떠나", "from; away from"], "αμαρτια": ["ἁμαρτία", "noun", "sin", "죄", "sin"], "θανατος": ["θάνατος", "noun", "death", "죽음", "death"]};
+
+function greekLookup(raw, suppliedLemma=""){
+  const surface=stripGreek(raw);
+  let lemmaKey=stripGreek(suppliedLemma||"");
+  if(lemmaKey.includes(" ")) lemmaKey=lemmaKey.split(/\s+/)[0];
+  if(!lemmaKey || !GREEK_LEXICON[lemmaKey]) lemmaKey=GREEK_SURFACE_TO_LEMMA[surface]||lemmaKey||surface;
+
+  const rec=GREEK_LEXICON[lemmaKey];
+  if(rec){
+    return {
+      lemma:rec[0],
+      pos:rec[1],
+      meaning:rec[2],
+      ko:rec[3],
+      alternatives:rec[4]
+    };
+  }
+  return {
+    lemma:suppliedLemma||raw,
+    pos:"",
+    meaning:"Meaning not yet embedded for this lemma.",
+    ko:"이 단어의 뜻은 아직 앱 사전에 내장되지 않았습니다.",
+    alternatives:""
+  };
+}
+
+function romanKoine(s){
+ const x=stripGreek(s);let r=x;
+ const reps=[["αι","ai"],["ει","ei"],["οι","oi"],["ου","ou"],["αυ","au"],["ευ","eu"],["γγ","ng"],["γκ","nk"],["γχ","nch"],["θ","th"],["φ","ph"],["χ","ch"],["ψ","ps"],["ω","ō"],["η","ē"],["υ","y"],["β","b"],["γ","g"],["δ","d"],["ζ","z"],["κ","k"],["λ","l"],["μ","m"],["ν","n"],["ξ","x"],["π","p"],["ρ","r"],["σ","s"],["ς","s"],["τ","t"],["α","a"],["ε","e"],["ι","i"],["ο","o"]];
+ for(const [a,b] of reps)r=r.split(a).join(b);return r;
+}
+function romanHebrew(input){
+ let s=String(input).normalize("NFD").replace(/[\u0591-\u05AF]/g,"");const v={"ְ":"e","ֱ":"e","ֲ":"a","ֳ":"o","ִ":"i","ֵ":"e","ֶ":"e","ַ":"a","ָ":"a","ֹ":"o","ֻ":"u","ׇ":"a"};const c={"א":"ʾ","ב":"b","ג":"g","ד":"d","ה":"h","ו":"v","ז":"z","ח":"ḥ","ט":"ṭ","י":"y","כ":"kh","ך":"kh","ל":"l","מ":"m","ם":"m","נ":"n","ן":"n","ס":"s","ע":"ʿ","פ":"f","ף":"f","צ":"ts","ץ":"ts","ק":"q","ר":"r","ש":"sh","ת":"t"};let out="";
+ const chars=[...s];for(let i=0;i<chars.length;i++){const ch=chars[i];if(c[ch]){let q=c[ch],look=chars.slice(i+1,i+4).join("");if(ch==="ב"&&look.includes("ּ"))q="b";if((ch==="כ"||ch==="ך")&&look.includes("ּ"))q="k";if((ch==="פ"||ch==="ף")&&look.includes("ּ"))q="p";out+=q;}else if(v[ch])out+=v[ch];else if(ch==="־")out+="-";}return out||"—";
+}
+const HEB_VERBS=new Set(["וַיַּצְמַח","תֹאכַל","אֲכָלְךָ","תָּמוּת"]);
+const HEB_NOUN_HINT=["יְהוָה","אֱלֹהִים","אֲדָמָה","עֵץ","חַיִּים","גָּן","דַּעַת","יוֹם","דֶּרֶךְ","אִישׁ","אַחֲרִית","מָוֶת"];
+function hebPos(w){if(HEB_VERBS.has(w))return"verb";if(HEB_NOUN_HINT.some(x=>w.includes(x)))return"noun";return"word";}
+
+function renderStaticOriginal(ref){
+ const d=STATIC_ORIGINAL[ref];if(!d)return false;const box=document.getElementById("mgreek");const words=d.text.split(/\s+/).filter(Boolean);
+ const pairs=words.map(w=>{if(d.lang==="Greek"){const n=stripGreek(w),info=greekLookup(w),lemma=info.lemma||w;
+ const cls=(info.pos==="verb"?"verb":info.pos==="noun"?"noun":(GREEK_VERBS.has(n)?"verb":GREEK_NOUNS.has(n)?"noun":""));
+ return `<span class="gpair"><button type="button" class="gword ${cls}" data-word="${esc(w)}" data-roman="${esc(romanKoine(w))}" data-pos="${esc(info.pos||cls||"word")}" data-lemma="${esc(lemma)}">${esc(w)}</button><span class="roman">${esc(romanKoine(w))}</span></span>`;}else{const cls=hebPos(w);return `<span class="hpair"><button type="button" class="hword ${cls==="verb"||cls==="noun"?cls:""}" data-word="${esc(w)}" data-roman="${esc(romanHebrew(w))}" data-pos="${esc(cls)}" data-lang="Biblical Hebrew">${esc(w)}</button><span class="roman">${esc(romanHebrew(w))}</span></span>`;}}).join(" ");
+ box.innerHTML=`<div class="gphrase"><div class="${d.lang==="Greek"?"greekline":"semiticline"}">${pairs}</div></div><div class="sourceLine">${d.lang==="Greek"?"Greek text (SBLGNT/NA-style reading for study)":"Masoretic Hebrew (WLC-style consonants/vocalization)"} · learner Romanization directly under each word.</div>`;
+ document.getElementById("originalHeading").textContent=(d.lang==="Greek"?"GREEK":"HEBREW (MASORETIC TEXT)")+" · ENGLISH PRONUNCIATION";
+ document.getElementById("originalHint").textContent="Tap a word for pronunciation and a short lexical note. Verbs are red; nouns are green.";
+ return true;
+}
+
+function parseNTRef(ref){const books=Object.keys(NT_BOOKS).sort((a,b)=>b.length-a.length);const book=books.find(b=>ref.startsWith(b+" "));if(!book)return null;const m=ref.slice(book.length).trim().match(/^(\d+):(\d+)(?:-(\d+))?$/);if(!m)return null;return {book,...NT_BOOKS[book],chapter:+m[1],v1:+m[2],v2:+(m[3]||m[2])};}
+function parseOTRef(ref){const books=Object.keys(OT_BOOKS).sort((a,b)=>b.length-a.length);const book=books.find(b=>ref.startsWith(b+" "));if(!book)return null;const m=ref.slice(book.length).trim().match(/^(\d+):(\d+)(?:-(\d+))?$/);if(!m)return null;return {book,osis:OT_BOOKS[book],chapter:+m[1],v1:+m[2],v2:+(m[3]||m[2])};}
+async function fetchFirst(urls,timeout=6500){let last;for(const url of urls){try{const c=new AbortController(),t=setTimeout(()=>c.abort(),timeout);const r=await fetch(url,{signal:c.signal});clearTimeout(t);if(!r.ok)throw new Error("HTTP "+r.status);return await r.text();}catch(e){last=e;}}throw last||new Error("Could not load");}
+function posName(p){if(/^V/.test(p))return"verb";if(/^N/.test(p))return"noun";return"word";}
+async function loadGreek(ref){
+ const r=parseNTRef(ref);if(!r)return false;const box=document.getElementById("mgreek");box.innerHTML='<div class="loadingGreek">Loading Greek…</div>';
+ try{const txt=await fetchFirst([`https://cdn.jsdelivr.net/gh/morphgnt/sblgnt@master/${r.file}`,`https://raw.githubusercontent.com/morphgnt/sblgnt/master/${r.file}`]);const rows=[];
+ for(const line of txt.split(/\r?\n/)){const c=line.trim().split(/\s+/);if(c.length<7)continue;const code=c[0],ch=+code.slice(2,4),v=+code.slice(4,6);if(code.slice(0,2)!==r.code||ch!==r.chapter||v<r.v1||v>r.v2)continue;rows.push({pos:c[1],parse:c[2],text:c[3],word:c[4],norm:c[5],lemma:c.slice(6).join(" ")});}
+ if(!rows.length)throw new Error("Verse not found");box.innerHTML='<div class="gphrase"><div class="greekline">'+rows.map(x=>{const p=posName(x.pos),roman=romanKoine(x.word);return `<span class="gpair"><button type="button" class="gword ${p==="verb"||p==="noun"?p:""}" data-word="${esc(x.word)}" data-roman="${esc(roman)}" data-pos="${esc(p)}" data-lemma="${esc(x.lemma)}" data-parse="${esc(x.parse)}">${esc(x.text)}</button><span class="roman">${esc(roman)}</span></span>`;}).join(" ")+'</div></div><div class="sourceLine">SBLGNT text · MorphGNT morphology/lemma · Romanization directly under each word.</div>';return true;
+ }catch(e){box.innerHTML=`<div class="loadingGreek">Greek did not load, but the English Bible text above is already available.<br><button type="button" class="retryOriginal" data-retry-ref="${esc(ref)}">↻ Retry original text</button></div>`;return false;}
+}
+async function loadHebrew(ref){
+ const r=parseOTRef(ref);if(!r)return false;const box=document.getElementById("mgreek");box.innerHTML='<div class="loadingGreek">Loading Masoretic Hebrew…</div>';
+ try{const xml=await fetchFirst([`https://cdn.jsdelivr.net/npm/morphhb@2.0.2/wlc/${r.osis}.xml`,`https://raw.githubusercontent.com/openscriptures/morphhb/master/wlc/${r.osis}.xml`],7500);const doc=new DOMParser().parseFromString(xml,"application/xml");let all="";
+ for(let v=r.v1;v<=r.v2;v++){const id=`${r.osis}.${r.chapter}.${v}`;const verse=[...doc.getElementsByTagNameNS("*","verse")].find(x=>x.getAttribute("osisID")===id);if(!verse)continue;const ws=[...verse.getElementsByTagNameNS("*","w")];all+=`<div class="gphrase"><div class="semiticline"><span class="verseTag">${v}</span>`+ws.map(w=>{const raw=w.textContent.trim().replace(/\//g,""),m=w.getAttribute("morph")||"",p=/V/.test(m)?"verb":/N/.test(m)?"noun":"word",roman=romanHebrew(raw);return `<span class="hpair"><button type="button" class="hword ${p==="verb"||p==="noun"?p:""}" data-word="${esc(raw)}" data-roman="${esc(roman)}" data-pos="${esc(p)}" data-parse="${esc(m)}" data-lang="Biblical Hebrew">${esc(raw)}</button><span class="roman">${esc(roman)}</span></span>`;}).join(" ")+"</div></div>";}
+ if(!all)throw new Error("Verse not found");box.innerHTML=all+'<div class="sourceLine">Westminster Leningrad Codex via Open Scriptures Hebrew Bible · Romanization directly under each word.</div>';return true;
+ }catch(e){box.innerHTML=`<div class="loadingGreek">Old Testament original text did not load, but the English Bible text above is already available.<br><button type="button" class="retryOriginal" data-retry-ref="${esc(ref)}">↻ Retry original text</button></div>`;return false;}
+}
+
+async function openVerse(ref,version="rv"){
+ const rvText=RV[ref]||"The Recovery Version text for this reference was not printed in the supplied Message Four material.";
+ document.getElementById("mref").textContent=ref;
+ document.getElementById("translationLabel").textContent="RECOVERY VERSION · supplied text";
+ document.getElementById("mrv").textContent=rvText;
+
+ const dc=document.getElementById("darbyCompare"), md=document.getElementById("mdarby");
+ if(DARBY[ref]){
+   md.textContent=DARBY[ref];
+   dc.style.display="block";
+ }else{
+   md.textContent="";
+   dc.style.display="none";
+ }
+
+ document.getElementById("modal").classList.add("show");document.getElementById("modal").setAttribute("aria-hidden","false");
+ if(renderStaticOriginal(ref))return;
+ if(parseNTRef(ref)){document.getElementById("originalHeading").textContent="GREEK · ENGLISH PRONUNCIATION";document.getElementById("originalHint").textContent="Loading SBLGNT/MorphGNT. If it fails, the Recovery Version text above remains visible.";await loadGreek(ref);return;}
+ if(parseOTRef(ref)){document.getElementById("originalHeading").textContent="HEBREW (MASORETIC TEXT) · ENGLISH PRONUNCIATION";document.getElementById("originalHint").textContent="Loading WLC/OSHB. If it fails, the Recovery Version text above remains visible.";await loadHebrew(ref);return;}
+ document.getElementById("mgreek").innerHTML='<div class="loadingGreek">Original-language mapping is not configured for this reference.</div>';
+}
+document.addEventListener("click",e=>{
+ const r=e.target.closest(".ref");if(r){e.preventDefault();openVerse(r.dataset.ref);return;}
+ const retry=e.target.closest(".retryOriginal");if(retry){e.preventDefault();openVerse(retry.dataset.retryRef);return;}
+ const w=e.target.closest(".gword,.hword");
+ if(w&&document.getElementById("mgreek").contains(w)){
+   e.preventDefault();
+   const raw=w.dataset.word||w.textContent;
+   const roman=w.dataset.roman||"";
+   const suppliedLemma=w.dataset.lemma||"";
+   const parse=w.dataset.parse||"";
+   const isGreek=w.classList.contains("gword");
+
+   if(isGreek){
+     const info=greekLookup(raw,suppliedLemma);
+     document.getElementById("wordDictBody").innerHTML=`
+       <div class="wordDictGreek">${esc(raw)}</div>
+       <div class="wordDictRoman">${esc(roman)}</div>
+       <div class="wordDictRow meaningMain"><b>Meaning in this verse</b><br>${esc(info.meaning)}</div>
+       <div class="wordDictRow meaningKo"><b>뜻</b><br>${esc(info.ko)}</div>
+       <div class="wordDictRow"><b>Lemma:</b> ${esc(info.lemma)}</div>
+       <div class="wordDictRow"><b>Part of speech:</b> ${esc(info.pos||w.dataset.pos||"word")}</div>
+       ${parse?`<div class="wordDictRow"><b>Morphology:</b> ${esc(parse)}</div>`:""}
+       ${info.alternatives?`<div class="wordDictRow"><b>Possible English renderings:</b><br>${esc(info.alternatives)}</div>`:""}
+       <div class="wordDictRow dictNote">Meaning is context-sensitive; the renderings above show the normal semantic range, not a replacement translation.</div>`;
+   }else{
+     document.getElementById("wordDictBody").innerHTML=`
+       <div class="wordDictGreek">${esc(raw)}</div>
+       <div class="wordDictRoman">${esc(roman)}</div>
+       <div class="wordDictRow"><b>Part of speech:</b> ${esc(w.dataset.pos||"word")}</div>
+       ${parse?`<div class="wordDictRow"><b>Morphology:</b> ${esc(parse)}</div>`:""}
+       <div class="wordDictRow"><b>Meaning:</b> Hebrew lexical expansion will be added separately; use the verse context above for this build.</div>`;
+   }
+   document.getElementById("wordDict").classList.add("show");
+ }
+});
+document.getElementById("modalClose").onclick=()=>{document.getElementById("modal").classList.remove("show");speechSynthesis.cancel();};
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")document.getElementById("modal").classList.remove("show");};
+document.getElementById("wordDictClose").onclick=()=>document.getElementById("wordDict").classList.remove("show");
+document.getElementById("wordDict").onclick=e=>{if(e.target.id==="wordDict")e.currentTarget.classList.remove("show");};
+document.getElementById("verseListen").onclick=()=>speakText(document.getElementById("mrv").textContent,1,false,chosenVoice());
+document.getElementById("versePause").onclick=function(){togglePause(this)};document.getElementById("verseStop").onclick=stopSpeech;
+</script>
+</body></html>
